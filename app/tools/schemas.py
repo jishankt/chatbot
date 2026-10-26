@@ -1,6 +1,83 @@
 """
-JSON Schema definitions for cx02-sales-ai tools.
+JSON Schema and Pydantic definitions for cx02-sales-ai tools.
 """
+
+from typing import Optional, List, Dict, Any
+from pydantic import BaseModel, Field
+
+
+# ---------------------------------------------------------------------------
+# Pydantic Schemas for Tool Arguments
+# ---------------------------------------------------------------------------
+
+class GetPriceArgs(BaseModel):
+    sku: str = Field(..., description="Product SKU or alias, e.g. CX-02, CX2-MS46-2PC")
+
+
+class GetProductLinkArgs(BaseModel):
+    sku: str = Field(..., description="Product SKU to fetch official product URL")
+
+
+class CheckStockArgs(BaseModel):
+    sku: str = Field(..., description="Product SKU to check stock availability")
+
+
+class ListProductsArgs(BaseModel):
+    pass
+
+
+class CalculateCostArgs(BaseModel):
+    size: str = Field("4x6", description="Print size: 4x6, 5x7, 6x8, 6x9")
+    volume: Optional[int] = Field(None, ge=1, description="Total number of prints to estimate cost for")
+
+
+class QuoteItem(BaseModel):
+    sku: str = Field(..., description="Product SKU")
+    qty: int = Field(1, ge=1, le=1000, description="Quantity (1-1,000)")
+
+
+class CreateQuoteArgs(BaseModel):
+    items: List[QuoteItem] = Field(..., min_length=1, description="List of quote items")
+    customer_name: str = Field("Valued Customer", description="Customer name")
+    phone: Optional[str] = Field(None, description="Customer contact phone")
+    sender_id: Optional[str] = Field(None, description="Sender channel ID")
+    idempotency_key: Optional[str] = Field(None, description="Idempotency key")
+
+
+class GetPolicyArgs(BaseModel):
+    policy_name: str = Field(..., description="Policy key: warranty, delivery_time, delivery_charges, etc.")
+
+
+class CreateLeadArgs(BaseModel):
+    phone: Optional[str] = Field(None, description="Customer contact phone")
+    name: Optional[str] = Field("Valued Customer", description="Customer full name")
+    notes: Optional[str] = Field(None, description="Internal notes")
+    sender_id: Optional[str] = Field(None, description="Sender ID")
+
+
+class HandoffArgs(BaseModel):
+    reason: str = Field(..., description="Reason for handoff")
+    summary: Optional[str] = Field(None, description="Inquiry summary")
+    phone: Optional[str] = Field(None, description="Customer phone number")
+    sender_id: Optional[str] = Field(None, description="Sender ID")
+
+
+TOOL_ARG_MODELS: Dict[str, Any] = {
+    "get_price": GetPriceArgs,
+    "get_product_link": GetProductLinkArgs,
+    "check_stock": CheckStockArgs,
+    "list_products": ListProductsArgs,
+    "calculate_cost_per_print": CalculateCostArgs,
+    "create_quote": CreateQuoteArgs,
+    "get_policy": GetPolicyArgs,
+    "create_lead": CreateLeadArgs,
+    "handoff_to_human": HandoffArgs
+}
+
+
+# ---------------------------------------------------------------------------
+# Backward-Compatible JSON Schemas
+# ---------------------------------------------------------------------------
 
 TOOL_SCHEMAS = {
     "get_price": {
@@ -91,7 +168,7 @@ TOOL_SCHEMAS = {
             "phone": {"type": "string"},
             "notes": {"type": "string"}
         },
-        "required": ["phone"]
+        "required": []
     },
     "handoff_to_human": {
         "type": "object",

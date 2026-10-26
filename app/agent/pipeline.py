@@ -15,34 +15,54 @@ from app.tools.handoff import handoff_to_human, create_lead
 from app.storage.messages import log_message, get_conversation_history
 from app.storage.leads import set_pending_lead, get_pending_lead, clear_pending_lead
 
+from app.utils.quantity import parse_quantity
+from app.cognitive.reader import read_message, ReadContext
+from app.cognitive.understander import understand_message, UnderstandResult
+from app.cognitive.state_machine import load_sales_state, transition_sales_state, SalesState
+
 logger = logging.getLogger(__name__)
 
 
-def determine_target_sku(text: str) -> str:
-    t = text.lower()
+def determine_target_sku(text: str, read_ctx: Optional[ReadContext] = None) -> Optional[str]:
+    # 0. If read_ctx already resolved a specific SKU, honor it
+    if read_ctx and read_ctx.resolved_sku:
+        return read_ctx.resolved_sku
+
+    raw_lower = text.lower()
+    t = raw_lower.replace(" ", "").replace("-", "").replace(".", "").replace("\"", "").replace("×", "x").replace("*", "x")
+
+    # 1. Direct SKU and accessory matching
     if "bag" in t or "case" in t:
         return "CX-02-BAG"
-    elif "pen" in t or "cleaning" in t:
+    if "pen" in t or "cleaning" in t:
         return "CITIZEN-PEN"
-
     if "6x9" in t:
         return "6x9"
+    if "ms46" in t or "4x6" in t or "cx24x6" in t:
+        return "CX2-MS46-2PC"
+    if "ms57" in t or "5x7" in t or "cx0257" in t:
+        return "CX2-MS57-2PC"
+    if "ms68" in t or "6x8" in t or "cx26x8" in t:
+        return "CX2-MS68-2PC"
 
-    is_media = any(m in t for m in ["media", "paper", "roll", "box", "set", "pack", "sheet", "consumable"])
-    is_printer = any(p in t for p in ["printer", "printers", "unit", "machine"]) or ("cx-02" in t and not is_media)
+    # 2. Unsupported accessories / items
+    unsupported_items = ["tripod", "cable", "adapter", "battery", "scanner", "stand", "bluetooth", "wireless", "xyz"]
+    if any(u in raw_lower for u in unsupported_items):
+        return None
 
-    if is_printer and not is_media:
+    # 3. Media without specific size defaults to standard 4x6 media
+    if any(m in raw_lower for m in ["media", "paper", "consumable", "rolls"]):
+        return "CX2-MS46-2PC"
+
+    # 4. Printer or general product inquiry ("CX-02", "printer", "machine", "unit", "it")
+    if any(p in raw_lower for p in ["cx-02", "cx02", "printer", "machine", "unit", "it", "device"]):
         return "CX-02"
 
-    if is_media or not is_printer:
-        if "ms46" in t or "4x6" in t or "4*6" in t:
-            return "CX2-MS46-2PC"
-        elif "ms57" in t or "5x7" in t or "5*7" in t:
-            return "CX2-MS57-2PC"
-        elif "ms68" in t or "6x8" in t or "6*8" in t:
-            return "CX2-MS68-2PC"
+    # 5. General pricing / purchase inquiry
+    if any(q in raw_lower for q in ["price", "cost", "how much", "rate", "quote", "buy", "order", "link", "url"]):
+        return "CX-02"
 
-    return "CX-02"
+    return None
 
 
 def extract_phone_and_name(text: str) -> Dict[str, Optional[str]]:
@@ -67,15 +87,29 @@ class CX02Pipeline:
         phone: Optional[str] = None,
         message_id: Optional[str] = None
     ) -> Dict[str, Any]:
-        user_msg = user_message.strip()
+        # 1. Fetch conversation history (last 8 turns)
+        history = get_conversation_history(sender_id, limit=8)
+
+        # 2. Cognitive Step 1: READ (Normalization, Language, Anaphora, Quantity)
+        read_ctx = read_message(user_message, history=history)
+        user_msg = read_ctx.normalized_text
         msg_lower = user_msg.lower()
         tools_called = []
         chunks = []
 
-        # 1. Fetch conversation history (last 8 turns)
-        history = get_conversation_history(sender_id, limit=8)
+        # 3. Cognitive Step 2: UNDERSTAND (Structured NLU, Entities, Risk Flags)
+        understand_res = understand_message(read_ctx)
 
-        # 2. Check pending lead state
+        # 4. Cognitive Step 3: THINK (Deterministic Sales Policy State Machine)
+        sales_state = load_sales_state(sender_id)
+        decision = transition_sales_state(
+            state=sales_state,
+            understand_res=understand_res,
+            read_ctx=read_ctx,
+            phone=phone
+        )
+
+        # 5. Check pending lead state
         pending = get_pending_lead(sender_id)
         if pending and pending.get("stage") == "awaiting_contact":
             contact = extract_phone_and_name(user_msg)
@@ -104,9 +138,9 @@ class CX02Pipeline:
                     "chunks_retrieved": []
                 }
 
-        # 3. Router Intent Classification (Priority 1 to 14)
+        # 5. Router Intent Classification (Priority 1 to 14)
         routing = classify_intent(user_msg)
-        intent = routing["intent"]
+        intent = understand_res.intent.primary_intent or routing["intent"]
         priority = routing["priority"]
 
         # Branch 1: Guardrails
@@ -169,13 +203,27 @@ class CX02Pipeline:
 
         # Branch 9: Stock Availability
         elif intent == "stock":
-            target_sku = determine_target_sku(user_msg)
-            stock_res = check_stock(target_sku)
-            tools_called.append({"tool": "check_stock", "args": {"sku": target_sku}, "result": stock_res})
-            if stock_res.get("status") == "success":
-                reply = f"📦 *Stock Status for {stock_res['name']}*:\n{stock_res['stock_status']}."
+            target_sku = determine_target_sku(user_msg, read_ctx=read_ctx)
+            if target_sku is None:
+                ho = handoff_to_human(
+                    reason=f"Stock inquiry for unrecognized item: {user_msg}",
+                    summary=user_msg,
+                    phone=phone,
+                    sender_id=sender_id
+                )
+                tools_called.append({"tool": "handoff_to_human", "result": ho})
+                reply = (
+                    "I specialize exclusively in the *Citizen CX-02 photo printer* and its official accessories "
+                    "(4x6\", 5x7\", and 6x8\" media sets, protective carry bag, and printhead cleaning pen). "
+                    f"Our sales desk can check stock for other products.\n\n{ho['customer_message']}"
+                )
             else:
-                reply = stock_res.get("message", "Stock status unavailable.")
+                stock_res = check_stock(target_sku)
+                tools_called.append({"tool": "check_stock", "args": {"sku": target_sku}, "result": stock_res})
+                if stock_res.get("status") == "success":
+                    reply = f"📦 *Stock Status for {stock_res['name']}*:\n{stock_res['stock_status']}."
+                else:
+                    reply = stock_res.get("message", "Stock status unavailable.")
 
         # Branch 10: Media Yield / Running Cost
         elif intent == "media_yield_cost":
@@ -234,13 +282,28 @@ class CX02Pipeline:
                 "photobooth", "rewind", "cleaning", "pen", "bag", "power", "watt", "wattage", "sleep"
             ])
 
+            parts = []
+
             # 1. Execute tool if pricing or quote or link is asked
             if intent in ("price", "quote", "link") or has_price_terms:
-                target_sku = determine_target_sku(user_msg)
+                target_sku = determine_target_sku(user_msg, read_ctx=read_ctx)
 
-                if "quote" in msg_lower or "quotation" in msg_lower:
-                    qty_match = re.search(r"\b(\d+)\b", user_msg)
-                    qty = int(qty_match.group(1)) if qty_match else 1
+                if target_sku is None:
+                    ho = handoff_to_human(
+                        reason=f"Unrecognized or ambiguous product inquiry: {user_msg}",
+                        summary=user_msg,
+                        phone=phone,
+                        sender_id=sender_id
+                    )
+                    tools_called.append({"tool": "handoff_to_human", "result": ho})
+                    parts.append(
+                        "I specialize exclusively in the *Citizen CX-02 photo printer* and its official accessories "
+                        "(4x6\", 5x7\", and 6x8\" media sets, protective carry bag, and printhead cleaning pen). "
+                        "I could not identify the specific product you are asking about. "
+                        f"Our sales desk can confirm availability for you.\n\n{ho['customer_message']}"
+                    )
+                elif "quote" in msg_lower or "quotation" in msg_lower or (read_ctx and read_ctx.resolved_qty and read_ctx.resolved_qty > 1 and read_ctx.is_anaphora):
+                    qty = (read_ctx.resolved_qty if read_ctx else None) or parse_quantity(user_msg) or 1
 
                     # Check if multi-item quote (e.g. printer AND media)
                     if ("printer" in msg_lower or "unit" in msg_lower) and any(m in msg_lower for m in ["4x6", "5x7", "6x8", "paper", "media", "bag", "pen"]):
@@ -279,7 +342,6 @@ class CX02Pipeline:
                 chunks = retrieve(user_msg, top_k=2)
 
             # 3. Synthesize response combining RAG and Tool results
-            parts = []
             if chunks:
                 top_chunk = chunks[0]
                 section = top_chunk["section"]
@@ -344,5 +406,11 @@ class CX02Pipeline:
             "intent": intent,
             "priority": priority,
             "tools_called": tools_called,
-            "chunks_retrieved": chunks
+            "chunks_retrieved": chunks,
+            "language": read_ctx.language,
+            "resolved_sku": read_ctx.resolved_sku,
+            "is_anaphora": read_ctx.is_anaphora,
+            "understanding": understand_res.model_dump(),
+            "sales_state": decision.current_state.value,
+            "state_decision": decision.model_dump()
         }

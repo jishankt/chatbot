@@ -42,3 +42,25 @@ def get_quote(quote_id: str) -> Optional[Dict[str, Any]]:
         return None
     finally:
         conn.close()
+
+
+def get_latest_quote_by_sender(sender_id: str) -> Optional[Dict[str, Any]]:
+    conn = get_db_connection()
+    try:
+        cur = conn.cursor()
+        cur.execute(
+            """
+            SELECT * FROM quotes
+            WHERE sender_id = ?
+            ORDER BY created_at DESC LIMIT 1
+            """,
+            (sender_id,)
+        )
+        row = cur.fetchone()
+        if row:
+            d = dict(row)
+            d["items"] = json.loads(d["items_json"])
+            return d
+        return None
+    finally:
+        conn.close()

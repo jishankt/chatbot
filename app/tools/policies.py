@@ -7,8 +7,12 @@ POLICY_NAMES_MAP = {
     "warranties": "warranty",
     "guarantee": "warranty",
     "delivery": "delivery_charges",
-    "delivery_time": "delivery_time",
-    "processing": "delivery_time",
+    "delivery_time": "order_processing",
+    "order_processing": "order_processing",
+    "processing": "order_processing",
+    "transit_time": "transit_time",
+    "transit": "transit_time",
+    "shipping_time": "transit_time",
     "shipping": "delivery_charges",
     "delivery_charges": "delivery_charges",
     "shipping_cost": "delivery_charges",
@@ -40,7 +44,14 @@ POLICY_NAMES_MAP = {
     "outside_gcc": "delivery_outside_gcc",
     "outside_gcc_delivery": "delivery_outside_gcc",
     "delivery_outside_gcc": "delivery_outside_gcc",
-    "africa_delivery": "delivery_outside_gcc"
+    "africa_delivery": "delivery_outside_gcc",
+    "import_duty_vat_outside_uae": "import_duty_vat_outside_uae",
+    "import_duty": "import_duty_vat_outside_uae",
+    "customs": "import_duty_vat_outside_uae",
+    "duty": "import_duty_vat_outside_uae",
+    "price_changes": "price_changes",
+    "price_change": "price_changes",
+    "pricing_errors": "price_changes"
 }
 
 GCC_COUNTRIES = {"uae", "united arab emirates", "saudi arabia", "ksa", "kuwait", "qatar", "bahrain", "oman"}
@@ -62,12 +73,12 @@ def get_policy(policy_name: str, destination: Optional[str] = None) -> Dict[str,
 
     if is_outside_gcc:
         outside_entry = policies.get("delivery_outside_gcc", {})
-        terms_text = outside_entry.get("terms", "Deliveries outside the GCC require custom logistics and must be arranged directly through our sales desk.")
+        terms_text = outside_entry.get("terms", "We only deliver our products to the UAE, Oman, and all other GCC countries.")
         return {
             "status": "handoff",
             "policy": "delivery_outside_gcc",
             "handoff": True,
-            "message": f"{terms_text} Our team will connect with you to review export and shipping options.",
+            "message": f"{terms_text} Delivery outside the GCC is handled by our sales desk for custom export and shipping options.",
             "requires_sales_desk": True
         }
 
@@ -91,11 +102,14 @@ def get_policy(policy_name: str, destination: Optional[str] = None) -> Dict[str,
 
     # If action is explicitly handoff
     if isinstance(val, dict) and val.get("action") == "handoff":
+        msg = val.get("terms", "This inquiry requires confirmation from our sales desk.")
+        if canonical_key == "delivery_outside_gcc" and "outside the gcc" not in msg.lower():
+            msg = f"{msg} Delivery outside the GCC is handled by our sales desk for custom export and shipping options."
         return {
             "status": "handoff",
             "policy": canonical_key,
             "handoff": True,
-            "message": val.get("terms", "This inquiry requires confirmation from our sales desk."),
+            "message": msg,
             "details": val
         }
 

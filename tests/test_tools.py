@@ -153,4 +153,100 @@ def test_safe_dispatcher():
     # Missing required argument
     missing_res = execute_tool("get_price", {})
     assert missing_res["status"] == "error"
-    assert "Missing required parameter" in missing_res["message"]
+    assert "validation error" in missing_res["message"].lower() or "missing" in missing_res["message"].lower()
+
+
+def test_unknown_sku_refusal_no_default_cx02():
+    from app.agent.pipeline import CX02Pipeline
+    pipeline = CX02Pipeline()
+
+    # Asking for unsupported accessory or unknown SKU must not quote 4,385 AED printer
+    res_adapter = pipeline.process("What is the price of the wireless adapter?")
+    assert "4,385" not in res_adapter["reply"]
+    assert any(t.get("tool") == "handoff_to_human" for t in res_adapter["tools_called"])
+    assert "could not identify the specific product" in res_adapter["reply"].lower()
+
+    res_tripod = pipeline.process("How much does the tripod cost?")
+    assert "4,385" not in res_tripod["reply"]
+    assert any(t.get("tool") == "handoff_to_human" for t in res_tripod["tools_called"])
+
+
+def test_quantity_parsing_arabic_and_k_suffix():
+    from app.utils.quantity import parse_quantity
+    assert parse_quantity("5,000") == 5000
+    assert parse_quantity("1k") == 1000
+    assert parse_quantity("2.5k") == 2500
+    assert parse_quantity("٣") == 3
+    assert parse_quantity("quote for 10 units") == 10
+
+    # Quotation with quantity >= 10 printers must trigger large-quantity handoff
+    res_bulk = create_quote([{"sku": "CX-02", "qty": "10"}])
+    assert res_bulk["status"] == "error"
+    assert res_bulk["handoff"] is True
+    assert res_bulk.get("large_quantity") is True
+    assert "commercial tier pricing" in res_bulk["message"].lower()
+
+
+def test_outbound_whatsapp_sender():
+    from app.whatsapp.client import send_whatsapp_message
+    res = send_whatsapp_message(to="+971508901641", text="Hello from Kepler Tech")
+    assert res["status"] in ("sent", "mock_sent")
+    assert "***" in res["to"]  # Phone number masked in logs / responses
+
+
+import uuid
+
+def test_quote_idempotency():
+    sender = f"test_quote_idemp_{uuid.uuid4().hex[:8]}"
+    items = [{"sku": "CX2-MS46-2PC", "qty": 2}]
+
+    # Call 1: Creates fresh quote
+    q1 = create_quote(items=items, sender_id=sender)
+    assert q1["status"] == "success"
+    assert "quote_id" in q1
+    assert q1.get("idempotent") is None
+
+    # Call 2: Identical items and sender returns the existing quote
+    q2 = create_quote(items=items, sender_id=sender)
+    assert q2["status"] == "success"
+    assert q2["quote_id"] == q1["quote_id"]
+    assert q2.get("idempotent") is True
+
+
+def test_handoff_and_lead_idempotency():
+    from app.tools.handoff import handoff_to_human, create_lead
+    sender = f"test_handoff_idemp_{uuid.uuid4().hex[:8]}"
+
+    # Handoff idempotency
+    h1 = handoff_to_human(reason="Commercial discount request", sender_id=sender)
+    assert h1["status"] == "handoff_initiated"
+    assert h1.get("idempotent") is None
+
+    h2 = handoff_to_human(reason="Commercial discount request", sender_id=sender)
+    assert h2["status"] == "handoff_initiated"
+    assert h2.get("idempotent") is True
+
+    # Lead capture idempotency
+    l1 = create_lead(name="Sarah", phone="+971501112233", sender_id=sender)
+    assert l1["status"] == "success"
+    assert l1.get("idempotent") is None
+
+    l2 = create_lead(name="Sarah", phone="+971501112233", sender_id=sender)
+    assert l2["status"] == "success"
+    assert l2["lead_id"] == l1["lead_id"]
+    assert l2.get("idempotent") is True
+
+
+def test_dispatcher_pydantic_validation_bounds():
+    # Invalid quantity > 1000 in create_quote
+    res_overflow = execute_tool("create_quote", {
+        "items": [{"sku": "CX-02", "qty": 5000}]
+    })
+    assert res_overflow["status"] == "error"
+    assert "validation error" in res_overflow["message"].lower()
+
+    # Invalid empty items in create_quote
+    res_empty = execute_tool("create_quote", {"items": []})
+    assert res_empty["status"] == "error"
+    assert "validation error" in res_empty["message"].lower()
+

@@ -108,3 +108,31 @@ def test_whatsapp_post_hmac_and_deduplication(client, monkeypatch):
     res_dup = client.post("/webhook", data=raw_data, headers={"X-Hub-Signature-256": sig, "Content-Type": "application/json"})
     assert res_dup.status_code == 200
     assert res_dup.get_json()["status"] == "EVENT_RECEIVED"
+
+
+def test_leads_endpoint_auth(client, monkeypatch):
+    monkeypatch.setattr(Config, "ADMIN_API_KEY", "super_secret_admin_token")
+
+    # 1. No token -> 401
+    res_no_auth = client.get("/leads")
+    assert res_no_auth.status_code == 401
+    assert "Unauthorized" in res_no_auth.get_json()["error"]
+
+    # 2. Wrong token -> 401
+    res_wrong = client.get("/leads", headers={"Authorization": "Bearer wrong_token"})
+    assert res_wrong.status_code == 401
+
+    # 3. Valid token -> 200
+    res_ok = client.get("/leads", headers={"Authorization": "Bearer super_secret_admin_token"})
+    assert res_ok.status_code == 200
+    assert "leads" in res_ok.get_json()
+
+
+def test_whatsapp_production_fail_closed(client, monkeypatch):
+    monkeypatch.setattr(Config, "ENV", "production")
+    monkeypatch.setattr(Config, "WHATSAPP_APP_SECRET", "")
+    monkeypatch.setattr(Config, "WHATSAPP_DEV_OVERRIDE", False)
+
+    res = client.post("/webhook", json={"test": True})
+    assert res.status_code == 500
+    assert "unconfigured in production" in res.get_json()["message"]

@@ -17,8 +17,11 @@ SYNONYMS: Dict[str, Set[str]] = {
     "size": {"dimensions", "dimension", "width", "depth", "height", "mm", "inches", "footprint", "volume", "compact", "sizes", "capacity"},
     "dimensions": {"dimensions", "dimension", "width", "depth", "height", "mm", "inches", "footprint", "volume"},
     "dimension": {"dimensions", "dimension", "width", "depth", "height", "mm", "inches", "footprint", "volume"},
-    "speed": {"speed", "speeds", "seconds", "second", "sec", "fast", "rate", "time"},
-    "fast": {"speed", "speeds", "seconds", "second", "sec", "fast", "time"},
+    "speed": {"speed", "speeds", "seconds", "second", "sec", "fast", "rate", "time", "long", "how long", "take"},
+    "fast": {"speed", "speeds", "seconds", "second", "sec", "fast", "time", "long"},
+    "photo": {"speed", "speeds", "seconds", "print", "4x6", "5x7", "6x8", "time"},
+    "long": {"speed", "speeds", "seconds", "second", "time", "take"},
+    "take": {"speed", "speeds", "seconds", "time", "long"},
     "resolution": {"resolution", "dpi", "dots", "quality", "sharp", "sharpness"},
     "dpi": {"resolution", "dpi", "dots", "300x300", "300x600"},
     "media": {"media", "paper", "roll", "rolls", "box", "prints", "print", "sheet", "sheets", "capacity", "yield"},
@@ -61,8 +64,18 @@ SYNONYMS: Dict[str, Set[str]] = {
 
 
 def extract_keywords(text: str) -> List[str]:
-    tokens = re.findall(r"[a-z0-9]+", text.lower())
-    return [t for t in tokens if t not in STOPWORDS and len(t) > 1]
+    # First extract dimension tokens like 4x6, 5x7, 6x8, 300x600 as atomic units
+    norm = text.lower()
+    dim_tokens = re.findall(r"\d+x\d+", norm)
+    # Remove dimension substrings to avoid double-counting
+    norm_no_dims = re.sub(r"\d+x\d+", " ", norm)
+    # Standard alphanumeric tokens (keep 2+ char; also keep 2-digit+ pure numbers)
+    raw_tokens = re.findall(r"[a-z0-9]+", norm_no_dims)
+    filtered = [
+        t for t in raw_tokens
+        if t not in STOPWORDS and (len(t) > 1 or t.isdigit())
+    ]
+    return dim_tokens + filtered
 
 
 def calculate_word_coverage(query: str, chunk_text: str) -> float:

@@ -1,16 +1,17 @@
+<!-- RawSource: data/raw/cx02_datasheet.txt, data/raw/citizen_cx02_page.txt, data/raw/cx02_product_page.txt -->
 <!-- Source: https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf -->
+<!-- Source: https://citizen-systems.com/en/products/printer/photo/cx-02 -->
+<!-- Source: https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/ -->
 <!-- Model: CX-02 -->
 
 ## Physical Dimensions and Weight
-- Width: 275 mm (10.8 inches)
-- Depth: 366 mm (14.4 inches)
-- Height: 170 mm (6.7 inches)
-- Net Weight: 12.0 kg (26.5 lbs) excluding media and ribbon
-- Gross Packaged Weight: 13.5 kg (29.8 lbs)
-- Compact Form Factor: 33% smaller in volume and 14% lighter than preceding models such as the CX-01.
+- Size (W x D x H): 275 mm x 366 mm x 170 mm (27.5 x 36.6 x 17 cm)
+- Product Weight: 12 Kg (printer unit)
+- Package Weight: 13.5 Kg
+- Package Dimensions: 39 x 50 x 33.5 cm (50 x 39 x 33.5 cm)
 
-## Connectivity and Operating Systems
-- Interface: High-speed USB 2.0 (Type-B connector)
-- Supported Operating Systems: Windows 7, Windows 8, Windows 10, Windows 11 (32-bit and 64-bit); macOS 10.12 Sierra up to macOS 14 Sonoma; Linux CUPS drivers available.
-- Power Supply: AC 100V - 240V, 50/60 Hz internal auto-switching power supply.
-- Power Consumption: Standby power under 0.5W in Sleep Mode (Energy Star compliant).
+## Operating Systems and Connectivity
+- Supported Operating Systems: Mac OS X, Windows 7 & 10, Windows 11, Windows Server 2022
+- Main Interface: USB 2.0 full speed
+- Energy Saving: Sleep mode reduces energy consumption by 98%
+- Paper & Ribbon Handling: Drop-in paper loading and comfortable ribbon handling

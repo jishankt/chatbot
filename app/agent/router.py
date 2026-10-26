@@ -62,7 +62,9 @@ BUNDLE_CATALOG_KEYWORDS = [
 ]
 
 PRICE_KEYWORDS = [
-    "price", "how much", "cost", "rate", "aed", "dirham", "dirhams"
+    "price", "how much", "cost", "rate", "aed", "dirham", "dirhams",
+    "bikam", "kam el se3r", "kam el s3r", "se3r", "s3r",
+    "سعر", "بكم", "تكلفة", "كم سعر"
 ]
 
 LINK_KEYWORDS = [
@@ -220,7 +222,7 @@ def classify_intent(message: str) -> Dict[str, Any]:
 
     # Priority 12: Price Inquiry
     for kw in PRICE_KEYWORDS:
-        if kw in clean_msg:
+        if re.search(r"\b" + re.escape(kw) + r"\b", clean_msg):
             return {
                 "intent": "price",
                 "priority": 12,

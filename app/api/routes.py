@@ -1,6 +1,8 @@
 import time
 import hmac
 import hashlib
+import logging
+from functools import wraps
 from flask import Blueprint, request, jsonify, render_template
 from app.config import Config
 from app.agent.pipeline import CX02Pipeline
@@ -8,9 +10,28 @@ from app.storage.messages import is_message_duplicate
 from app.storage.leads import get_leads
 from app.tools.pricing import load_catalog
 from app.tools.quote import create_quote
+from app.whatsapp.client import send_whatsapp_message
+from app.utils.phone import mask_phone_number
+
+logger = logging.getLogger(__name__)
 
 api_bp = Blueprint("api", __name__)
 pipeline = CX02Pipeline()
+
+
+def require_admin_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth_header = request.headers.get("Authorization", "")
+        token = auth_header.replace("Bearer ", "").strip() if auth_header.startswith("Bearer ") else None
+        expected = Config.ADMIN_API_KEY
+        if not token or not expected or not hmac.compare_digest(token, expected):
+            return jsonify({
+                "error": "Unauthorized",
+                "message": "Valid Bearer token required for access to protected leads data."
+            }), 401
+        return f(*args, **kwargs)
+    return decorated
 
 
 @api_bp.route("/", methods=["GET"])
@@ -49,6 +70,9 @@ def chat_endpoint():
     if not message:
         return jsonify({"error": "Empty message"}), 400
 
+    masked_phone = mask_phone_number(phone)
+    logger.info(f"Incoming chat from {sender_id} ({masked_phone}): {message[:60]}...")
+
     start_time = time.time()
     result = pipeline.process(
         user_message=message,
@@ -82,8 +106,9 @@ def quote_endpoint():
 
 
 @api_bp.route("/leads", methods=["GET"])
+@require_admin_auth
 def leads_endpoint():
-    """Retrieve captured CRM leads."""
+    """Retrieve captured CRM leads (Protected by Bearer token)."""
     leads = get_leads(limit=100)
     return jsonify({"leads": leads, "count": len(leads)}), 200
 
@@ -99,7 +124,12 @@ def _handle_whatsapp_verification():
 
 
 def _handle_whatsapp_incoming():
-    # 1. Signature validation (if secret is configured)
+    # 1. Fail-closed in production if secret unconfigured and no explicit dev override
+    if Config.ENV == "production" and not Config.WHATSAPP_APP_SECRET and not Config.WHATSAPP_DEV_OVERRIDE:
+        logger.error("WhatsApp webhook secret unconfigured in production environment.")
+        return jsonify({"status": "error", "message": "Webhook secret unconfigured in production"}), 500
+
+    # 2. Signature validation (if secret is configured)
     if Config.WHATSAPP_APP_SECRET:
         signature = request.headers.get("X-Hub-Signature-256", "")
         if not signature.startswith("sha256="):
@@ -125,19 +155,24 @@ def _handle_whatsapp_incoming():
 
                 # Deduplication check via SQLite
                 if msg_id and is_message_duplicate(msg_id):
+                    logger.info(f"Duplicate WhatsApp message ignored: {msg_id}")
                     continue
 
                 from_num = msg.get("from", "Unknown")
                 text_body = msg.get("text", {}).get("body", "").strip()
 
                 if text_body:
-                    pipeline.process(
+                    res = pipeline.process(
                         user_message=text_body,
                         sender_id=from_num,
                         channel="whatsapp",
                         phone=from_num,
                         message_id=msg_id
                     )
+                    # Outbound dispatch via Meta Graph API
+                    reply_text = res.get("reply", "")
+                    if reply_text and from_num != "Unknown":
+                        send_whatsapp_message(to=from_num, text=reply_text)
 
     # Always return 200 to acknowledge Meta webhook
     return jsonify({"status": "EVENT_RECEIVED"}), 200

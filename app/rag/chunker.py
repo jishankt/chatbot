@@ -17,6 +17,9 @@ def parse_markdown_kb(kb_dir: Path) -> List[Dict[str, Any]]:
         source_match = re.search(r"<!--\s*Source:\s*([^\s>]+)\s*-->", content, re.IGNORECASE)
         source_url = source_match.group(1).strip() if source_match else "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/"
 
+        raw_source_match = re.search(r"<!--\s*RawSource:\s*([^>]+)\s*-->", content, re.IGNORECASE)
+        raw_sources = [s.strip() for s in raw_source_match.group(1).split(",")] if raw_source_match else []
+
         model_match = re.search(r"<!--\s*Model:\s*([^\s>]+)\s*-->", content, re.IGNORECASE)
         model_name = model_match.group(1).strip() if model_match else "CX-02"
 
@@ -54,7 +57,8 @@ def parse_markdown_kb(kb_dir: Path) -> List[Dict[str, Any]]:
                 "title": heading,
                 "text": full_text,
                 "model": model_name,
-                "source_url": source_url
+                "source_url": source_url,
+                "raw_sources": raw_sources
             }
             chunks.append(chunk)
             chunk_idx += 1

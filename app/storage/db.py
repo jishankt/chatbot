@@ -89,6 +89,22 @@ def init_db(db_path: Optional[Path] = None) -> None:
         )
     """)
 
+    # Sales policy state machine
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS conversation_states (
+            sender_id TEXT PRIMARY KEY,
+            current_state TEXT NOT NULL DEFAULT 'GREETING',
+            turn_count INTEGER NOT NULL DEFAULT 0,
+            business_type TEXT,
+            delivery_destination TEXT,
+            target_sku TEXT,
+            quote_id TEXT,
+            discovery_questions_asked TEXT DEFAULT '[]',
+            last_intent TEXT,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+
     conn.commit()
     conn.close()
 

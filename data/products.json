@@ -34,13 +34,36 @@
       ],
       "unverified_fields": [],
       "attributes": {
-        "print_method": "Dye-sublimation thermal transfer",
-        "speed_4x6_sec": 8.4,
-        "resolution_dpi": ["300x300", "300x600"],
-        "weight_kg": 12.0,
-        "dimensions_mm": "275 x 366 x 170",
-        "interface": "USB 2.0",
-        "power_standby_watts": 0.5
+        "print_method": {
+          "value": "Dye-sublimation thermal system with overcoat",
+          "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
+          "raw_source_file": "data/raw/cx02_datasheet.txt"
+        },
+        "speed_4x6_sec": {
+          "value": 8.4,
+          "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
+          "raw_source_file": "data/raw/cx02_datasheet.txt"
+        },
+        "resolution": {
+          "value": "300 dpi, 600 dpi",
+          "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
+          "raw_source_file": "data/raw/cx02_datasheet.txt"
+        },
+        "weight_kg": {
+          "value": 12,
+          "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
+          "raw_source_file": "data/raw/cx02_datasheet.txt"
+        },
+        "dimensions_mm": {
+          "value": "275 x 366 x 170",
+          "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
+          "raw_source_file": "data/raw/cx02_datasheet.txt"
+        },
+        "interface": {
+          "value": "USB 2.0 full speed",
+          "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
+          "raw_source_file": "data/raw/cx02_datasheet.txt"
+        }
       },
       "url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
       "description": "Compact, lightweight dye-sublimation photo printer for event photography, photobooths, and retail kiosks."
@@ -48,7 +71,7 @@
     "CX2-MS46-2PC": {
       "id": "CX2-MS46-2PC",
       "sku": "CX2-MS46-2PC",
-      "site_sku": "CX2-MS46-2PC",
+      "site_sku": "CX2.4x6",
       "model_number": "CX2-MS46-2PC",
       "brand": "Citizen",
       "family": "CX-02",
@@ -67,18 +90,29 @@
       "estimate_note": "Estimate based on 2 rolls x 400 prints",
       "unverified_fields": ["prints_per_set"],
       "attributes": {
-        "size_inch": "4x6",
-        "size_mm": "102x152",
-        "rolls_per_box": 2,
-        "estimated_prints_per_roll": 400
+        "size_inch": {
+          "value": "4x6",
+          "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-4x6-printer-media/",
+          "raw_source_file": "data/raw/media_4x6_page.txt"
+        },
+        "rolls_per_box": {
+          "value": 2,
+          "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-4x6-printer-media/",
+          "raw_source_file": "data/raw/media_4x6_page.txt"
+        },
+        "estimated_prints_per_roll": {
+          "value": 400,
+          "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
+          "raw_source_file": "data/raw/cx02_datasheet.txt"
+        }
       },
-      "url": "https://www.keplertechllc.com/product/citizen-cx-02-4x6-media-set/",
+      "url": "https://www.keplertechllc.com/product/citizen-cx-02-4x6-printer-media/",
       "description": "Original Citizen 4x6\" paper and ink ribbon set (2 rolls, estimated 800 total prints)."
     },
     "CX2-MS57-2PC": {
       "id": "CX2-MS57-2PC",
       "sku": "CX2-MS57-2PC",
-      "site_sku": "CX2-MS57-2PC",
+      "site_sku": "CX0257",
       "model_number": "CX2-MS57-2PC",
       "brand": "Citizen",
       "family": "CX-02",
@@ -97,18 +131,34 @@
       "estimate_note": null,
       "unverified_fields": [],
       "attributes": {
-        "size_inch": "5x7",
-        "size_mm": "127x178",
-        "rolls_per_box": 2,
-        "verified_prints_per_roll": 230
+        "size_inch": {
+          "value": "5x7",
+          "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-5x7-media-set-2-roll/",
+          "raw_source_file": "data/raw/media_5x7_page.txt"
+        },
+        "rolls_per_box": {
+          "value": 2,
+          "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-5x7-media-set-2-roll/",
+          "raw_source_file": "data/raw/media_5x7_page.txt"
+        },
+        "sheets_per_roll": {
+          "value": 230,
+          "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
+          "raw_source_file": "data/raw/cx02_datasheet.txt"
+        },
+        "prints_per_set": {
+          "value": "up to 460 prints",
+          "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-5x7-media-set-2-roll/",
+          "raw_source_file": "data/raw/media_5x7_page.txt"
+        }
       },
-      "url": "https://www.keplertechllc.com/product/citizen-cx-02-5x7-media-set/",
-      "description": "Original Citizen 5x7\" paper and ink ribbon set (2 rolls, verified 460 total prints)."
+      "url": "https://www.keplertechllc.com/product/citizen-cx-02-5x7-media-set-2-roll/",
+      "description": "Original Citizen 5x7\" paper and ink ribbon set (2 rolls, up to 460 prints)."
     },
     "CX2-MS68-2PC": {
       "id": "CX2-MS68-2PC",
       "sku": "CX2-MS68-2PC",
-      "site_sku": "CX2-MS68-2PC",
+      "site_sku": "CX2.6X8",
       "model_number": "CX2-MS68-2PC",
       "brand": "Citizen",
       "family": "CX-02",
@@ -127,19 +177,30 @@
       "estimate_note": "Estimate based on 2 rolls x 200 prints",
       "unverified_fields": ["prints_per_set"],
       "attributes": {
-        "size_inch": "6x8",
-        "size_mm": "152x203",
-        "rolls_per_box": 2,
-        "estimated_prints_per_roll": 200
+        "size_inch": {
+          "value": "6x8",
+          "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-printer-6x8-media/",
+          "raw_source_file": "data/raw/media_6x8_page.txt"
+        },
+        "rolls_per_box": {
+          "value": 2,
+          "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-printer-6x8-media/",
+          "raw_source_file": "data/raw/media_6x8_page.txt"
+        },
+        "estimated_prints_per_roll": {
+          "value": 200,
+          "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
+          "raw_source_file": "data/raw/cx02_datasheet.txt"
+        }
       },
-      "url": "https://www.keplertechllc.com/product/citizen-cx-02-6x8-media-set/",
+      "url": "https://www.keplertechllc.com/product/citizen-cx-02-printer-6x8-media/",
       "description": "Original Citizen 6x8\" paper and ink ribbon set (2 rolls, estimated 400 total prints)."
     },
     "CX-02-BAG": {
       "id": "CX-02-BAG",
       "sku": "CX-02-BAG",
-      "site_sku": "CX-02-BAG",
-      "model_number": "CX-02-BAG",
+      "site_sku": "Citizen CX-02 Bag",
+      "model_number": null,
       "brand": "Citizen",
       "family": "CX-02",
       "name": "Citizen CX-02 Carry Bag",
@@ -154,17 +215,25 @@
       "compatible_with": ["CX-02"],
       "unverified_fields": [],
       "attributes": {
-        "material": "Padded ballistic nylon",
-        "strap": "Detachable shoulder strap"
+        "compatibility": {
+          "value": "Citizen CX-02 Printer",
+          "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-printer-carry-bag/",
+          "raw_source_file": "data/raw/bag_product_page.txt"
+        },
+        "interior": {
+          "value": "Padded interior for transport protection",
+          "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-printer-carry-bag/",
+          "raw_source_file": "data/raw/bag_product_page.txt"
+        }
       },
-      "url": "https://www.keplertechllc.com/product/citizen-cx-02-carry-bag/",
-      "description": "Padded protective carrying case designed specifically for the Citizen CX-02."
+      "url": "https://www.keplertechllc.com/product/citizen-cx-02-printer-carry-bag/",
+      "description": "Protective carrying case designed specifically for the Citizen CX-02 with padded interior."
     },
     "CITIZEN-PEN": {
       "id": "CITIZEN-PEN",
       "sku": "CITIZEN-PEN",
-      "site_sku": "CITIZEN-PEN",
-      "model_number": "CITIZEN-PEN",
+      "site_sku": "Citizen Pen",
+      "model_number": null,
       "brand": "Citizen",
       "family": "CX-02",
       "name": "Citizen Thermal Head Cleaning Pen",
@@ -181,11 +250,14 @@
       "compatible_with": ["CX-02"],
       "unverified_fields": ["price_confirmed"],
       "attributes": {
-        "formulation": "Special non-abrasive solvent",
-        "application": "Thermal head element cleaning"
+        "application": {
+          "value": "Cleaning thermal printheads on Citizen photo printers",
+          "source_url": "https://www.keplertechllc.com/product/citizen-thermal-head-cleaning-pen/",
+          "raw_source_file": "data/raw/pen_product_page.txt"
+        }
       },
-      "url": "https://www.keplertechllc.com/product/citizen-cx-02-printhead-cleaning-pen/",
-      "description": "Citizen thermal printhead cleaning pen to maintain print quality and prolong head life."
+      "url": "https://www.keplertechllc.com/product/citizen-thermal-head-cleaning-pen/",
+      "description": "Citizen thermal printhead cleaning pen to maintain print quality and clean thermal printheads."
     }
   }
 }

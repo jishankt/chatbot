@@ -26,3 +26,4 @@ This sales assistant is built for Kepler Tech LLC (Dubai) to assist business cus
     - https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf
     - https://citizen-systems.com/en/products/printer/photo/cx-02
     List any other source you want to use and wait for approval.
+12. **Raw Data Integrity**: Raw source files under `data/raw/` must be verbatim extracts from authorized source URLs and documents. Never edit raw source files by hand.

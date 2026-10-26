@@ -1,6 +1,6 @@
 import logging
 from typing import Dict, Any, Callable
-from app.tools.schemas import TOOL_SCHEMAS
+from app.tools.schemas import TOOL_SCHEMAS, TOOL_ARG_MODELS
 from app.tools.pricing import get_price, check_stock, list_products, calculate_cost_per_print
 from app.tools.links import get_product_link
 from app.tools.quote import create_quote
@@ -24,7 +24,7 @@ TOOL_MAP: Dict[str, Callable] = {
 
 def execute_tool(tool_name: str, args: Dict[str, Any]) -> Dict[str, Any]:
     """
-    Safely dispatches and executes a tool with JSON-schema validation.
+    Safely dispatches and executes a tool with strict Pydantic and JSON-schema validation.
     Guarantees no unhandled exceptions are raised.
     """
     if tool_name not in TOOL_MAP:
@@ -37,21 +37,24 @@ def execute_tool(tool_name: str, args: Dict[str, Any]) -> Dict[str, Any]:
         }
 
     func = TOOL_MAP[tool_name]
-    schema = TOOL_SCHEMAS.get(tool_name, {})
-    required_fields = schema.get("required", [])
 
-    # Validate required arguments
-    missing = [rf for rf in required_fields if rf not in args or args[rf] is None]
-    if missing:
-        return {
-            "status": "error",
-            "tool": tool_name,
-            "message": f"Missing required parameter(s): {', '.join(missing)}",
-            "handoff": False
-        }
+    # Validate against Pydantic schema model if available
+    validated_args = args
+    if tool_name in TOOL_ARG_MODELS:
+        model_cls = TOOL_ARG_MODELS[tool_name]
+        try:
+            instance = model_cls(**args)
+            validated_args = instance.model_dump(exclude_none=True)
+        except Exception as ve:
+            return {
+                "status": "error",
+                "tool": tool_name,
+                "message": f"Validation error for tool '{tool_name}': {str(ve)}",
+                "handoff": False
+            }
 
     try:
-        result = func(**args)
+        result = func(**validated_args)
         return {
             "status": "success",
             "tool": tool_name,

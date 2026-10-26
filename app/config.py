@@ -34,11 +34,18 @@ class Config:
     OLLAMA_EMBED_MODEL = os.getenv("OLLAMA_EMBED_MODEL", "nomic-embed-text")
     FORCE_EXTRACTIVE_MODE = os.getenv("FORCE_EXTRACTIVE_MODE", "false").lower() in ("true", "1")
 
-    # WhatsApp Cloud API Webhook
+    # Environment & Auth
+    ENV = os.getenv("ENV", "development").lower()
+    ADMIN_API_KEY = os.getenv("ADMIN_API_KEY", "kepler_admin_secret_key_2026")
+    DATA_RETENTION_DAYS = int(os.getenv("DATA_RETENTION_DAYS", "90"))
+
+    # WhatsApp Cloud API Webhook & Outbound
     WHATSAPP_TOKEN = os.getenv("WHATSAPP_TOKEN", "")
+    WHATSAPP_API_TOKEN = os.getenv("WHATSAPP_API_TOKEN", os.getenv("WHATSAPP_TOKEN", ""))
     WHATSAPP_PHONE_NUMBER_ID = os.getenv("WHATSAPP_PHONE_NUMBER_ID", "")
     WHATSAPP_VERIFY_TOKEN = os.getenv("WHATSAPP_VERIFY_TOKEN", "cx02_sales_verify_token")
     WHATSAPP_APP_SECRET = os.getenv("WHATSAPP_APP_SECRET", "")
+    WHATSAPP_DEV_OVERRIDE = os.getenv("WHATSAPP_DEV_OVERRIDE", "false").lower() in ("true", "1")
 
     # Kepler Tech LLC Contact Info
     KEPLER_PHONE = os.getenv("KEPLER_PHONE", "00971 4 323 1008")

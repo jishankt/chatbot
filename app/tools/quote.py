@@ -2,17 +2,20 @@ import uuid
 from typing import List, Dict, Any, Optional
 from app.config import Config
 from app.tools.pricing import load_catalog, normalize_sku
-from app.storage.quotes import save_quote
+from app.storage.quotes import save_quote, get_latest_quote_by_sender
+from app.utils.quantity import parse_quantity, get_large_quantity_threshold
 
 
 def create_quote(
     items: List[Dict[str, Any]],
     customer_name: str = "Valued Customer",
     phone: Optional[str] = None,
-    sender_id: Optional[str] = None
+    sender_id: Optional[str] = None,
+    idempotency_key: Optional[str] = None
 ) -> Dict[str, Any]:
     catalog = load_catalog()
     products = catalog.get("products", {})
+    large_qty_threshold = get_large_quantity_threshold()
 
     if not items:
         return {
@@ -20,6 +23,50 @@ def create_quote(
             "message": "Cannot create quotation: No items were provided.",
             "handoff": False
         }
+
+    # Idempotent replay: if the sender generated an identical quote recently, reuse it
+    if sender_id:
+        latest = get_latest_quote_by_sender(sender_id)
+        if latest:
+            latest_items = [{
+                "sku": i.get("sku"),
+                "qty": i.get("qty")
+            } for i in latest.get("items", [])]
+            incoming_items = [{
+                "sku": normalize_sku(i.get("sku", "")),
+                "qty": parse_quantity(i.get("qty", 1))
+            } for i in items]
+            if latest_items == incoming_items:
+                vat_line = f"VAT ({int(Config.VAT_RATE * 100)}%): {latest['vat_amount']:,.2f} AED" if latest.get("vat_amount") else "VAT: Consult sales desk for applicable tax treatment"
+                line_strings = [
+                    f"• {l['qty']}x {l['name']} (SKU: {l['sku']})\n   @ {l['unit_price']:,.2f} AED = {l['line_total']:,.2f} AED"
+                    for l in latest.get("items", [])
+                ]
+                text_summary = (
+                    f"📄 *Official Quotation ({latest['quote_id']})*\n"
+                    f"Customer: {latest['customer_name']}\n"
+                    f"Supplier: Kepler Tech LLC (Dubai)\n"
+                    f"----------------------------------------\n"
+                    f"{chr(10).join(line_strings)}\n"
+                    f"----------------------------------------\n"
+                    f"Subtotal: {latest['subtotal']:,.2f} AED\n"
+                    f"{vat_line}\n"
+                    f"*Total: {latest['total']:,.2f} AED*\n\n"
+                    f"To confirm this order, contact Kepler Tech LLC:\n"
+                    f"📞 Phone: {Config.KEPLER_PHONE} | 💬 WhatsApp: {Config.KEPLER_WHATSAPP}"
+                )
+                return {
+                    "status": "success",
+                    "quote_id": latest["quote_id"],
+                    "customer_name": latest["customer_name"],
+                    "phone": latest["phone"],
+                    "lines": latest["items"],
+                    "subtotal": latest["subtotal"],
+                    "vat_amount": latest.get("vat_amount"),
+                    "total": latest["total"],
+                    "text_summary": text_summary,
+                    "idempotent": True
+                }
 
     validated_lines = []
     subtotal = 0.0
@@ -41,20 +88,33 @@ def create_quote(
                 "handoff": True
             }
 
-        try:
-            qty = int(item.get("qty", 1))
-        except (ValueError, TypeError):
+        parsed_qty = parse_quantity(item.get("qty", 1))
+        if parsed_qty is None:
             return {
                 "status": "error",
-                "message": f"Invalid quantity for SKU '{raw_sku}'. Quantity must be an integer.",
+                "message": f"Invalid quantity for SKU '{raw_sku}'. Quantity must be a valid number.",
                 "handoff": False
             }
 
+        qty = parsed_qty
         if qty < 1 or qty > 1000:
             return {
                 "status": "error",
                 "message": f"Quantity for {products[norm_sku]['name']} must be between 1 and 1,000 units. For larger commercial orders, please speak with our corporate sales desk.",
                 "handoff": True
+            }
+
+        # Check configurable large-quantity handoff threshold for printers (>= 10)
+        if norm_sku == "CX-02" and qty >= large_qty_threshold:
+            return {
+                "status": "error",
+                "message": (
+                    f"Quantity of {qty} units for {products[norm_sku]['name']} qualifies for commercial tier pricing. "
+                    f"Orders of {large_qty_threshold} or more printers require sales desk assistance. "
+                    f"Please contact our Dubai corporate desk at {Config.KEPLER_PHONE} or WhatsApp {Config.KEPLER_WHATSAPP}."
+                ),
+                "handoff": True,
+                "large_quantity": True
             }
 
         unit_price = products[norm_sku]["price"]

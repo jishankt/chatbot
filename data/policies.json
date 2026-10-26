@@ -9,7 +9,7 @@
   "warranty": null,
   "vat_treatment": null,
   "payment_methods": {
-    "terms": "Payment methods accepted are Credit Card (Visa, MasterCard), Debit Card, and PayPal. Payment must be made in full at the time of order placement, and no products will be dispatched until payment is received in full.",
+    "terms": "Payment methods accepted are Credit Card (Visa, MasterCard in AED), Debit Card, and PayPal. You must pay for the goods at the time of placing your order. Goods will not be dispatched until payment is received in full.",
     "methods": ["Credit Card", "Debit Card", "PayPal"],
     "section": "Section 4",
     "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
@@ -17,38 +17,50 @@
     "confirm_before_use": true
   },
   "cancellation_policy": {
-    "terms": "Orders may be cancelled only within 24 hours of placing the order.",
+    "terms": "Customers can cancel their order only within 24 hours of placing the order.",
     "section": "Section 8a",
     "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
     "source_date": "2023-09-19",
     "confirm_before_use": true
   },
   "return_policy": {
-    "terms": "Returns are accepted only if the product is defective, damaged, or not as described. Customer must notify Kepler Tech within 2 days of delivery. Product delivery packaging must remain unopened, undamaged, and unused. Prior return approval is required from Kepler Tech. Approved refunds are credited to the original payment method within up to 45 days depending on the issuing bank.",
+    "terms": "We will accept returns of goods that are defective or do not meet the description on our website. Returned goods should be in their original packaging. Return will only be accepted if the delivery packaging has not been opened. You must notify us of any defective or non-conforming goods within 2 days of receipt. Only after you get the approval for return from our side, you may ship your products back to us using a registered courier service. Returns and refunds will only be processed after proper inspection of the returned goods. We reserve the right to refuse any returned shipments if the product has been used or tampered with. Refunds will be done only through the Original Mode of Payment. Please allow for up to 45 days for the refund transfer to be completed.",
     "notice_days": 2,
     "refund_window_days": 45,
-    "section": "Section 9",
+    "section": "Section 8",
     "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
     "source_date": "2023-09-19",
     "confirm_before_use": true
   },
   "delivery_charges": {
-    "terms": "Flat shipping rate of AED 10 for deliveries within the UAE. Delivery outside the UAE is available across the GCC with shipping fees calculated and shown at checkout. Deliveries outside the GCC require sales desk assistance.",
+    "terms": "UAE Delivery Fees will be a Flat Rate of AED 10 and Delivery Fees outside UAE will be mentioned on the checkout page depending on the country and location.",
     "uae_flat_aed": 10.0,
-    "section": "Section 10",
+    "section": "Section 10c",
     "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
     "source_date": "2023-09-19",
     "confirm_before_use": true
   },
-  "delivery_time": {
-    "terms": "Orders are processed within 1-2 business days following payment confirmation.",
-    "section": "Section 10",
+  "order_processing": {
+    "terms": "All orders are processed within 1 to 2 business days (excluding weekends and holidays) after receiving your order confirmation email. You will receive another notification when your order has shipped.",
+    "business_days": "1-2",
+    "section": "Section 10b",
+    "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
+    "source_date": "2023-09-19",
+    "confirm_before_use": true
+  },
+  "transit_time": {
+    "terms": "Domestic deliveries are fulfilled within 1 to 2 days; international shipments typically take between 6 to 8 days. Our primary carrier partners include FedEx and Aramex. Kepler Tech uses reasonable efforts to deliver goods within the timeframe specified on our website, but does not guarantee delivery within that timeframe.",
+    "domestic_days": "1-2",
+    "international_days": "6-8",
+    "carriers": ["FedEx", "Aramex"],
+    "guaranteed": false,
+    "section": "FAQ / Section 7b",
     "source_url": "https://www.keplertechllc.com/faq/",
     "source_date": "2024-04-26",
     "confirm_before_use": true
   },
   "pickup": {
-    "terms": "Free local pickup at store, ready in 1-2 business days.",
+    "terms": "You can skip the shipping fees with free local pickup at store. After placing your order and selecting local pickup at checkout, your order will be prepared and ready for pick up within 1 to 2 business days.",
     "location": "D79 Khalid Bin Waleed Road, Dubai",
     "section": "Section 10e",
     "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
@@ -56,15 +68,33 @@
     "confirm_before_use": true
   },
   "tracking": {
-    "terms": "A shipment tracking number is provided once the order has been dispatched.",
+    "terms": "To track your order, visit https://www.keplertechllc.com/track-your-order/ and enter your tracking number. Alternatively, you can reach us directly via phone at +971 521 21 4898 for live updates on your shipment.",
+    "track_url": "https://www.keplertechllc.com/track-your-order/",
+    "phone": "+971 521 21 4898",
     "section": "FAQ",
     "source_url": "https://www.keplertechllc.com/faq/",
     "source_date": "2024-04-26",
     "confirm_before_use": true
   },
   "delivery_outside_gcc": {
-    "terms": "Deliveries outside the GCC require custom export logistics and must be arranged directly through our sales desk.",
+    "terms": "We only deliver our products to the UAE, Oman, and all other GCC countries.",
     "action": "handoff",
+    "rule_source": "internal",
+    "section": "Section 10a",
+    "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
+    "source_date": "2023-09-19",
+    "confirm_before_use": true
+  },
+  "import_duty_vat_outside_uae": {
+    "terms": "The customer is responsible for paying both the import customs duty and VAT in the destination country.",
+    "section": "Section 4d",
+    "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
+    "source_date": "2023-09-19",
+    "confirm_before_use": true
+  },
+  "price_changes": {
+    "terms": "The prices of goods on our website are subject to change without notice. We use our best efforts to ensure that the information on the Site and the price of our products are displayed accurately. However, some system or typographical errors may occur. We reserve the right to correct any and all errors on our website, including pricing errors.",
+    "section": "Section 4a, 4b",
     "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
     "source_date": "2023-09-19",
     "confirm_before_use": true

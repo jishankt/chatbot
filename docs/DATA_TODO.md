@@ -24,3 +24,4 @@
 | **11** | **Returns Policy** | Defective / unopened | Must notify Kepler within 2 days of delivery; packaging unopened; approval required. Marked `confirm_before_use: true`. | `data/policies.json` (`return_policy`) |
 | **12** | **Third-Party Media Policy**| Handoff | Use of non-Citizen paper/ribbon voids printhead warranty? Awaiting policy clarification. | `data/policies.json` (`third_party_media`) |
 | **13** | **Large-Quantity Threshold** | Default: 10 units | Inquiries exceeding 10 printers trigger immediate corporate management handoff. | `config/scope.yaml` (`large_quantity_handoff_threshold`) |
+| **14** | **Automated as_of Date Sync (WP11)** | Configurable sync source | Do not touch `as_of` by hand. In WP11 (Price/stock sync), automated feed/crawler will update `as_of` timestamps dynamically from the live WooCommerce shop or inventory feed. | `data/products.json` (`as_of`) |

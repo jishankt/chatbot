@@ -1,18 +1,22 @@
+<!-- RawSource: data/raw/cx02_product_page.txt, data/raw/citizen_cx02_page.txt, data/raw/cx02_datasheet.txt -->
 <!-- Source: https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/ -->
+<!-- Source: https://citizen-systems.com/en/products/printer/photo/cx-02 -->
+<!-- Source: https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf -->
 <!-- Model: CX-02 -->
 
 ## Product Overview and Brand Heritage
-The Citizen CX-02 photo printer is engineered by Citizen Systems Japan and distributed in the UAE by Kepler Tech LLC. It delivers continuous-tone, laboratory-quality photo prints in a compact, portable chassis. Known for commercial reliability, the CX-02 is widely deployed for event photography, photo booths, entertainment venues, portrait studios, and instant retail photo printing.
+The Citizen CX-02 digital photo printer is manufactured by Citizen Systems and distributed in the UAE by Kepler Tech LLC. It delivers high-quality dye-sublimation photo prints in a compact, portable chassis. The CX-02 joins Citizen's highly regarded CX printer range, offering new levels of quality, portability and compactness. Compared to previous CX models, it is 2kg lighter and 15% smaller.
 
 ## Applications and Ideal Use Cases
-The Citizen CX-02 is designed for high-demand photo environments:
-- Photo Booths: Ultra-compact dimensions (170 mm height, 275 mm width) fit easily into slim photo booth enclosures, retro wooden booths, and mirror booths.
-- Event and Wedding Photography: High-speed 8.4-second printing ensures fast turnover for guest souvenirs.
-- Retail Kiosks: Front-loading media mechanism allows quick consumable changes in seconds.
-- ID and Portrait Photos: 300 x 600 DPI resolution produces crisp biometric details and smooth skin tones.
+The Citizen CX-02 is designed for commercial and professional photo environments:
+- Retail and Kiosk installations
+- Event Photography and Photo Party Booths
+- Fast 8.4-second printing for 4 x 6 inch photos in High-Speed mode (or 8 seconds lab-quality print)
+- Compact chassis (275 x 366 x 170 mm, 12 Kg) suitable for portable event setups
 
-## Advantages Over Inkjet Printing
-- Instantly Dry and Protected: Prints exit completely dry and laminated with a clear protective overcoat layer that resists water, UV light, and fingerprints.
-- No Clogging: Thermal dye-sublimation ribbons eliminate wet ink nozzles and drying issues.
-- Multiple Finishes from One Roll: Switch between glossy, matte, and fine matte finishes digitally via driver settings without changing media.
-- Sleep Mode Energy Savings: Lowers standby power consumption under 0.5W.
+## Key Advantages and Energy Saving
+- Dye sublimation thermal system with overcoat for durable, protected prints.
+- Front-loading drop-in paper loading and comfortable ribbon handling.
+- Finishing options: Glossy or matte surface selectable through printer driver without changing media.
+- Energy saving: Sleep mode reduces energy consumption by 98%.
+- Ribbon rewind function: Prevents wasted ribbon and paper when printing single 4 x 6 inch photos using 6 x 8 inch media.
