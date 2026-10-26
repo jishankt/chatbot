@@ -1,0 +1,110 @@
+[
+  {
+    "chunk_id": "chunk_001",
+    "file": "01_overview.md",
+    "section": "Product Overview and Brand Heritage",
+    "title": "Product Overview and Brand Heritage",
+    "text": "## Product Overview and Brand Heritage\nThe Citizen CX-02 photo printer is engineered by Citizen Systems Japan and distributed in the UAE by Kepler Tech LLC. It delivers continuous-tone, laboratory-quality photo prints in a compact, portable chassis. Known for commercial reliability, the CX-02 is widely deployed for event photography, photo booths, entertainment venues, portrait studios, and instant retail photo printing.",
+    "model": "CX-02",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/"
+  },
+  {
+    "chunk_id": "chunk_002",
+    "file": "01_overview.md",
+    "section": "Applications and Ideal Use Cases",
+    "title": "Applications and Ideal Use Cases",
+    "text": "## Applications and Ideal Use Cases\nThe Citizen CX-02 is designed for high-demand photo environments:\n- Photo Booths: Ultra-compact dimensions (170 mm height, 275 mm width) fit easily into slim photo booth enclosures, retro wooden booths, and mirror booths.\n- Event and Wedding Photography: High-speed 8.4-second printing ensures fast turnover for guest souvenirs.\n- Retail Kiosks: Front-loading media mechanism allows quick consumable changes in seconds.\n- ID and Portrait Photos: 300 x 600 DPI resolution produces crisp biometric details and smooth skin tones.",
+    "model": "CX-02",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/"
+  },
+  {
+    "chunk_id": "chunk_003",
+    "file": "01_overview.md",
+    "section": "Advantages Over Inkjet Printing",
+    "title": "Advantages Over Inkjet Printing",
+    "text": "## Advantages Over Inkjet Printing\n- Instantly Dry and Protected: Prints exit completely dry and laminated with a clear protective overcoat layer that resists water, UV light, and fingerprints.\n- No Clogging: Thermal dye-sublimation ribbons eliminate wet ink nozzles and drying issues.\n- Multiple Finishes from One Roll: Switch between glossy, matte, and fine matte finishes digitally via driver settings without changing media.\n- Sleep Mode Energy Savings: Lowers standby power consumption under 0.5W.",
+    "model": "CX-02",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/"
+  },
+  {
+    "chunk_id": "chunk_004",
+    "file": "02_print_engine.md",
+    "section": "Print Engine and Technology",
+    "title": "Print Engine and Technology",
+    "text": "## Print Engine and Technology\n- Printing Technology: Dye-sublimation thermal transfer with ribbon rewind technology\n- Resolution Modes: 300 x 300 DPI (High Speed Mode) and 300 x 600 DPI (High Resolution Mode)\n- Gradation: 256 levels per colour (8-bit per colour channel, total 16.7 million colours)\n- Colour Ribbons: Yellow, Magenta, Cyan plus transparent protective overcoat\n- Buffer Memory: 64 MB internal high-speed image buffer",
+    "model": "CX-02",
+    "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf"
+  },
+  {
+    "chunk_id": "chunk_005",
+    "file": "02_print_engine.md",
+    "section": "Ribbon Rewind and Ribbon-Save Feature",
+    "title": "Ribbon Rewind and Ribbon-Save Feature",
+    "text": "## Ribbon Rewind and Ribbon-Save Feature\nThe Citizen CX-02 features an intelligent ribbon rewind function:\n- Ribbon-Save Mechanism: When printing odd numbers of 4x6\" photos on 6x8\" media or half-format sizes, the printer rewinds unused ribbon sections.\n- Cost Efficiency: Prevents wasted ribbon ink panels and maximizes total print yields per media roll.\n- Zero Waste: Eliminates the need to print pairs of photos when only one is needed.",
+    "model": "CX-02",
+    "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf"
+  },
+  {
+    "chunk_id": "chunk_006",
+    "file": "03_media_formats.md",
+    "section": "Print Sizes and Capacity",
+    "title": "Print Sizes and Capacity",
+    "text": "## Print Sizes and Capacity\n- 4 x 6 inches (102 x 152 mm): 400 prints per roll, 800 prints per 2-roll media box (SKU: CX2-MS46-2PC, estimated 800 prints per set)\n- 5 x 7 inches (127 x 178 mm): 230 prints per roll, 460 prints per 2-roll media box (SKU: CX2-MS57-2PC, verified 460 prints per set)\n- 6 x 8 inches (152 x 203 mm): 200 prints per roll, 400 prints per 2-roll media box (SKU: CX2-MS68-2PC, estimated 400 prints per set)\n- 6 x 9 inches (152 x 229 mm): 180 prints per roll (hardware supported; 6x9 media sets not stocked by Kepler Tech LLC)\n- 2 x 6 inches (51 x 152 mm): Photo booth strips enabled through driver dual cut feature on 4x6\" or 6x8\" media",
+    "model": "CX-02",
+    "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf"
+  },
+  {
+    "chunk_id": "chunk_007",
+    "file": "03_media_formats.md",
+    "section": "Print Speeds",
+    "title": "Print Speeds",
+    "text": "## Print Speeds\n- 4 x 6 inch: 8.4 seconds (High Speed mode) / 9.8 seconds (High Quality mode)\n- 5 x 7 inch: 14.2 seconds\n- 6 x 8 inch: 15.6 seconds\n- 6 x 9 inch: 20.8 seconds",
+    "model": "CX-02",
+    "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf"
+  },
+  {
+    "chunk_id": "chunk_008",
+    "file": "03_media_formats.md",
+    "section": "Finishes and Surface Control",
+    "title": "Finishes and Surface Control",
+    "text": "## Finishes and Surface Control\n- Finishes: Glossy, Matte, and Fine Matte (Luster) finishes available.\n- Digital Control: Finishes are selected directly within the printer driver software using the thermal head temperature profile on the clear protective overcoat layer. No special paper or ribbon changes are required.\n- Protective Lamination: Automatically applied as a 4th pass layer, providing water resistance, UV protection, and fingerprint resistance.",
+    "model": "CX-02",
+    "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf"
+  },
+  {
+    "chunk_id": "chunk_009",
+    "file": "03_media_formats.md",
+    "section": "Paper and Ribbon Loading",
+    "title": "Paper and Ribbon Loading",
+    "text": "## Paper and Ribbon Loading\n- Front-loading drop-in paper roll and ribbon cassette mechanism.\n- Fast reloading: Designed for quick consumable replacement in under 60 seconds, even in compact photo booth enclosures or dark event environments.\n- Removable scrap bin: Catches paper trims and edge cuts to maintain a clean workspace.",
+    "model": "CX-02",
+    "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf"
+  },
+  {
+    "chunk_id": "chunk_010",
+    "file": "04_dimensions_power.md",
+    "section": "Physical Dimensions and Weight",
+    "title": "Physical Dimensions and Weight",
+    "text": "## Physical Dimensions and Weight\n- Width: 275 mm (10.8 inches)\n- Depth: 366 mm (14.4 inches)\n- Height: 170 mm (6.7 inches)\n- Net Weight: 12.0 kg (26.5 lbs) excluding media and ribbon\n- Gross Packaged Weight: 13.5 kg (29.8 lbs)\n- Compact Form Factor: 33% smaller in volume and 14% lighter than preceding models such as the CX-01.",
+    "model": "CX-02",
+    "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf"
+  },
+  {
+    "chunk_id": "chunk_011",
+    "file": "04_dimensions_power.md",
+    "section": "Connectivity and Operating Systems",
+    "title": "Connectivity and Operating Systems",
+    "text": "## Connectivity and Operating Systems\n- Interface: High-speed USB 2.0 (Type-B connector)\n- Supported Operating Systems: Windows 7, Windows 8, Windows 10, Windows 11 (32-bit and 64-bit); macOS 10.12 Sierra up to macOS 14 Sonoma; Linux CUPS drivers available.\n- Power Supply: AC 100V - 240V, 50/60 Hz internal auto-switching power supply.\n- Power Consumption: Standby power under 0.5W in Sleep Mode (Energy Star compliant).",
+    "model": "CX-02",
+    "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf"
+  },
+  {
+    "chunk_id": "chunk_012",
+    "file": "05_accessories.md",
+    "section": "Official Accessories and Consumables Overview",
+    "title": "Official Accessories and Consumables Overview",
+    "text": "## Official Accessories and Consumables Overview\n- Citizen CX-02 Protective Carry Bag (SKU: CX-02-BAG): Custom padded ballistic nylon carrying case with heavy-duty handles, detachable shoulder strap, and storage compartments for USB and power cables. Protects the printer during event transit.\n- Citizen Thermal Head Cleaning Pen (SKU: CITIZEN-PEN): Specially formulated non-abrasive thermal printhead cleaning pen to clear dust, fibers, and residue, preserving head lifespan and preventing print streaks.\n- 4x6\" Media Set (SKU: CX2-MS46-2PC): Contains 2 rolls of paper and 2 ribbon rolls, delivering an estimated 800 prints per box (400 prints per roll).\n- 5x7\" Media Set (SKU: CX2-MS57-2PC): Contains 2 rolls of paper and 2 ribbon rolls, delivering a verified 460 prints per box (230 prints per roll).\n- 6x8\" Media Set (SKU: CX2-MS68-2PC): Contains 2 rolls of paper and 2 ribbon rolls, delivering an estimated 400 prints per box (200 prints per roll).",
+    "model": "CX-02",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/"
+  }
+]

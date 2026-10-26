@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  cx02-sales-ai:
+    build: .
+    container_name: cx02-sales-ai
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - DEBUG=False
+      - DATABASE_PATH=/app/data/sales_ai.db
+      - PRICE_MAX_AGE_DAYS=14
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - OLLAMA_CHAT_MODEL=qwen2.5:7b
+      - FORCE_EXTRACTIVE_MODE=false
+      - WHATSAPP_VERIFY_TOKEN=cx02_sales_verify_token
+      - WHATSAPP_APP_SECRET=cx02_webhook_app_secret
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: cx02-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  ollama_data:

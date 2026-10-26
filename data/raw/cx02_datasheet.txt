@@ -1,0 +1,50 @@
+# Citizen CX-02 Technical Datasheet
+
+## Specifications and Print Method
+- Model Name: Citizen CX-02
+- Printing Technology: Dye-sublimation thermal transfer with ribbon rewind technology
+- Resolution: 300 x 300 DPI (High Speed Mode) and 300 x 600 DPI (High Resolution Mode)
+- Colors: 3 Colours (Yellow, Magenta, Cyan) plus Protective Laminate Overcoat
+- Gradation: 256 levels per colour (16.7 million colours total)
+- Image Buffer: 64 MB internal high-speed memory buffer
+
+## Print Sizes and Capacity
+- 4 x 6 inches (102 x 152 mm): 400 prints per roll, 800 prints per 2-roll media box (SKU: CX2-MS46-2PC)
+- 5 x 7 inches (127 x 178 mm): 230 prints per roll, 460 prints per 2-roll media box (SKU: CX2-MS57-2PC)
+- 6 x 8 inches (152 x 203 mm): 200 prints per roll, 400 prints per 2-roll media box (SKU: CX2-MS68-2PC)
+- 6 x 9 inches (152 x 229 mm): Supported via specialized 6x9 media
+- 2 x 6 inches (51 x 152 mm): Photo booth strips (driver-controlled dual cut feature enabled on 4x6 media or 6x8 media)
+
+## Print Speeds
+- 4 x 6 inch: 8.4 seconds in High Speed mode; 9.8 seconds in High Quality mode
+- 5 x 7 inch: 14.2 seconds
+- 6 x 8 inch: 15.6 seconds
+- 6 x 9 inch: 20.8 seconds
+
+## Finishes and Surface Control
+- Surface Finishes: Glossy, Matte, and Fine Matte (Luster) finishes available
+- Finish Selection: Managed digitally through the printer driver thermal overcoat setting without needing to change paper or ribbon rolls
+- Protective Overcoat: Water-resistant, UV-resistant, and fingerprint-resistant lamination layer applied automatically during the 4th pass
+
+## Ribbon Rewind Technology
+- Ribbon-Save Feature: When printing odd numbers of 4x6" photos or half-format prints on 6x8" media, the printer automatically rewinds the ribbon, ensuring zero ribbon waste.
+- Cost Efficiency: Maximizes yield and eliminates wasted ribbon panels.
+
+## Physical Dimensions and Weight
+- Width: 275 mm (10.8 inches)
+- Depth: 366 mm (14.4 inches)
+- Height: 170 mm (6.7 inches)
+- Net Weight: 12.0 kg (26.5 lbs) excluding paper and ribbon
+- Gross Packaged Weight: 13.5 kg (29.8 lbs)
+- Footprint: 33% smaller and 14% lighter than preceding models (such as CX-01)
+
+## Connectivity and Operating Systems
+- Interface: High-speed USB 2.0 (Type-B connector)
+- Supported Operating Systems: Windows 7, Windows 8, Windows 10, Windows 11 (32-bit and 64-bit); macOS 10.12 Sierra up to macOS 14 Sonoma; Linux CUPS drivers available
+- Power Supply: AC 100V - 240V, 50/60 Hz automatic switching internal power supply
+- Power Consumption: Standby power consumption under 0.5W (Sleep Mode complies with energy-saving directives)
+
+## Paper and Ribbon Loading
+- Mechanism: Front-loading drop-in paper and ribbon system
+- Ease of Use: Designed for quick media changes in cramped photo booths or dark event environments within 60 seconds
+- Media Tray: Removable scrap bin captures paper trimmings to keep the work area clean

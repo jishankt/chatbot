@@ -1,0 +1,74 @@
+{
+  "company_contact": {
+    "name": "Kepler Tech LLC",
+    "address": "D79 Khalid Bin Waleed Road, Dubai",
+    "phone": "00971 4 323 1008",
+    "whatsapp": "+971 50 890 1641",
+    "hours": "Mon-Fri 8:30-17:30, Sat 8:30-13:00"
+  },
+  "warranty": null,
+  "vat_treatment": null,
+  "payment_methods": {
+    "terms": "Payment methods accepted are Credit Card (Visa, MasterCard), Debit Card, and PayPal. Payment must be made in full at the time of order placement, and no products will be dispatched until payment is received in full.",
+    "methods": ["Credit Card", "Debit Card", "PayPal"],
+    "section": "Section 4",
+    "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
+    "source_date": "2023-09-19",
+    "confirm_before_use": true
+  },
+  "cancellation_policy": {
+    "terms": "Orders may be cancelled only within 24 hours of placing the order.",
+    "section": "Section 8a",
+    "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
+    "source_date": "2023-09-19",
+    "confirm_before_use": true
+  },
+  "return_policy": {
+    "terms": "Returns are accepted only if the product is defective, damaged, or not as described. Customer must notify Kepler Tech within 2 days of delivery. Product delivery packaging must remain unopened, undamaged, and unused. Prior return approval is required from Kepler Tech. Approved refunds are credited to the original payment method within up to 45 days depending on the issuing bank.",
+    "notice_days": 2,
+    "refund_window_days": 45,
+    "section": "Section 9",
+    "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
+    "source_date": "2023-09-19",
+    "confirm_before_use": true
+  },
+  "delivery_charges": {
+    "terms": "Flat shipping rate of AED 10 for deliveries within the UAE. Delivery outside the UAE is available across the GCC with shipping fees calculated and shown at checkout. Deliveries outside the GCC require sales desk assistance.",
+    "uae_flat_aed": 10.0,
+    "section": "Section 10",
+    "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
+    "source_date": "2023-09-19",
+    "confirm_before_use": true
+  },
+  "delivery_time": {
+    "terms": "Orders are processed within 1-2 business days following payment confirmation.",
+    "section": "Section 10",
+    "source_url": "https://www.keplertechllc.com/faq/",
+    "source_date": "2024-04-26",
+    "confirm_before_use": true
+  },
+  "pickup": {
+    "terms": "Free local pickup at store, ready in 1-2 business days.",
+    "location": "D79 Khalid Bin Waleed Road, Dubai",
+    "section": "Section 10e",
+    "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
+    "source_date": "2023-09-19",
+    "confirm_before_use": true
+  },
+  "tracking": {
+    "terms": "A shipment tracking number is provided once the order has been dispatched.",
+    "section": "FAQ",
+    "source_url": "https://www.keplertechllc.com/faq/",
+    "source_date": "2024-04-26",
+    "confirm_before_use": true
+  },
+  "delivery_outside_gcc": {
+    "terms": "Deliveries outside the GCC require custom export logistics and must be arranged directly through our sales desk.",
+    "action": "handoff",
+    "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
+    "source_date": "2023-09-19",
+    "confirm_before_use": true
+  },
+  "installation": null,
+  "support_terms": null
+}

@@ -1,0 +1,23 @@
+# Citizen CX-02 Product Overview and Applications
+
+## Product Overview
+The Citizen CX-02 represents the benchmark in portable, professional dye-sublimation photo printing. Engineered by Citizen Systems Japan, this compact powerhouse delivers laboratory-grade, continuous-tone photo prints in seconds. Known for unmatched durability and reliability in commercial environments, the CX-02 is the preferred printer worldwide for event photographers, photo booth builders, amusement parks, school portraits, and instant retail photo kiosks.
+
+## Target Applications
+- Photo Booths: Its ultra-compact chassis (only 170 mm high and 275 mm wide) fits effortlessly inside slim photobooth enclosures, retro wooden booths, or modern mirror booths.
+- Event Photography & Weddings: Fast 8.4-second print times keep guests moving and queues short. The optional padded carry bag protects the unit during transit.
+- Retail Kiosks & Instant Printing: Front loading paper and ribbon drop-in mechanisms allow non-technical store clerks to reload consumables in seconds.
+- ID & Passport Photos: Precision 300x600 dpi resolution produces razor-sharp biometric portraits and crisp detail.
+
+## Key Advantages Over Traditional Printing
+- Zero Smudging: Unlike inkjet printers, dye-sub prints emerge completely dry, coated with a durable protective layer that resists water, UV light, and fingerprints immediately upon exit.
+- No Ink Cartridges to Clog: Thermal dye-sublimation ribbons never dry out or clog printheads, even after sitting idle for weeks.
+- Multiple Finishes from a Single Roll: Switch between glossy, matte, and fine matte finishes directly from the print driver software without replacing paper or changing rolls.
+- Energy Efficient Sleep Mode: Lowers power consumption by up to 50% compared to previous generations, consuming less than 0.5W in standby.
+
+## Official Add-ons and Consumables
+- Citizen 4x6" Media Set (CX2-MS46-2PC): Contains 2 rolls of paper and 2 rolls of ribbon, delivering 800 prints per box at 4x6 inches.
+- Citizen 5x7" Media Set (CX2-MS57-2PC): Contains 2 rolls of paper and 2 rolls of ribbon, delivering 460 prints per box at 5x7 inches.
+- Citizen 6x8" Media Set (CX2-MS68-2PC): Contains 2 rolls of paper and 2 rolls of ribbon, delivering 400 prints per box at 6x8 inches.
+- Citizen CX-02 Protective Carry Bag: Custom heavy-duty ballistic nylon padded bag with reinforced handles, shoulder strap, and accessory pockets for cables.
+- Citizen Printhead Cleaning Pen: Specially formulated non-abrasive thermal head cleaning pen that removes dust, fibers, and adhesive residue to ensure continuous streak-free prints.

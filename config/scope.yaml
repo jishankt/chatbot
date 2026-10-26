@@ -1,0 +1,66 @@
+# config/scope.yaml
+# Kepler Tech LLC - Sales AI Scope & Guardrail Policy
+
+# 1. Active Products (Initially strictly Citizen CX-02 family)
+active_products:
+  - id: "CX-02"
+    name: "Citizen CX-02 Photo Printer"
+    brand: "Citizen"
+    family: "CX-02"
+    category: "printer"
+    status: "active"
+
+whitelisted_accessories:
+  - id: "CX2-MS46-2PC"
+    name: "Citizen CX-02 4x6\" Media Set (2 Rolls)"
+    category: "media"
+    status: "active"
+  - id: "CX2-MS57-2PC"
+    name: "Citizen CX-02 5x7\" Media Set (2 Rolls)"
+    category: "media"
+    status: "active"
+  - id: "CX2-MS68-2PC"
+    name: "Citizen CX-02 6x8\" Media Set (2 Rolls)"
+    category: "media"
+    status: "active"
+  - id: "CX-02-BAG"
+    name: "Citizen CX-02 Carry Bag"
+    category: "accessory"
+    status: "active"
+  - id: "CITIZEN-PEN"
+    name: "Citizen Thermal Head Cleaning Pen"
+    category: "accessory"
+    status: "active"
+
+# 2. Blocked Competitor Brands (Must politely refuse and hand off; never compare)
+blocked_brands:
+  - "dnp"
+  - "epson"
+  - "fujifilm"
+  - "fuji"
+  - "hiti"
+  - "sinfonia"
+  - "mitsubishi"
+  - "canon"
+
+# 3. Non-CX-02 Citizen Models (Handoff only; strictly outside single-product scope)
+handoff_only_products:
+  - "cx-02w"
+  - "cx02w"
+  - "cx-02s"
+  - "cx02s"
+  - "cy-02"
+  - "cy02"
+  - "cz-01"
+  - "cz01"
+  - "op900ii"
+  - "op900"
+  - "cw-01"
+  - "cw01"
+  - "cx-01"
+  - "cx01"
+
+# 4. Commercial Quantity Thresholds
+large_quantity_handoff_threshold: 10   # Inquiries >= 10 printers trigger corporate desk handoff
+large_media_handoff_threshold: 50      # Inquiries >= 50 media boxes trigger corporate desk handoff
+hard_quantity_limit_cap: 1000          # Absolute upper limit for quote tool
