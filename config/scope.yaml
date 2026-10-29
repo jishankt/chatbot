@@ -1,13 +1,129 @@
 # config/scope.yaml
 # Kepler Tech LLC - Sales AI Scope & Guardrail Policy
 
-# 1. Active Products (Initially strictly Citizen CX-02 family)
+company_scope: kepler_printers
+product_detail_active:
+  - "CX-02"
+  - "CY-02"
+  - "CZ-01"
+  - "CX-02W"
+  - "SC-T3100"
+  - "SC-T5100"
+  - "SC-T7700D"
+  - "SC-P700"
+  - "SC-P900"
+  - "SC-P9500"
+  - "SC-P8500D"
+  - "SC-P8500DM"
+  - "SC-F100"
+  - "SC-F500"
+  - "WF-C5890"
+  - "EM-C800"
+  - "AM-C4000"
+  - "AM-C5000"
+  - "AM-C6000"
+  - "DS-530II"
+  - "DS-770II"
+
+# Brands sold by Kepler Tech LLC (never block or refuse these)
+brands_sold:
+  - "Epson"
+  - "Citizen"
+  - "Innova"
+  - "Olmec"
+  - "Korejet"
+
+# Active products with full commercial detail (prices, specs, quote tool)
 active_products:
   - id: "CX-02"
     name: "Citizen CX-02 Photo Printer"
     brand: "Citizen"
     family: "CX-02"
     category: "printer"
+    status: "active"
+  - id: "CY-02"
+    name: "Citizen CY-02 Photo Printer"
+    brand: "Citizen"
+    family: "CY-02"
+    category: "printer"
+    status: "active"
+  - id: "CZ-01"
+    name: "Citizen CZ-01 Photo Printer"
+    brand: "Citizen"
+    family: "CZ-01"
+    category: "printer"
+    status: "active"
+  - id: "CX-02W"
+    name: "Citizen CX-02W Wide Format Photo Printer"
+    brand: "Citizen"
+    family: "CX-02W"
+    category: "printer"
+    status: "active"
+  - id: "SC-T3100"
+    name: "Epson SureColor SC-T3100 Technical CAD Plotter"
+    brand: "Epson"
+    family: "SureColor"
+    category: "cad_plotter"
+    status: "active"
+  - id: "SC-T5100"
+    name: "Epson SureColor SC-T5100 Technical CAD Plotter"
+    brand: "Epson"
+    family: "SureColor"
+    category: "cad_plotter"
+    status: "active"
+  - id: "SC-T7700D"
+    name: "Epson SureColor SC-T7700D Dual-Roll Plotter"
+    brand: "Epson"
+    family: "SureColor"
+    category: "cad_plotter"
+    status: "active"
+  - id: "SC-P700"
+    name: "Epson SureColor SC-P700 13\" Photo Printer"
+    brand: "Epson"
+    family: "SureColor"
+    category: "photo"
+    status: "active"
+  - id: "SC-P900"
+    name: "Epson SureColor SC-P900 17\" Photo Printer"
+    brand: "Epson"
+    family: "SureColor"
+    category: "photo"
+    status: "active"
+  - id: "SC-P9500"
+    name: "Epson SureColor SC-P9500 44\" Fine Art Plotter"
+    brand: "Epson"
+    family: "SureColor"
+    category: "photo"
+    status: "active"
+  - id: "SC-F100"
+    name: "Epson SureColor SC-F100 Sublimation Printer"
+    brand: "Epson"
+    family: "SureColor"
+    category: "sublimation"
+    status: "active"
+  - id: "WF-C5890"
+    name: "Epson WorkForce Pro WF-C5890 DWF"
+    brand: "Epson"
+    family: "WorkForce"
+    category: "business_mfp"
+    status: "active"
+  - id: "EM-C800"
+    name: "Epson WorkForce Pro EM-C800"
+    brand: "Epson"
+    family: "WorkForce"
+    category: "business_mfp"
+    status: "active"
+  - id: "DS-530II"
+    name: "Epson WorkForce DS-530II Document Scanner"
+    brand: "Epson"
+    family: "WorkForce"
+    category: "scanner"
+    status: "active"
+  - id: "DS-770II"
+    name: "Epson WorkForce DS-770II Document Scanner"
+    brand: "Epson"
+    family: "WorkForce"
+    category: "scanner"
     status: "active"
 
 whitelisted_accessories:
@@ -32,18 +148,21 @@ whitelisted_accessories:
     category: "accessory"
     status: "active"
 
-# 2. Blocked Competitor Brands (Must politely refuse and hand off; never compare)
+# Blocked Competitor Brands (Only brands Kepler does NOT carry; politely refuse and offer Kepler alternative / human)
+# Note: Epson and Citizen are authorized brands and REMOVED from blocked list!
 blocked_brands:
   - "dnp"
-  - "epson"
   - "fujifilm"
   - "fuji"
   - "hiti"
   - "sinfonia"
   - "mitsubishi"
   - "canon"
+  - "kodak"
+  - "noritsu"
+  - "shinko"
 
-# 3. Non-CX-02 Citizen Models (Handoff only; strictly outside single-product scope)
+# Other Citizen models carried by Kepler with details pending (link + handoff to sales specialist)
 handoff_only_products:
   - "cx-02w"
   - "cx02w"
@@ -60,7 +179,34 @@ handoff_only_products:
   - "cx-01"
   - "cx01"
 
-# 4. Commercial Quantity Thresholds
+# Product Categories available at Kepler Tech LLC
+catalog_categories:
+  - name: "Office Printers"
+    url: "https://www.keplertechllc.com/product-category/printers/business-printer/"
+    brands: ["Epson"]
+    description: "Epson WorkForce Pro Series, AM-C Series, EM-C Series business office printers"
+  - name: "Large Format & Plotters"
+    url: "https://www.keplertechllc.com/product-category/printers/epson-large-format-inkjet-printer/"
+    brands: ["Epson"]
+    description: "Epson SureColor Graphic Series, CAD/GIS Plotters, Wide Format"
+  - name: "Dye-Sub Photo Printers"
+    url: "https://www.keplertechllc.com/product-category/printers/dye-sublimation-citizen-photo-printer/"
+    brands: ["Citizen"]
+    description: "Citizen CX Series (CX-02, CX-02W), CY Series (CY-02), CZ Series (CZ-01), Photo Media & Ribbons"
+  - name: "Inkjet Media"
+    url: "https://www.keplertechllc.com/product-category/inkjet-printing-paper/"
+    brands: ["Epson", "Korejet", "Innova", "Olmec"]
+    description: "Photo paper, Fine Art, Backlit, Canvas"
+  - name: "Epson Inks"
+    url: "https://www.keplertechllc.com/product-category/inks-consumables/epson-printer-ink-cartridges/"
+    brands: ["Epson"]
+    description: "UltraChrome HDX, T-Series OEM Inks, Pigment & Dye Cartridges"
+  - name: "Consumables & Parts"
+    url: "https://www.keplertechllc.com/product-category/inks-consumables/"
+    brands: ["Epson", "Citizen"]
+    description: "Maintenance Boxes, Print Heads, Cutter Blades, Cleaning Kits"
+
+# Commercial Quantity Thresholds
 large_quantity_handoff_threshold: 10   # Inquiries >= 10 printers trigger corporate desk handoff
 large_media_handoff_threshold: 50      # Inquiries >= 50 media boxes trigger corporate desk handoff
 hard_quantity_limit_cap: 1000          # Absolute upper limit for quote tool

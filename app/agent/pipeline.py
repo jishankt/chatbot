@@ -753,21 +753,21 @@ class CX02Pipeline:
             elif "citizen" in msg_lower:
                 reply = (
                     "Kepler Tech supplies the complete Citizen commercial photo printer lineup:\n"
-                    "• **Citizen CX-02** (Active flagship): Compact 4x6\", 5x7\", 6x8\" dye-sub printer (4,385.00 AED)\n"
-                    "• **Citizen CX-02W**: Wide-format dye-sub for 8x10\" and 8x12\" prints (from 33.7s)\n"
-                    "• **Citizen CY-02**: High-capacity commercial kiosk printer for 4x6\" and 6x8\" (from 14.9s)\n"
-                    "• **Citizen CZ-01**: Ultra-compact, lightweight event printer for 4x4\" and 4x6\" (from 16.3s)\n\n"
-                    "For commercial pricing and availability on the CX-02W, CY-02, or CZ-01, our Dubai sales desk can assist you immediately."
+                    "• **Citizen CX-02** (Active flagship): Compact 4x6\", 5x7\", 6x8\" dye-sub printer (**4,385.00 AED**)\n"
+                    "• **Citizen CY-02**: High-capacity commercial kiosk printer for 4x6\" and 6x8\" (**3,400.00 AED**)\n"
+                    "• **Citizen CZ-01**: Ultra-compact lightweight event printer for 4x4\" and 4x6\" (**3,200.00 AED**)\n"
+                    "• **Citizen CX-02W**: Wide-format dye-sub for 8x10\" and 8x12\" prints (**6,820.00 AED**)\n\n"
+                    "All prices are subject to 5% UAE VAT and subject to sales desk confirmation. Which model best fits your event or kiosk setup?"
                 )
             elif any(ep in msg_lower for ep in ["epson", "plotter", "surecolor", "workforce", "large format"]):
                 reply = (
-                    "Direct online pricing for Epson systems is not available through this automated chat. "
-                    "Kepler Tech LLC is an official authorized partner for **Epson** commercial printing systems in the UAE, providing:\n"
-                    "• **Epson SureColor SC-P900 & SC-P700**: Professional photo and fine art plotters\n"
-                    "• **Epson WorkForce**: High-speed, heat-free commercial office business printers\n"
-                    "• **Epson Business Scanners**: Sheet-fed and flatbed document scanners\n\n"
-                    "Explore our Epson business range: https://www.keplertechllc.com/product-category/printers/business-printer/\n\n"
-                    "Our specialized sales team in Dubai is available to assist you with models and quotations."
+                    "Kepler Tech LLC is an authorized partner for **Epson** commercial printing systems and scanners in the UAE:\n"
+                    "• **CAD & Technical Plotters**: SureColor **SC-T3100** (24\" — **3,880.00 AED**), **SC-T5100** (36\" — **9,700.00 AED**), **SC-T7700D** (dual-roll — Pricing via official quotation)\n"
+                    "• **Photo & Fine Art**: SureColor **SC-P700** (13\" — **3,400.00 AED**), **SC-P900** (17\" — **4,880.00 AED**), **SC-P9500** (44\" — Pricing via official quotation)\n"
+                    "• **Dye Sublimation**: SureColor **SC-F100** (A4 — **1,950.00 AED**), **SC-F500** (24\" — Pricing via official quotation)\n"
+                    "• **Office & Enterprise MFP**: WorkForce Pro **WF-C5890** (**1,656.00 AED**), WorkForce Enterprise **AM-C4000/C5000/C6000** (Pricing via official quotation)\n"
+                    "• **Document Scanners**: WorkForce **DS-530II**, **DS-770II** (Pricing via official quotation)\n\n"
+                    "Verified prices are subject to 5% UAE VAT and confirmation by our sales desk. Would you like specifications or an official quote for any of these systems?"
                 )
             elif any(w in msg_lower for w in ["aircast", "aircastpro", "wireless"]):
                 reply = (
@@ -1478,12 +1478,17 @@ class CX02Pipeline:
                             old_str = f" (Original: ~{res['formatted_old_price']}~)" if res.get("formatted_old_price") else ""
                             stale_str = f"\n⚠️ {res['stale_note']}" if res.get("stale_note") else ""
                             est_str = f"\nℹ️ {res['estimate_note']}" if res.get("estimate_note") else ""
-                            confirm_str = f"\nℹ️ Note: {res['to_confirm_note']}" if res.get("to_confirm_note") else ""
                             parts.append(
-                                f"The official price for the *{res['name']}* (SKU: {res['sku']}) is "
-                                f"*{res['formatted_price']}*{old_str}.{est_str}{confirm_str}{stale_str}\n"
-                                f"Availability: {'In Stock (Dubai)' if res['in_stock'] else 'Pre-order'}."
+                                f"The official price for the **{res['name']}** (SKU: {res['sku']}) is "
+                                f"**{res['formatted_price']}**{old_str}.\n"
+                                f"• VAT: Prices are subject to 5% UAE VAT.\n"
+                                f"• Note: Price subject to confirmation by our sales desk.{est_str}{stale_str}\n"
+                                f"• Availability: {'In Stock (Dubai warehouse)' if res['in_stock'] else 'Available on order'}."
                             )
+                        elif res.get("status") == "quote_required":
+                            parts.append(res["message"])
+                        elif res.get("status") == "not_listed":
+                            parts.append(res["message"])
                         elif res.get("handoff"):
                             ho = handoff_to_human(reason=res.get("message"), summary=user_msg, phone=phone, sender_id=sender_id)
                             tools_called.append({"tool": "handoff_to_human", "result": ho})
