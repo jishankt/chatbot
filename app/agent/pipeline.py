@@ -385,6 +385,45 @@ class CX02Pipeline:
             phone=phone
         )
 
+        # Handle Customer Frustration: Acknowledge, restate understood slots, course correct, suppress pitch
+        if understand_res.risk_flags.anger_frustration:
+            understood_slots = []
+            if sales_state.category:
+                cat_display = "Photo Printers" if sales_state.category == "photo" else str(sales_state.category).replace("_", " ").title()
+                understood_slots.append(f"category: {cat_display}")
+            if sales_state.paper_size:
+                understood_slots.append(f"size: {sales_state.paper_size}")
+            if sales_state.volume:
+                understood_slots.append(f"volume: {sales_state.volume}")
+            slots_summary = f" (Current context recorded: {', '.join(understood_slots)})" if understood_slots else ""
+
+            ho = handoff_to_human(reason="Customer expressed frustration or bot misunderstanding", summary=user_msg, phone=phone, sender_id=sender_id)
+            tools_called.append({"tool": "handoff_to_human", "result": ho})
+            reply = (
+                f"I apologize for the misunderstanding{slots_summary}. "
+                "I want to ensure you get the exact commercial solution without any back-and-forth. "
+                "I have notified our senior commercial printing team at Kepler Tech Dubai to assist you directly:\n\n"
+                f"{ho['customer_message']}"
+            )
+            save_sales_state(sales_state)
+            log_message(sender_id=sender_id, role="user", content=user_msg, message_id=message_id, channel=channel)
+            log_message(sender_id=sender_id, role="assistant", content=reply, channel=channel)
+            return {
+                "reply": reply,
+                "intent": "frustration_handoff",
+                "priority": "high",
+                "tools_called": tools_called,
+                "chunks_retrieved": [],
+                "cards": [],
+                "language": read_ctx.language,
+                "resolved_sku": None,
+                "is_anaphora": False,
+                "understanding": understand_res.model_dump(),
+                "sales_state": decision.current_state.value if hasattr(decision.current_state, "value") else str(decision.current_state),
+                "state_decision": decision.model_dump(),
+                "prompt_version": Config.PROMPT_VERSION
+            }
+
 
         # 5. Check pending lead state
         pending = get_pending_lead(sender_id)

@@ -56,7 +56,7 @@ class UnderstandResult(BaseModel):
 # ---------------------------------------------------------------------------
 
 class CircuitBreaker:
-    def __init__(self, failure_threshold: int = 3, cooldown_seconds: float = 30.0):
+    def __init__(self, failure_threshold: int = 5, cooldown_seconds: float = 15.0):
         self.failure_threshold = failure_threshold
         self.cooldown_seconds = cooldown_seconds
         self.failure_count = 0
@@ -126,8 +126,9 @@ URGENCY_PATTERNS = [
 ]
 
 SENTIMENT_FRUSTRATED_PATTERNS = [
-    r"\b(ridiculous|scam|terrible|worst|unacceptable|furious|horrible|cheated|disaster)\b",
-    r"\b(مهزلة|نصب|سيء\s*جدا|كارثة|غير\s*مقبول)\b"
+    r"\b(ridiculous|scam|terrible|worst|unacceptable|furious|horrible|cheated|disaster|frustrated|frustrating)\b",
+    r"\b(you\s*(do\s*not|don'?t)\s*understand|that'?s\s*not\s*what\s*i\s*(asked|said)|stop\s*repeating|useless\s*bot|i\s*already\s*said|not\s*listening)\b",
+    r"\b(مهزلة|نصب|سيء\s*جدا|كارثة|غير\s*مقبول|ما\s*تفهم|مش\s*هذا\s*اللي\s*طلبته)\b"
 ]
 
 SENTIMENT_NEGATIVE_PATTERNS = [
@@ -326,8 +327,8 @@ JSON FORMAT REQUIRED:
 """
 
 
-def extract_llm_nlu(user_text: str, timeout: float = 1.2) -> Optional[Dict[str, Any]]:
-    """Calls Ollama with fast timeout (1.2s). Returns parsed JSON dict or None."""
+def extract_llm_nlu(user_text: str, timeout: float = 5.0) -> Optional[Dict[str, Any]]:
+    """Calls Ollama with 5.0s timeout. Returns parsed JSON dict or None."""
     if Config.FORCE_EXTRACTIVE_MODE or not circuit_breaker.can_attempt():
         return None
 
@@ -353,12 +354,16 @@ def extract_llm_nlu(user_text: str, timeout: float = 1.2) -> Optional[Dict[str, 
             circuit_breaker.record_success()
             content = res.json().get("message", {}).get("content", "").strip()
             return json.loads(content)
-        else:
+        elif res.status_code >= 500:
             circuit_breaker.record_failure()
             return None
-    except Exception as e:
+        else:
+            return None
+    except requests.exceptions.ConnectionError:
         circuit_breaker.record_failure()
-        logger.debug(f"LLM NLU extraction skipped/failed: {e}")
+        return None
+    except Exception as e:
+        logger.debug(f"LLM NLU extraction skipped/timed out: {e}")
         return None
 
 
@@ -472,9 +477,14 @@ def understand_message(read_ctx: ReadContext) -> UnderstandResult:
     """
     rule_res = understand_rule_based(read_ctx)
 
-    # Attempt fast LLM extraction if circuit is closed
+    # Cut LLM calls to one per turn when rule confidence is high:
+    # Skip slow NLU LLM when rules are confident (price, stock, quotes, specs, policies)
+    if rule_res.intent.confidence >= 0.85 and rule_res.intent.primary_intent != "unknown":
+        return rule_res
+
+    # Attempt fast LLM extraction only when intent is ambiguous / unknown
     llm_dict = None
     if not Config.FORCE_EXTRACTIVE_MODE and circuit_breaker.can_attempt():
-        llm_dict = extract_llm_nlu(read_ctx.normalized_text, timeout=1.2)
+        llm_dict = extract_llm_nlu(read_ctx.normalized_text, timeout=2.0)
 
     return arbitrate_understanding(rule_res, llm_dict)
