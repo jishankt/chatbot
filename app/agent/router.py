@@ -420,7 +420,7 @@ def classify_intent(message: str) -> Dict[str, Any]:
 
     # Priority 13: Link / Where to buy
     for kw in LINK_KEYWORDS:
-        if kw in clean_msg:
+        if re.search(r"\b" + re.escape(kw) + r"\b", clean_msg):
             return {
                 "intent": "link",
                 "priority": 13,

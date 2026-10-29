@@ -70,8 +70,8 @@ def determine_target_sku(text: str, read_ctx: Optional[ReadContext] = None) -> O
     if any(m in raw_lower for m in ["media", "paper", "consumable", "rolls"]):
         return "CX2-MS46-2PC"
 
-    # 5. Printer or general product inquiry ("CX-02", "printer", "machine", "unit", "it")
-    if any(p in raw_lower for p in ["cx-02", "cx02", "printer", "machine", "unit", "it", "device"]):
+    # 5. Explicit CX-02 inquiry
+    if any(p in raw_lower for p in ["cx-02", "cx02"]):
         return "CX-02"
 
     # 6. General pricing / purchase inquiry without product specification returns None
@@ -365,11 +365,17 @@ class CX02Pipeline:
         tools_called = []
         chunks = []
 
-        # Update sales state with model and brand if resolved
+        # Update sales state with model, brand, category, and requirements from read_ctx
         if read_ctx.detected_brand:
             sales_state.brand = read_ctx.detected_brand
         if read_ctx.detected_category:
             sales_state.category = read_ctx.detected_category
+        if read_ctx.detected_paper_size:
+            sales_state.paper_size = read_ctx.detected_paper_size
+        if read_ctx.detected_volume:
+            sales_state.volume = read_ctx.detected_volume
+        if read_ctx.detected_budget:
+            sales_state.budget = read_ctx.detected_budget
         if read_ctx.resolved_model:
             sales_state.update_model(read_ctx.resolved_model, brand=read_ctx.detected_brand, category=read_ctx.detected_category)
         elif read_ctx.resolved_sku:
@@ -518,6 +524,97 @@ class CX02Pipeline:
         intent = understand_res.intent.primary_intent or routing["intent"]
         priority = routing["priority"]
 
+        # Conflict Resolution & Recommendation Disambiguation
+        has_large_format = any(w in msg_lower for w in ["8x10", "8x12", "8 inch", "8\"", "large format", "large prints", "studio portrait"])
+        has_high_roll_capacity = any(w in msg_lower for w in ["700", "700 prints", "high capacity roll", "unattended", "avoid refill", "no refill", "frequent refill"])
+        has_ultra_light = any(w in msg_lower for w in ["5.8", "5.8kg", "ultra-compact", "ultra compact", "ultra lightweight", "ultra light", "under 6kg", "under 6 kg"])
+
+        # Conflict 1: 8x10 large format AND 700 prints per roll capacity
+        if has_large_format and has_high_roll_capacity:
+            reply = (
+                "There is a technical trade-off between large print format and roll capacity in the Citizen lineup:\n\n"
+                "• **Citizen CX-02W**: Our wide-format 8-inch printer engineered specifically for **8×10\"** and **8×12\"** large studio portraits (yields 110–120 prints per roll).\n"
+                "• **Citizen CY-02**: Our high-capacity commercial workhorse holding up to **700 prints per roll**, but designed for standard **4×6\"** (and 6×8\") media.\n\n"
+                "To recommend the right model: Is producing **8×10\" large prints** your primary requirement, or is **700-print roll capacity** to minimize reloading downtime more important for your operation?"
+            )
+            cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["CX-02W", "CY-02"] if s in PRODUCT_CARD_DEFS]
+            log_message(sender_id=sender_id, role="user", content=user_msg, message_id=message_id, channel=channel)
+            log_message(sender_id=sender_id, role="assistant", content=reply, channel=channel)
+            return {
+                "reply": reply,
+                "intent": "conflict_resolution",
+                "priority": priority,
+                "tools_called": tools_called,
+                "chunks_retrieved": [],
+                "cards": cards,
+                "language": read_ctx.language,
+                "resolved_sku": None,
+                "is_anaphora": False,
+                "understanding": understand_res.model_dump(),
+                "sales_state": decision.current_state.value if hasattr(decision.current_state, "value") else str(decision.current_state),
+                "state_decision": decision.model_dump(),
+                "prompt_version": Config.PROMPT_VERSION
+            }
+
+        # Conflict 2: Ultra-lightweight (<6kg) AND 8x10 large format
+        if has_ultra_light and has_large_format:
+            reply = (
+                "There is a technical trade-off between ultra-lightweight portability and wide-format printing:\n\n"
+                "• **Citizen CZ-01**: Ultra-compact and portable at just **5.8 kg** (with built-in anti-curl technology), supporting standard **4×6\"** and square **4×4\"** prints.\n"
+                "• **Citizen CX-02W**: Engineered for large **8×10\"** and **8×12\"** studio portraits, weighing **14 kg**.\n\n"
+                "Which is your main priority: **ultra-lightweight portability (5.8 kg)** for mobile on-site shooting, or **8×10\" wide-format** studio capabilities?"
+            )
+            cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["CZ-01", "CX-02W"] if s in PRODUCT_CARD_DEFS]
+            log_message(sender_id=sender_id, role="user", content=user_msg, message_id=message_id, channel=channel)
+            log_message(sender_id=sender_id, role="assistant", content=reply, channel=channel)
+            return {
+                "reply": reply,
+                "intent": "conflict_resolution",
+                "priority": priority,
+                "tools_called": tools_called,
+                "chunks_retrieved": [],
+                "cards": cards,
+                "language": read_ctx.language,
+                "resolved_sku": None,
+                "is_anaphora": False,
+                "understanding": understand_res.model_dump(),
+                "sales_state": decision.current_state.value if hasattr(decision.current_state, "value") else str(decision.current_state),
+                "state_decision": decision.model_dump(),
+                "prompt_version": Config.PROMPT_VERSION
+            }
+
+        # Ambiguous Recommendation: User asks generally "which printer should I buy / recommend a printer" without specs
+        is_general_recommendation = any(p in msg_lower for p in [
+            "which printer should i buy", "which printer do you recommend", "recommend a printer",
+            "what printer do you suggest", "suggest a printer", "help me choose a printer",
+            "which one is best for me", "which model should i choose", "which citizen printer", "what printer should i"
+        ]) and not any(m in msg_lower for m in ["cx-02", "cx02", "cy-02", "cy02", "cz-01", "cz01", "cx-02w", "cx02w"])
+        if is_general_recommendation and not has_large_format and not has_high_roll_capacity and not has_ultra_light:
+            reply = (
+                "To recommend the ideal Citizen commercial photo printer for your business, could you clarify:\n\n"
+                "1. **Print Formats**: Do you need standard 4×6\" event prints, compact 4×4\" square prints, or large 8×10\" / 8×12\" studio portraits?\n"
+                "2. **Primary Priority**: Is your main priority **mobility** (ultra-lightweight 5.8 kg CZ-01), **maximum roll capacity** to minimize refills (up to 700 prints CY-02), **large format** (CX-02W), or **fast all-around event booth printing** (CX-02)?\n\n"
+                "Once you share your preference, I will guide you to the exact model and genuine consumables!"
+            )
+            cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["CX-02", "CY-02", "CZ-01", "CX-02W"] if s in PRODUCT_CARD_DEFS]
+            log_message(sender_id=sender_id, role="user", content=user_msg, message_id=message_id, channel=channel)
+            log_message(sender_id=sender_id, role="assistant", content=reply, channel=channel)
+            return {
+                "reply": reply,
+                "intent": "clarification_recommendation",
+                "priority": priority,
+                "tools_called": tools_called,
+                "chunks_retrieved": [],
+                "cards": cards,
+                "language": read_ctx.language,
+                "resolved_sku": None,
+                "is_anaphora": False,
+                "understanding": understand_res.model_dump(),
+                "sales_state": decision.current_state.value if hasattr(decision.current_state, "value") else str(decision.current_state),
+                "state_decision": decision.model_dump(),
+                "prompt_version": Config.PROMPT_VERSION
+            }
+
         # Branch 0: Anaphoric / Contextual Reference Handling (why this?, its media?)
         if read_ctx.reference_type == "why":
             model = read_ctx.resolved_model or sales_state.current_model or "Citizen CX-02"
@@ -652,10 +749,11 @@ class CX02Pipeline:
 
         # Branch 3d: Out of Scope
         elif intent == "out_of_scope":
-            fixed_resp = routing.get("fixed_response", "Kepler Tech specializes in commercial printing hardware, media, and solutions.")
-            reply = (
-                f"{fixed_resp}\n\n"
-                "If you have any questions regarding the Citizen CX-02 photo printer, media rolls, or commercial printing equipment, I'd be delighted to assist!"
+            reply = routing.get("fixed_response") or (
+                "Currently, we do not provide that product. That product is not part of the Kepler Tech commercial catalogue. "
+                "At present, Kepler Tech supplies the official Citizen commercial photo printer lineup "
+                "(Citizen CX-02, CX-02W, CY-02, and CZ-01) and genuine media consumables. "
+                "Would you like details on our Citizen photo printers, or can I connect you with our Dubai sales desk?"
             )
 
         # Branch 3e: Services & Solutions (Repair, Rental, Leasing, MPS, ERP)
@@ -1421,7 +1519,7 @@ class CX02Pipeline:
                 }
 
             is_6x9_inquiry = "6x9" in msg_lower and any(w in msg_lower for w in ["sell", "have", "buy", "media", "paper", "order", "roll", "stock", "get", "cost", "price"])
-            has_price_terms = is_6x9_inquiry or any(p in msg_lower for p in [
+            has_price_terms = is_6x9_inquiry or any(re.search(r"\b" + re.escape(p) + r"\b", msg_lower) for p in [
                 "price", "how much", "cost", "rate", "aed", "dirham", "dirhams", "quote", "quotation", "link", "url", "where can i buy", "where to buy", "website"
             ])
             has_knowledge_terms = any(k in msg_lower for k in [

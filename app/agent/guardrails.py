@@ -131,10 +131,10 @@ def check_pre_guardrails(user_text: str) -> Tuple[bool, str, Dict[str, Any]]:
             return False, "out_of_scope", {
                 "reason": f"Inquiry about off-scope product '{pat}'.",
                 "response": (
-                    "That product is not part of the Kepler Tech commercial catalogue. "
-                    "Kepler Tech specializes in commercial photo printers (Citizen dye-sublimation), "
-                    "large-format CAD & fine art plotters (Epson SureColor), high-speed business MFPs (Epson WorkForce), "
-                    "and professional document scanners. Would you like to explore any of our commercial printing solutions?"
+                    "Currently, we do not provide that product. That product is not part of the Kepler Tech commercial catalogue. "
+                    "At present, Kepler Tech supplies the official Citizen commercial photo printer lineup "
+                    "(Citizen CX-02, CX-02W, CY-02, and CZ-01) and genuine media consumables. "
+                    "Would you like details on our Citizen photo printers, or can I connect you with our Dubai sales desk?"
                 )
             }
 
