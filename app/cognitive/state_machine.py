@@ -32,6 +32,48 @@ class SessionSalesState(BaseModel):
     quote_id: Optional[str] = None
     discovery_questions_asked: List[str] = Field(default_factory=list)
     last_intent: Optional[str] = None
+    version: int = 1
+    # Structured Session State slots
+    brand: Optional[str] = None
+    category: Optional[str] = None
+    current_model: Optional[str] = None
+    compared_models: List[str] = Field(default_factory=list)
+    paper_size: Optional[str] = None
+    volume: Optional[str] = None
+    print_only_vs_mfp: Optional[str] = None
+    budget: Optional[float] = None
+    language: str = "en"
+    last_bot_question: Optional[str] = None
+    lead_info: Dict[str, Any] = Field(default_factory=dict)
+
+    def update_model(self, model: str, brand: Optional[str] = None, category: Optional[str] = None):
+        if self.current_model and self.current_model != model:
+            if self.current_model not in self.compared_models:
+                self.compared_models.append(self.current_model)
+        self.current_model = model
+        self.target_sku = model
+        if brand:
+            self.brand = brand
+        if category:
+            self.category = category
+        if model not in self.compared_models:
+            self.compared_models.append(model)
+        if len(self.compared_models) > 5:
+            self.compared_models = self.compared_models[-5:]
+
+    def switch_category_or_brand(self, new_category: Optional[str] = None, new_brand: Optional[str] = None):
+        """Reset irrelevant filters on category or brand switch while retaining lead info."""
+        if new_category and new_category.lower() != (self.category or "").lower():
+            self.category = new_category
+            self.paper_size = None
+            self.volume = None
+            self.print_only_vs_mfp = None
+            self.current_model = None
+            self.compared_models = []
+        if new_brand and new_brand.lower() != (self.brand or "").lower():
+            self.brand = new_brand
+            self.current_model = None
+            self.compared_models = []
 
 
 class StateMachineDecision(BaseModel):
@@ -58,61 +100,148 @@ def load_sales_state(sender_id: str) -> SessionSalesState:
         if row:
             raw_asked = row["discovery_questions_asked"]
             asked = json.loads(raw_asked) if raw_asked else []
+            version_val = row["version"] if "version" in row.keys() else 1
+            slots = {}
+            if "slots_json" in row.keys() and row["slots_json"]:
+                try:
+                    slots = json.loads(row["slots_json"])
+                except Exception:
+                    slots = {}
             return SessionSalesState(
                 sender_id=row["sender_id"],
                 current_state=SalesState(row["current_state"]),
                 turn_count=row["turn_count"],
-                business_type=row["business_type"],
-                delivery_destination=row["delivery_destination"],
+                business_type=slots.get("business_type") or row["business_type"],
+                delivery_destination=slots.get("delivery_destination") or row["delivery_destination"],
                 target_sku=row["target_sku"],
                 quote_id=row["quote_id"],
                 discovery_questions_asked=asked,
-                last_intent=row["last_intent"]
+                last_intent=row["last_intent"],
+                version=version_val or 1,
+                brand=slots.get("brand"),
+                category=slots.get("category"),
+                current_model=slots.get("current_model") or (row["current_product"] if "current_product" in row.keys() else None),
+                compared_models=slots.get("compared_models", []),
+                paper_size=slots.get("paper_size"),
+                volume=slots.get("volume"),
+                print_only_vs_mfp=slots.get("print_only_vs_mfp"),
+                budget=slots.get("budget") or (row["budget"] if "budget" in row.keys() else None),
+                language=slots.get("language") or (row["language"] if "language" in row.keys() else "en") or "en",
+                last_bot_question=slots.get("last_bot_question"),
+                lead_info=slots.get("lead_info", {})
             )
         return SessionSalesState(sender_id=sender_id)
     finally:
         conn.close()
 
 
-def save_sales_state(state: SessionSalesState) -> None:
-    """Persists updated state into SQLite."""
-    conn = get_db_connection()
-    try:
-        cur = conn.cursor()
-        cur.execute(
-            """
-            INSERT INTO conversation_states (
-                sender_id, current_state, turn_count, business_type,
-                delivery_destination, target_sku, quote_id,
-                discovery_questions_asked, last_intent, updated_at
+def save_sales_state(state: SessionSalesState, max_retries: int = 3) -> bool:
+    """Persists updated state into SQLite using optimistic locking on version."""
+    slots_dict = {
+        "brand": state.brand,
+        "category": state.category,
+        "current_model": state.current_model or state.target_sku,
+        "compared_models": state.compared_models,
+        "paper_size": state.paper_size,
+        "volume": state.volume,
+        "print_only_vs_mfp": state.print_only_vs_mfp,
+        "budget": state.budget,
+        "language": state.language,
+        "last_bot_question": state.last_bot_question,
+        "lead_info": state.lead_info,
+        "business_type": state.business_type,
+        "delivery_destination": state.delivery_destination
+    }
+    slots_json_str = json.dumps(slots_dict)
+    curr_prod = state.current_model or state.target_sku
+
+    for attempt in range(max_retries):
+        conn = get_db_connection()
+        try:
+            cur = conn.cursor()
+            # Try optimistic update if row exists
+            cur.execute(
+                """
+                UPDATE conversation_states
+                SET current_state = ?,
+                    turn_count = ?,
+                    business_type = COALESCE(?, business_type),
+                    delivery_destination = COALESCE(?, delivery_destination),
+                    target_sku = COALESCE(?, target_sku),
+                    quote_id = COALESCE(?, quote_id),
+                    discovery_questions_asked = ?,
+                    last_intent = ?,
+                    current_product = COALESCE(?, current_product),
+                    budget = COALESCE(?, budget),
+                    language = COALESCE(?, language),
+                    slots_json = ?,
+                    version = version + 1,
+                    updated_at = CURRENT_TIMESTAMP
+                WHERE sender_id = ? AND version = ?
+                """,
+                (
+                    state.current_state.value,
+                    state.turn_count,
+                    state.business_type,
+                    state.delivery_destination,
+                    state.target_sku,
+                    state.quote_id,
+                    json.dumps(state.discovery_questions_asked),
+                    state.last_intent,
+                    curr_prod,
+                    state.budget,
+                    state.language,
+                    slots_json_str,
+                    state.sender_id,
+                    state.version
+                )
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
-            ON CONFLICT(sender_id) DO UPDATE SET
-                current_state = excluded.current_state,
-                turn_count = excluded.turn_count,
-                business_type = COALESCE(excluded.business_type, conversation_states.business_type),
-                delivery_destination = COALESCE(excluded.delivery_destination, conversation_states.delivery_destination),
-                target_sku = COALESCE(excluded.target_sku, conversation_states.target_sku),
-                quote_id = COALESCE(excluded.quote_id, conversation_states.quote_id),
-                discovery_questions_asked = excluded.discovery_questions_asked,
-                last_intent = excluded.last_intent,
-                updated_at = CURRENT_TIMESTAMP
-            """,
-            (
-                state.sender_id,
-                state.current_state.value,
-                state.turn_count,
-                state.business_type,
-                state.delivery_destination,
-                state.target_sku,
-                state.quote_id,
-                json.dumps(state.discovery_questions_asked),
-                state.last_intent
+            if cur.rowcount > 0:
+                conn.commit()
+                state.version += 1
+                return True
+
+            # If no rows updated, check if row exists
+            cur.execute("SELECT version FROM conversation_states WHERE sender_id = ?", (state.sender_id,))
+            existing = cur.fetchone()
+            if existing:
+                # Concurrent conflict: reload version and retry
+                state.version = existing["version"]
+                continue
+
+            # Row doesn't exist yet: insert with version = 1
+            cur.execute(
+                """
+                INSERT INTO conversation_states (
+                    sender_id, current_state, turn_count, business_type,
+                    delivery_destination, target_sku, quote_id,
+                    discovery_questions_asked, last_intent, current_product,
+                    budget, language, slots_json, version, updated_at
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, CURRENT_TIMESTAMP)
+                """,
+                (
+                    state.sender_id,
+                    state.current_state.value,
+                    state.turn_count,
+                    state.business_type,
+                    state.delivery_destination,
+                    state.target_sku,
+                    state.quote_id,
+                    json.dumps(state.discovery_questions_asked),
+                    state.last_intent,
+                    curr_prod,
+                    state.budget,
+                    state.language,
+                    slots_json_str
+                )
             )
-        )
-        conn.commit()
-    finally:
-        conn.close()
+            conn.commit()
+            state.version = 1
+            return True
+        finally:
+            conn.close()
+    return False
 
 
 # ---------------------------------------------------------------------------
