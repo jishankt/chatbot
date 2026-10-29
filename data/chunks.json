@@ -6,6 +6,9 @@
     "title": "Product Overview and Brand Heritage",
     "text": "## Product Overview and Brand Heritage\nThe Citizen CX-02 digital photo printer is manufactured by Citizen Systems and distributed in the UAE by Kepler Tech LLC. It delivers high-quality dye-sublimation photo prints in a compact, portable chassis. The CX-02 joins Citizen's highly regarded CX printer range, offering new levels of quality, portability and compactness. Compared to previous CX models, it is 2kg lighter and 15% smaller.",
     "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
     "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
     "raw_sources": [
       "data/raw/cx02_product_page.txt",
@@ -20,6 +23,9 @@
     "title": "Applications and Ideal Use Cases",
     "text": "## Applications and Ideal Use Cases\nThe Citizen CX-02 is designed for commercial and professional photo environments:\n- Retail and Kiosk installations\n- Event Photography and Photo Party Booths\n- Fast 8.4-second printing for 4 x 6 inch photos in High-Speed mode (or 8 seconds lab-quality print)\n- Compact chassis (275 x 366 x 170 mm, 12 Kg) suitable for portable event setups",
     "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
     "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
     "raw_sources": [
       "data/raw/cx02_product_page.txt",
@@ -34,6 +40,9 @@
     "title": "Key Advantages and Energy Saving",
     "text": "## Key Advantages and Energy Saving\n- Dye sublimation thermal system with overcoat for durable, protected prints.\n- Front-loading drop-in paper loading and comfortable ribbon handling.\n- Finishing options: Glossy or matte surface selectable through printer driver without changing media.\n- Energy saving: Sleep mode reduces energy consumption by 98%.\n- Ribbon rewind function: Prevents wasted ribbon and paper when printing single 4 x 6 inch photos using 6 x 8 inch media.",
     "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
     "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
     "raw_sources": [
       "data/raw/cx02_product_page.txt",
@@ -43,25 +52,31 @@
   },
   {
     "chunk_id": "chunk_004",
-    "file": "02_print_engine.md",
-    "section": "Print Engine and Technology",
-    "title": "Print Engine and Technology",
-    "text": "## Print Engine and Technology\n- Printing Technology: Dye sublimation thermal system with overcoat\n- Resolution: 300 dpi, 600 dpi\n- Printing Modes: High Speed, High Quality\n- Main Interface: USB 2.0 full speed\n- Paper Load: Quick and easy media changing with drop-in paper loading and comfortable ribbon handling",
+    "file": "01_overview.md",
+    "section": "Dye-Sublimation Technology and Overcoat Protection",
+    "title": "Dye-Sublimation Technology and Overcoat Protection",
+    "text": "## Dye-Sublimation Technology and Overcoat Protection\nThe Citizen CX-02 utilizes professional dye-sublimation thermal transfer technology with a clear protective overcoat:\n- Instantly Dry and Water-Resistant: Prints emerge completely dry, laminated, and water-resistant immediately upon printing. The clear overcoat seals the photo against liquid spills, fingerprints, dust, and UV fading.\n- Clean Operation: Unlike inkjet printers that rely on liquid ink cartridges that can clog, smear, or leak during transit, dye-sublimation uses solid dry ribbon panels, ensuring clean, reliable operation for mobile setups.\n- Continuous Tone Lab Quality: Thermal heat fuses vaporized dyes directly into the synthetic paper surface, producing smooth continuous-tone gradations without visible dots or graininess at 300 dpi and 600 dpi resolution.\n- Optimized for Event Photo Booths and High Traffic: Designed specifically for event party booths, retail kiosks, and mobile photographers requiring rapid, reliable, uninterrupted photo printing in 8.4 seconds (or 8 seconds).",
     "model": "CX-02",
-    "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
     "raw_sources": [
-      "data/raw/cx02_datasheet.txt",
+      "data/raw/cx02_product_page.txt",
       "data/raw/citizen_cx02_page.txt",
-      "data/raw/cx02_product_page.txt"
+      "data/raw/cx02_datasheet.txt"
     ]
   },
   {
     "chunk_id": "chunk_005",
     "file": "02_print_engine.md",
-    "section": "Ribbon Rewind and Media Saving Feature",
-    "title": "Ribbon Rewind and Media Saving Feature",
-    "text": "## Ribbon Rewind and Media Saving Feature\nThe Citizen CX-02 features an intelligent ribbon rewind function:\n- Media Saving: Ribbon rewind feature avoids wasted ribbon and paper when printing single 4 x 6 inch photos using 6 x 8 inch media.\n- Energy Saving: Sleep mode reduces energy consumption by 98%.\n- Longevity: Precision engineered for a long, hassle-free operating life.",
+    "section": "Print Engine and Technology",
+    "title": "Print Engine and Technology",
+    "text": "## Print Engine and Technology\n- Printing Technology: Dye-sublimation thermal transfer system with overcoat\n- Resolution Modes: 300 dpi (High Speed mode) and 600 dpi (High Quality mode)\n- Main Interface: USB 2.0 full speed (Type-B connector)\n- Media Loading: Quick front-loading drop-in paper mechanism and comfortable ribbon handling\n- Instant Lamination: Clear protective top layer overcoat laminated during final pass for water, fingerprint, and UV resistance",
     "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
     "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
     "raw_sources": [
       "data/raw/cx02_datasheet.txt",
@@ -71,41 +86,48 @@
   },
   {
     "chunk_id": "chunk_006",
-    "file": "03_media_formats.md",
-    "section": "Supported Print Sizes",
-    "title": "Supported Print Sizes",
-    "text": "## Supported Print Sizes\nPrint sizes supported by the Citizen CX-02 hardware:\n- 4 x 6 inches (101 x 152 mm): 400 sheets per roll (sold in 2 roll pack CX2-MS46-2PC)\n- 5 x 7 inches (127 x 178 mm): 230 sheets per roll (sold in 2 roll pack CX2-MS57-2PC, produces up to 460 prints per set)\n- 6 x 8 inches (152 x 203 mm): 200 sheets per roll (sold in 2 roll pack CX2-MS68-2PC)\n- 6 x 9 inches (152 x 229 mm): 180 sheets per roll (hardware supported by printer; 6x9 media sets not listed on Kepler Tech website)\n- 3.5 x 5 inches (89 x 127 mm): hardware supported by Citizen CX-02 specifications",
+    "file": "02_print_engine.md",
+    "section": "Ribbon Rewind and Media Saving Feature",
+    "title": "Ribbon Rewind and Media Saving Feature",
+    "text": "## Ribbon Rewind and Media Saving Feature\nThe Citizen CX-02 features an intelligent ribbon rewind function:\n- Ribbon-Save Mechanism: When printing single 4 x 6 inch photos using 6 x 8 inch media, the printer prints on the first half of the ribbon panel and rewinds the ribbon, preventing waste of the remaining half.\n- Energy Saving: Standby sleep mode reduces energy consumption by 98%.\n- Long-Term Reliability: Engineered by Citizen Systems Japan for heavy-duty commercial duty cycles in event photography, retail kiosks, and mobile photo party booths.",
     "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
     "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
     "raw_sources": [
       "data/raw/cx02_datasheet.txt",
       "data/raw/citizen_cx02_page.txt",
-      "data/raw/cx02_product_page.txt",
-      "data/raw/media_5x7_page.txt"
+      "data/raw/cx02_product_page.txt"
     ]
   },
   {
     "chunk_id": "chunk_007",
-    "file": "03_media_formats.md",
-    "section": "Print Speeds (Maximum)",
-    "title": "Print Speeds (Maximum)",
-    "text": "## Print Speeds (Maximum)\n- 4 x 6 inches: 8.4 seconds (High Speed mode) / 9.8 seconds (High Quality mode)\n- 5 x 7 inches: 14.2 seconds\n- 6 x 8 inches: 15.6 seconds\n- 6 x 9 inches: 20.8 seconds",
+    "file": "02_print_engine.md",
+    "section": "Thermal Printhead Maintenance",
+    "title": "Thermal Printhead Maintenance",
+    "text": "## Thermal Printhead Maintenance\n- Thermal Head Cleaning: Periodic cleaning using the official Citizen Head Cleaning Pen (CITIZEN-PEN) removes thermal residue, dyes, and dust.\n- Best Practice: Cleaning the thermal printhead each time paper and ribbon media are swapped prolongs printhead life and prevents print streak artifacts.",
     "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
     "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
     "raw_sources": [
       "data/raw/cx02_datasheet.txt",
       "data/raw/citizen_cx02_page.txt",
-      "data/raw/cx02_product_page.txt",
-      "data/raw/media_5x7_page.txt"
+      "data/raw/cx02_product_page.txt"
     ]
   },
   {
     "chunk_id": "chunk_008",
     "file": "03_media_formats.md",
-    "section": "Finishing Options and Surface Control",
-    "title": "Finishing Options and Surface Control",
-    "text": "## Finishing Options and Surface Control\n- Official Datasheet specifies two finishing options selectable through printer driver: Glossy or Matte surface.\n- Citizen's website CX-02 specifications also state: \"Glossy / Matte / Fine Matte / Luster\", and Kepler Tech's product page text mentions glossy, luster, and matte finishes selectable in driver settings.\n- Note on Luster: The official datasheet specifies glossy and matte, while Citizen's site and Kepler's product text mention luster and fine matte. Our team will confirm driver luster support for your workflow.",
+    "section": "Supported Print Sizes",
+    "title": "Supported Print Sizes",
+    "text": "## Supported Print Sizes\nPrint sizes supported by the Citizen CX-02 hardware:\n- 4 x 6 inches (101 x 152 mm): 400 sheets per roll (sold in 2 roll pack CX2-MS46-2PC)\n- 5 x 7 inches (127 x 178 mm): 230 sheets per roll (sold in 2 roll pack CX2-MS57-2PC, produces up to 460 prints per set)\n- 6 x 8 inches (152 x 203 mm): 200 sheets per roll (sold in 2 roll pack CX2-MS68-2PC)\n- 6 x 9 inches (152 x 229 mm): 180 sheets per roll (hardware supported by printer; 6x9 media sets not listed on Kepler Tech website)\n- 3.5 x 5 inches (89 x 127 mm): hardware supported by Citizen CX-02 specifications",
     "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
     "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
     "raw_sources": [
       "data/raw/cx02_datasheet.txt",
@@ -116,25 +138,50 @@
   },
   {
     "chunk_id": "chunk_009",
-    "file": "04_dimensions_power.md",
-    "section": "Physical Dimensions and Weight",
-    "title": "Physical Dimensions and Weight",
-    "text": "## Physical Dimensions and Weight\n- Size (W x D x H): 275 mm x 366 mm x 170 mm (27.5 x 36.6 x 17 cm)\n- Product Weight: 12 Kg (printer unit)\n- Package Weight: 13.5 Kg\n- Package Dimensions: 39 x 50 x 33.5 cm (50 x 39 x 33.5 cm)",
+    "file": "03_media_formats.md",
+    "section": "Print Speeds (Maximum)",
+    "title": "Print Speeds (Maximum)",
+    "text": "## Print Speeds (Maximum)\n- 4 x 6 inches: 8.4 seconds in High-Speed mode (or 9.8 seconds in High-Quality mode). Lab-quality prints can be produced in approximately 8 seconds.\n- 5 x 7 inches: 14.2 seconds.\n- 6 x 8 inches: 15.6 seconds.\n- 6 x 9 inches: 20.8 seconds.",
     "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
     "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
     "raw_sources": [
       "data/raw/cx02_datasheet.txt",
       "data/raw/citizen_cx02_page.txt",
-      "data/raw/cx02_product_page.txt"
+      "data/raw/cx02_product_page.txt",
+      "data/raw/media_5x7_page.txt"
     ]
   },
   {
     "chunk_id": "chunk_010",
-    "file": "04_dimensions_power.md",
-    "section": "Operating Systems and Connectivity",
-    "title": "Operating Systems and Connectivity",
-    "text": "## Operating Systems and Connectivity\n- Supported Operating Systems: Mac OS X, Windows 7 & 10, Windows 11, Windows Server 2022\n- Main Interface: USB 2.0 full speed\n- Energy Saving: Sleep mode reduces energy consumption by 98%\n- Paper & Ribbon Handling: Drop-in paper loading and comfortable ribbon handling",
+    "file": "03_media_formats.md",
+    "section": "Finishing Options and Surface Control",
+    "title": "Finishing Options and Surface Control",
+    "text": "## Finishing Options and Surface Control\n- Two driver-selectable finishing options on the standard media: Glossy or Matte surface, selectable directly through printer driver software without replacing ribbon or paper.\n- Citizen CX-02 driver settings also support Fine Matte and Luster finishes for professional portrait and studio applications.\n- Note on Luster: The official datasheet specifies glossy and matte, while Citizen's manufacturer specifications also document luster and fine matte. Our team will confirm driver luster settings for your specific workflow.",
     "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
+    "raw_sources": [
+      "data/raw/cx02_datasheet.txt",
+      "data/raw/citizen_cx02_page.txt",
+      "data/raw/cx02_product_page.txt",
+      "data/raw/media_5x7_page.txt"
+    ]
+  },
+  {
+    "chunk_id": "chunk_011",
+    "file": "04_dimensions_power.md",
+    "section": "Physical Dimensions and Weight",
+    "title": "Physical Dimensions and Weight",
+    "text": "## Physical Dimensions and Weight\n- Size (W x D x H): 275 mm x 366 mm x 170 mm (27.5 x 36.6 x 17 cm)\n- Product Weight: 12 Kg (printer unit; 2kg lighter than the CX model and 15% smaller)\n- Package Weight: 13.5 Kg\n- Package Dimensions: 39 x 50 x 33.5 cm (50 x 39 x 33.5 cm)\n- Portability & Footprint: Ultra-compact and lightweight chassis designed to fit into small, cramped spaces, photo booth enclosures, and retail kiosks, making it easy to travel, transport, and set up on location.",
+    "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
     "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
     "raw_sources": [
       "data/raw/cx02_datasheet.txt",
@@ -143,12 +190,32 @@
     ]
   },
   {
-    "chunk_id": "chunk_011",
+    "chunk_id": "chunk_012",
+    "file": "04_dimensions_power.md",
+    "section": "Operating Systems and Connectivity",
+    "title": "Operating Systems and Connectivity",
+    "text": "## Operating Systems and Connectivity\n- Supported Operating Systems: Mac OS X, Windows 7 & 10, Windows 11, Windows Server 2022\n- Main Interface: USB 2.0 full speed\n- Energy Saving & Sleep Mode: Sleep mode reduces energy consumption by up to 98%, entering a low-power dormant state when inactive (automatically after a period of inactivity or manually initiated) while ensuring quick and seamless return to full printing functionality.\n- Paper & Ribbon Handling: Quick and easy media changing with drop-in paper loading and comfortable ribbon handling.\n- Printer Driver: Improved printer driver provides real-time media status monitoring and selectable finishing options (Glossy, Matte, Fine Matte, Luster).",
+    "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/wp-content/uploads/2023/05/Citizen-CX-02-Photo-Printer-Datasheet.pdf",
+    "raw_sources": [
+      "data/raw/cx02_datasheet.txt",
+      "data/raw/citizen_cx02_page.txt",
+      "data/raw/cx02_product_page.txt"
+    ]
+  },
+  {
+    "chunk_id": "chunk_013",
     "file": "05_accessories.md",
     "section": "Official Accessories and Consumables Overview",
     "title": "Official Accessories and Consumables Overview",
-    "text": "## Official Accessories and Consumables Overview\n- Citizen CX-02 Printer Carry Bag (SKU: Citizen CX-02 Bag, internal id: CX-02-BAG): Sleek and durable bag designed specifically to fit and safeguard the Citizen CX-02 printer with a padded interior for transportation.\n- Citizen Thermal Head Cleaning Pen (SKU: Citizen Pen, internal id: CITIZEN-PEN): Designed specifically to clean thermal printheads on Citizen photo printers, ensuring crisp, clear printing results.\n- 4x6\" Media Set (SKU: CX2.4x6, model: CX2-MS46-2PC): Genuine Citizen media containing 2 rolls (400 sheets per roll).\n- 5x7\" Media Set (SKU: CX0257, model: CX2-MS57-2PC): Genuine Citizen OEM media containing 2 rolls, produces up to 460 prints per set (230 sheets per roll).\n- 6x8\" Media Set (SKU: CX2.6X8, model: CX2-MS68-2PC): Genuine Citizen media containing 2 rolls (200 sheets per roll).",
+    "text": "## Official Accessories and Consumables Overview\n- Citizen CX-02 Printer Carry Bag (SKU: Citizen CX-02 Bag, internal id: CX-02-BAG): Sleek and durable bag designed specifically to fit and safeguard the Citizen CX-02 printer with a padded interior for transportation. Manufactured using abrasion-resistant foam-backed material with reinforced stitching and safety straps that pass under the bag. Features extra corner safeguarding, an embroidered Citizen logo, a robust two-clasp zip opening in one piece across top/rear panels, and a spacious main compartment accommodating printer, cables, power adapters, and media.\n- Citizen Thermal Head Cleaning Pen (SKU: Citizen Pen, internal id: CITIZEN-PEN): Weight .250 kg. Compatible with Citizen CX-02, Citizen CX-02W, Citizen CY-02, and Citizen CZ-01 thermal printers. Designed specifically to clean thermal printheads on Citizen photo printers, ensuring crisp, clear printing results. Removes dyes, dust, dirt, and thermal debris to prevent print head scratches, streaks, and premature head failure. Recommended to clean the thermal head each time a new roll of media is installed.\n- 4x6\" Media Set (SKU: CX2.4x6, model: CX2-MS46-2PC): Genuine Citizen media containing 2 rolls (400 sheets per roll). Engineered for event photography, photo booths, and retail printing where speed and consistency are essential.\n- 5x7\" Media Set (SKU: CX0257, model: CX2-MS57-2PC): Genuine Citizen OEM media containing 2 rolls, produces up to 460 prints per set (230 sheets per roll). Delivers vibrant colors, sharp detail, and a durable protective overcoat.\n- 6x8\" Media Set (SKU: CX2.6X8, model: CX2-MS68-2PC): Genuine Citizen media containing 2 rolls (200 sheets per roll). Ideal for professional studio portraits, wedding albums, and high-end event photography workflows.",
     "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
     "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-printer-carry-bag/",
     "raw_sources": [
       "data/raw/bag_product_page.txt",
@@ -157,6 +224,209 @@
       "data/raw/media_5x7_page.txt",
       "data/raw/media_6x8_page.txt",
       "data/raw/citizen_cx02_page.txt"
+    ]
+  },
+  {
+    "chunk_id": "chunk_014",
+    "file": "06_citizen_lineup.md",
+    "section": "Citizen Photo Printers Lineup Overview",
+    "title": "Citizen Photo Printers Lineup Overview",
+    "text": "## Citizen Photo Printers Lineup Overview\nKepler Tech LLC (Dubai) is an authorized partner and distributor for Citizen Systems commercial dye-sublimation photo printers across the GCC and UAE. The official Citizen photo printer range includes four specialized models:\n1. Citizen CX-02: Compact, high-speed flagship for event booths and retail photo kiosks.\n2. Citizen CY-02: Professional high-capacity commercial photo printer for fast, flexible volume production.\n3. Citizen CZ-01: Ultra-compact, portable photo printer ideal for on-the-go photographers and tight spaces.\n4. Citizen CX-02W: Wide-format commercial dye-sublimation printer producing larger 8x10 and 8x12 professional prints.\nAll four models feature a thermal dye-sublimation printing process, high-speed USB interface, compatibility with Windows 10/11 and macOS, and deliver crisp continuous-tone photo output at 300x300 dpi (high-speed) and up to 600x300 dpi (high-quality).",
+    "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product-category/printers/dye-sublimation-citizen-photo-printer/",
+    "raw_sources": [
+      "data/raw/kepler_citizen_photo_printers_brochure.txt",
+      "data/raw/cx02_datasheet.txt",
+      "data/raw/cx02_product_page.txt"
+    ]
+  },
+  {
+    "chunk_id": "chunk_015",
+    "file": "06_citizen_lineup.md",
+    "section": "Citizen CY-02 Photo Printer Specifications",
+    "title": "Citizen CY-02 Photo Printer Specifications",
+    "text": "## Citizen CY-02 Photo Printer Specifications\nThe Citizen CY-02 is a professional dye-sublimation photo printer offering flexible media options and fast photo production:\n- Application: Professional photo production, high-volume retail kiosks, and commercial event installations.\n- Print Speed: High-speed printing from 14.9 seconds.\n- Media Formats: Supports 4x6 inch and 6x8 inch media formats with multiple print size options for flexible output.\n- Print Modes: High-Speed and High-Quality print modes.\n- Surface Finishes: Glossy and Matte finish options selectable from the driver without changing media.\n- Print Engine: Thermal dye-sublimation printing process.\n- Interface & Connectivity: USB interface.\n- OS Compatibility: Compatible with Windows 10, Windows 11, and macOS.\n- Resolution: 300 x 300 dpi high-speed printing, up to 600 x 300 dpi high-quality mode.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Phone: +971 4 323 1008, Office No.1, Abdulla Al Awar Building, Khalid Bin Waleed Road).",
+    "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product-category/printers/dye-sublimation-citizen-photo-printer/",
+    "raw_sources": [
+      "data/raw/kepler_citizen_photo_printers_brochure.txt",
+      "data/raw/cx02_datasheet.txt",
+      "data/raw/cx02_product_page.txt"
+    ]
+  },
+  {
+    "chunk_id": "chunk_016",
+    "file": "06_citizen_lineup.md",
+    "section": "Citizen CZ-01 Photo Printer Specifications",
+    "title": "Citizen CZ-01 Photo Printer Specifications",
+    "text": "## Citizen CZ-01 Photo Printer Specifications\nThe Citizen CZ-01 is a compact and portable dye-sublimation photo printer ideal for fast, high-quality photo output:\n- Application: Mobile event photographers, compact photo booths, wedding photobooks, and small retail spaces.\n- Design: Compact and lightweight design for maximum mobility.\n- Print Speed: High-speed printing from 16.3 seconds.\n- Media Formats: Supports 4x4 inch square prints and 4x6 inch standard media sizes with multiple print size options.\n- Print Modes: High-Speed and High-Quality print modes.\n- Surface Finishes: Glossy and Matte finish options.\n- Print Engine: Thermal dye-sublimation printing process.\n- Interface & Connectivity: USB interface.\n- OS Compatibility: Compatible with Windows 10, Windows 11, and macOS.\n- Resolution: 300 x 300 dpi high-speed printing, up to 600 x 300 dpi high-quality mode.\n- Commercial Enquiries: Available from Kepler Tech LLC in Dubai (Phone: +971 4 323 1008).",
+    "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product-category/printers/dye-sublimation-citizen-photo-printer/",
+    "raw_sources": [
+      "data/raw/kepler_citizen_photo_printers_brochure.txt",
+      "data/raw/cx02_datasheet.txt",
+      "data/raw/cx02_product_page.txt"
+    ]
+  },
+  {
+    "chunk_id": "chunk_017",
+    "file": "06_citizen_lineup.md",
+    "section": "Citizen CX-02W Photo Printer Specifications",
+    "title": "Citizen CX-02W Photo Printer Specifications",
+    "text": "## Citizen CX-02W Photo Printer Specifications\nThe Citizen CX-02W is a wide-format dye-sublimation photo printer designed for producing larger professional photo prints:\n- Application: School portraits, event group photos, studio portraits, sports packages, and wide-format photo gifts.\n- Print Formats: Supports large-format 8x10 inch and 8x12 inch media formats with multiple large-format print size options.\n- Print Speed: High-speed printing from 33.7 seconds for large-format prints.\n- Print Modes: High-Speed and High-Quality print modes.\n- Surface Finishes: Glossy, Matte, and Lustre finish options.\n- Print Engine: Thermal dye-sublimation printing process.\n- Interface & Connectivity: USB interface.\n- OS Compatibility: Compatible with Windows 10, Windows 11, and macOS.\n- Resolution: 300 x 300 dpi high-speed printing, up to 600 x 300 dpi high-quality mode.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Phone: +971 4 323 1008).",
+    "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product-category/printers/dye-sublimation-citizen-photo-printer/",
+    "raw_sources": [
+      "data/raw/kepler_citizen_photo_printers_brochure.txt",
+      "data/raw/cx02_datasheet.txt",
+      "data/raw/cx02_product_page.txt"
+    ]
+  },
+  {
+    "chunk_id": "chunk_018",
+    "file": "07_epson_lineup.md",
+    "section": "Epson SureColor SC-T3100 Technical CAD Plotter Specifications",
+    "title": "Epson SureColor SC-T3100 Technical CAD Plotter Specifications",
+    "text": "## Epson SureColor SC-T3100 Technical CAD Plotter Specifications\nThe Epson SureColor SC-T3100 is an entry-level 24-inch wireless technical CAD/GIS plotter:\n- Application: Architecture blueprints, engineering line drawings, CAD, GIS, and posters.\n- Max Width & Media Sizes: 24.0 inches | Supports A1, A2, A3, A4 sheets and 24-inch rolls.\n- Print Speed: 34 seconds per A1 CAD line drawing on plain paper (approx. 106 A1 per hour).\n- Print Resolution: 2,400 x 1,200 DPI.\n- Ink Technology: Epson UltraChrome XD2 all-pigment inks (water and smudge resistant).\n- Connectivity: Wi-Fi, Wi-Fi Direct, Gigabit Ethernet, USB 3.0.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 3,880.00 AED + VAT).",
+    "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product-category/printers/epson-large-format-inkjet-printer/",
+    "raw_sources": [
+      "/opt/salesai/data/sheets/master_complete_products.csv"
+    ]
+  },
+  {
+    "chunk_id": "chunk_019",
+    "file": "07_epson_lineup.md",
+    "section": "Epson SureColor SC-T5100 Technical CAD Plotter Specifications",
+    "title": "Epson SureColor SC-T5100 Technical CAD Plotter Specifications",
+    "text": "## Epson SureColor SC-T5100 Technical CAD Plotter Specifications\nThe Epson SureColor SC-T5100 is a 36-inch professional technical CAD and GIS plotter:\n- Application: A0 architectural blueprints, civil engineering plans, and technical construction renderings.\n- Max Width & Media Sizes: 36.0 inches | Supports A0, A1, A2, A3, A4 sheets and up to 36-inch rolls. Stand included.\n- Print Speed: 31 seconds per A1 CAD line drawing on plain paper.\n- Print Resolution: 2,400 x 1,200 DPI.\n- Ink Technology: Epson UltraChrome XD2 all-pigment inks (moisture and archival resistant).\n- Connectivity: Wireless Wi-Fi, Ethernet, USB 3.0.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 9,700.00 AED + VAT).",
+    "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product-category/printers/epson-large-format-inkjet-printer/",
+    "raw_sources": [
+      "/opt/salesai/data/sheets/master_complete_products.csv"
+    ]
+  },
+  {
+    "chunk_id": "chunk_020",
+    "file": "07_epson_lineup.md",
+    "section": "Epson SureColor SC-T7700D Dual-Roll Plotter Specifications",
+    "title": "Epson SureColor SC-T7700D Dual-Roll Plotter Specifications",
+    "text": "## Epson SureColor SC-T7700D Dual-Roll Plotter Specifications\nThe Epson SureColor SC-T7700D is a heavy-duty 44-inch dual-roll production technical CAD and poster printer:\n- Application: High-volume production CAD, GIS mapping, retail point-of-sale banners, and engineering drawings.\n- Max Width & Media Sizes: 44.0 inches | Dual-roll auto-switching for B0, A0, A1, A2 formats.\n- Print Speed: Ultra-fast 16 seconds per A1 CAD line drawing (up to 130 m²/hr).\n- Print Resolution: 2,400 x 1,200 DPI with PrecisionCore MicroTFP printheads.\n- Ink Technology: Epson UltraChrome XD3 6-colour pigment inks including dedicated Chromatic Red.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Pricing is available through an official quotation).",
+    "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product-category/printers/epson-large-format-inkjet-printer/",
+    "raw_sources": [
+      "/opt/salesai/data/sheets/master_complete_products.csv"
+    ]
+  },
+  {
+    "chunk_id": "chunk_021",
+    "file": "07_epson_lineup.md",
+    "section": "Epson SureColor SC-P700 13-Inch Photo Printer Specifications",
+    "title": "Epson SureColor SC-P700 13-Inch Photo Printer Specifications",
+    "text": "## Epson SureColor SC-P700 13-Inch Photo Printer Specifications\nThe Epson SureColor SC-P700 is a professional 13-inch desktop photo and fine art printer:\n- Application: Professional portrait photographers, exhibition galleries, fine art reproduction, and graphic designers.\n- Max Width & Media Sizes: 13.0 inches | Supports A3+, A3, A4, 4x6, 5x7, 8x10 cut sheets and 13-inch roll paper.\n- Print Speed: Approx. 90 seconds for 8x10 inch / 150 seconds for 13x19 inch prints on Premium Glossy paper.\n- Print Resolution: 5,760 x 1,440 DPI.\n- Ink Technology: UltraChrome PRO10 10-colour pigment inks with Black Enhance Overcoat (BEO) for unmatched D-Max.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 3,400.00 AED + VAT).",
+    "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product-category/printers/epson-large-format-inkjet-printer/",
+    "raw_sources": [
+      "/opt/salesai/data/sheets/master_complete_products.csv"
+    ]
+  },
+  {
+    "chunk_id": "chunk_022",
+    "file": "07_epson_lineup.md",
+    "section": "Epson SureColor SC-P900 17-Inch Photo Printer Specifications",
+    "title": "Epson SureColor SC-P900 17-Inch Photo Printer Specifications",
+    "text": "## Epson SureColor SC-P900 17-Inch Photo Printer Specifications\nThe Epson SureColor SC-P900 is a professional 17-inch desktop fine art and exhibition photo printer:\n- Application: Commercial photography studios, fine art printmakers, and premium proofing.\n- Max Width & Media Sizes: 17.0 inches | Supports A2, A3+, A3, A4, 8x10, 8x12 cut sheets and 17-inch roll paper.\n- Print Speed: Approx. 90 seconds for 8x10 inch / 280 seconds for 17x22 inch prints on Premium Glossy paper.\n- Print Resolution: 5,760 x 1,440 DPI.\n- Ink Technology: UltraChrome PRO10 10-colour pigment inks with dedicated Matte Black and Photo Black lines (no switching).\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 4,880.00 AED + VAT).",
+    "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product-category/printers/epson-large-format-inkjet-printer/",
+    "raw_sources": [
+      "/opt/salesai/data/sheets/master_complete_products.csv"
+    ]
+  },
+  {
+    "chunk_id": "chunk_023",
+    "file": "07_epson_lineup.md",
+    "section": "Epson SureColor SC-P9500 44-Inch Production Fine Art Plotter Specifications",
+    "title": "Epson SureColor SC-P9500 44-Inch Production Fine Art Plotter Specifications",
+    "text": "## Epson SureColor SC-P9500 44-Inch Production Fine Art Plotter Specifications\nThe Epson SureColor SC-P9500 is a 44-inch flagship fine art and contract proofing plotter:\n- Application: Museum fine art reproduction, contract pre-press proofing (99% Pantone coverage), and premium gallery displays.\n- Max Width & Media Sizes: 44.0 inches | Supports B0, A0, A1 formats up to 44 inches wide.\n- Print Speed: Up to 12.5 m²/hr for 44-inch high-quality photo and art prints.\n- Print Resolution: 2,400 x 1,200 DPI with 12-channel PrecisionCore linehead.\n- Ink Technology: UltraChrome PRO12 12-colour all-pigment inks with K3 technology, Violet, Orange, and Green.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Pricing is available through an official quotation).",
+    "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product-category/printers/epson-large-format-inkjet-printer/",
+    "raw_sources": [
+      "/opt/salesai/data/sheets/master_complete_products.csv"
+    ]
+  },
+  {
+    "chunk_id": "chunk_024",
+    "file": "07_epson_lineup.md",
+    "section": "Epson SureColor SC-F100 Desktop Sublimation Printer Specifications",
+    "title": "Epson SureColor SC-F100 Desktop Sublimation Printer Specifications",
+    "text": "## Epson SureColor SC-F100 Desktop Sublimation Printer Specifications\nThe Epson SureColor SC-F100 is a compact A4 dye-sublimation printer:\n- Application: Promotional merchandise, customized gifts, mugs, phone cases, mousepads, and small textile garments.\n- Max Width & Media Sizes: 8.5 inches (A4, A5, Letter cut sheets).\n- Print Speed: Approx. 65 seconds per A4 sublimation transfer page.\n- Print Resolution: 600 x 1,200 DPI.\n- Ink Technology: Epson UltraChrome DS genuine dye-sublimation ink bottles (OEKO-TEX ECO PASSPORT certified). Refillable ink tanks.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 1,950.00 AED + VAT).",
+    "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product-category/printers/epson-large-format-inkjet-printer/",
+    "raw_sources": [
+      "/opt/salesai/data/sheets/master_complete_products.csv"
+    ]
+  },
+  {
+    "chunk_id": "chunk_025",
+    "file": "07_epson_lineup.md",
+    "section": "Epson WorkForce Pro WF-C5890 DWF Business Multifunction Printer Specifications",
+    "title": "Epson WorkForce Pro WF-C5890 DWF Business Multifunction Printer Specifications",
+    "text": "## Epson WorkForce Pro WF-C5890 DWF Business Multifunction Printer Specifications\nThe Epson WorkForce Pro WF-C5890 DWF is a high-speed A4 business colour multifunction printer (Print, Scan, Copy, Fax):\n- Application: High-demand corporate offices, SMB workgroups, government departments, and legal/financial firms.\n- Max Width & Media Sizes: A4, A5, A6, B5, Letter, Legal. Automatic duplex printing.\n- Print Speed: 25 ISO ppm black / 25 ISO ppm colour (simplex); 16 ipm duplex.\n- Print Resolution: 4,800 x 1,200 DPI.\n- Ink Technology: Epson DURABrite Ultra all-pigment inks (water, highlighter, and smudge resistant). High-yield Replaceable Ink Pack System (RIPS).\n- Technology: PrecisionCore Heat-Free technology delivering ultra-low power consumption and fast first page out time.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 1,656.00 AED + VAT).",
+    "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product-category/printers/epson-large-format-inkjet-printer/",
+    "raw_sources": [
+      "/opt/salesai/data/sheets/master_complete_products.csv"
+    ]
+  },
+  {
+    "chunk_id": "chunk_026",
+    "file": "07_epson_lineup.md",
+    "section": "Epson WorkForce Document Scanners Specifications (DS-530II and DS-770II)",
+    "title": "Epson WorkForce Document Scanners Specifications (DS-530II and DS-770II)",
+    "text": "## Epson WorkForce Document Scanners Specifications (DS-530II and DS-770II)\nEpson WorkForce sheetfed duplex document scanners are engineered for business record archiving and high-volume scanning:\n- Epson WorkForce DS-530II: 35 ppm / 70 ipm colour duplex scanning at 600 x 600 DPI, 50-sheet ADF, ultrasonic double-feed detection.\n- Epson WorkForce DS-770II: Heavy-duty 45 ppm / 90 ipm colour duplex scanning at 600 x 600 DPI, 100-sheet ADF, duty cycle up to 7,000 pages per day.\n- Compatibility: TWAIN and ISIS drivers for full document management workflow integration (Windows and macOS).\n- Consumables Note: Scanner consumables (pickup rollers, separation pads) are supply items available via our service desk upon request.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Pricing is available through an official quotation).",
+    "model": "CX-02",
+    "namespace": "cx02",
+    "site": "corporate",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product-category/printers/epson-large-format-inkjet-printer/",
+    "raw_sources": [
+      "/opt/salesai/data/sheets/master_complete_products.csv"
     ]
   }
 ]
