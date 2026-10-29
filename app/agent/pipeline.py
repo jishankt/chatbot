@@ -92,27 +92,69 @@ def extract_phone_and_name(text: str) -> Dict[str, Optional[str]]:
 
 
 PRODUCT_CARD_DEFS = {
+    # 4 Core Photo Printers (Citizen lineup)
     "CX-02": {
         "sku": "CX-02",
-        "title": "CX-02",
+        "title": "Citizen CX-02",
         "full_name": "Citizen CX-02 Photo Printer",
-        "badge": "Hardware",
+        "badge": "Flagship Photo",
         "price_display": "4,385.00 AED",
         "price_quote_text": "Commercial Quote on Request",
-        "recommendation": "Primary recommendation matching your specifications.",
+        "recommendation": "Flagship ultra-compact dye-sub photo printer for event booths & studios.",
         "image_url": "/static/img/citizen_cx02_card.webp",
         "url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
         "in_stock": True,
         "compare_query": "Compare Citizen CX-02 specifications"
     },
+    "CX-02W": {
+        "sku": "CX-02W",
+        "title": "Citizen CX-02W",
+        "full_name": "Citizen CX-02W Wide Photo Printer",
+        "badge": "Wide Format",
+        "price_display": "6,820.00 AED",
+        "price_quote_text": "Commercial Quote on Request",
+        "recommendation": "Wide dye-sublimation format supporting 8x10\" and 8x12\" professional prints.",
+        "image_url": "/static/img/citizen_cx02_card.webp",
+        "url": "https://www.keplertechllc.com/product/citizen-cx-02w-photo-printer/",
+        "in_stock": True,
+        "compare_query": "Compare Citizen CX-02W specifications"
+    },
+    "CY-02": {
+        "sku": "CY-02",
+        "title": "Citizen CY-02",
+        "full_name": "Citizen CY-02 Photo Printer",
+        "badge": "High Capacity",
+        "price_display": "3,400.00 AED",
+        "price_quote_text": "Commercial Quote on Request",
+        "recommendation": "High capacity event printer (700 prints per 4x6 roll) for heavy kiosk volume.",
+        "image_url": "/static/img/citizen_cx02_card.webp",
+        "url": "https://www.keplertechllc.com/product/citizen-cy-02-photo-printer/",
+        "in_stock": True,
+        "compare_query": "Compare Citizen CY-02 specifications"
+    },
+    "CZ-01": {
+        "sku": "CZ-01",
+        "title": "Citizen CZ-01",
+        "full_name": "Citizen CZ-01 Photo Printer",
+        "badge": "Ultra Compact",
+        "price_display": "3,200.00 AED",
+        "price_quote_text": "Commercial Quote on Request",
+        "recommendation": "Lightweight 5.8kg compact photo printer for small booths, popups, and passports.",
+        "image_url": "/static/img/citizen_cx02_card.webp",
+        "url": "https://www.keplertechllc.com/product/citizen-cz-01-photo-printer/",
+        "in_stock": True,
+        "compare_query": "Compare Citizen CZ-01 specifications"
+    },
+
+    # 4 Core Consumables & Maintenance (Like CX-02)
     "CX2-MS46-2PC": {
         "sku": "CX2-MS46-2PC",
         "title": "4x6\" Media Set",
         "full_name": "Citizen CX-02 4x6\" Media Set (CX2-MS46-2PC)",
-        "badge": "Media",
+        "badge": "Consumable",
         "price_display": "490.00 AED",
         "price_quote_text": "490.00 AED",
-        "recommendation": "Genuine dye-sublimation media (800 prints estimate).",
+        "recommendation": "Genuine dye-sublimation media (approx. 800 prints per box, 2 rolls).",
         "image_url": "/static/img/citizen_media_4x6.webp",
         "url": "https://www.keplertechllc.com/product/citizen-cx-02-4x6-printer-media/",
         "in_stock": True,
@@ -122,10 +164,10 @@ PRODUCT_CARD_DEFS = {
         "sku": "CX2-MS57-2PC",
         "title": "5x7\" Media Set",
         "full_name": "Citizen CX-02 5x7\" Media Set (CX2-MS57-2PC)",
-        "badge": "Media",
+        "badge": "Consumable",
         "price_display": "500.00 AED",
         "price_quote_text": "500.00 AED",
-        "recommendation": "Genuine Citizen OEM media (460 verified prints per set).",
+        "recommendation": "Genuine Citizen OEM media (460 verified prints per set, 2 rolls).",
         "image_url": "/static/img/citizen_media_5x7.jpg",
         "url": "https://www.keplertechllc.com/product/citizen-cx-02-5x7-media-set-2-roll/",
         "in_stock": True,
@@ -135,14 +177,27 @@ PRODUCT_CARD_DEFS = {
         "sku": "CX2-MS68-2PC",
         "title": "6x8\" Media Set",
         "full_name": "Citizen CX-02 6x8\" Media Set (CX2-MS68-2PC)",
-        "badge": "Media",
+        "badge": "Consumable",
         "price_display": "500.00 AED",
         "price_quote_text": "500.00 AED",
-        "recommendation": "Genuine dye-sublimation media (400 prints estimate).",
+        "recommendation": "Genuine dye-sublimation media (approx. 400 prints per box, 2 rolls).",
         "image_url": "/static/img/citizen_media_6x8.webp",
         "url": "https://www.keplertechllc.com/product/citizen-cx-02-printer-6x8-media/",
         "in_stock": True,
         "compare_query": "Tell me more about 6x8 media"
+    },
+    "CITIZEN-PEN": {
+        "sku": "CITIZEN-PEN",
+        "title": "Cleaning Pen",
+        "full_name": "Citizen Thermal Head Cleaning Pen",
+        "badge": "Maintenance",
+        "price_display": "190.00 AED",
+        "price_quote_text": "190.00 AED",
+        "recommendation": "OEM thermal printhead maintenance pen to prolong printhead life.",
+        "image_url": "/static/img/citizen_pen_card.webp",
+        "url": "https://www.keplertechllc.com/product/citizen-thermal-head-cleaning-pen/",
+        "in_stock": True,
+        "compare_query": "Tell me how to use the Citizen cleaning pen"
     },
     "CX-02-BAG": {
         "sku": "CX-02-BAG",
@@ -156,19 +211,6 @@ PRODUCT_CARD_DEFS = {
         "url": "https://www.keplertechllc.com/product/citizen-cx-02-printer-carry-bag/",
         "in_stock": True,
         "compare_query": "Tell me more about the CX-02 carry bag"
-    },
-    "CITIZEN-PEN": {
-        "sku": "CITIZEN-PEN",
-        "title": "Cleaning Pen",
-        "full_name": "Citizen Thermal Head Cleaning Pen",
-        "badge": "Maintenance",
-        "price_display": "190.00 AED",
-        "price_quote_text": "190.00 AED",
-        "recommendation": "OEM thermal printhead maintenance to prolong head life.",
-        "image_url": "/static/img/citizen_pen_card.webp",
-        "url": "https://www.keplertechllc.com/product/citizen-thermal-head-cleaning-pen/",
-        "in_stock": True,
-        "compare_query": "Tell me how to use the Citizen cleaning pen"
     }
 }
 
@@ -192,17 +234,12 @@ def build_matched_cards(target_sku: Optional[str], intent: str, user_msg: str, t
             if cards:
                 return cards
 
-    # 2. Bundle Catalog Browse
-    if intent == "bundle_catalog" or any(w in msg_l for w in ["catalog", "catalogue", "all products", "list products", "what else do you sell"]):
-        for sku in ["CX-02", "CX2-MS46-2PC", "CX2-MS57-2PC", "CX2-MS68-2PC", "CX-02-BAG", "CITIZEN-PEN"]:
-            if sku in PRODUCT_CARD_DEFS:
-                c = dict(PRODUCT_CARD_DEFS[sku])
-                c["price_subtext"] = c["price_display"]
-                cards.append(c)
-        return cards
+    # 2. Consumables & Media Sets Browse (4 items like CX-02 media)
+    is_consumables_query = any(w in msg_l for w in [
+        "consumable", "consumables", "media", "media sets", "rolls", "paper and ribbon", "paper & ribbon", "paper and rolls", "ink", "ribbon"
+    ]) and not any(w in msg_l for w in ["printer only", "hardware only"])
 
-    # 2b. Consumables & Media Sets Browse
-    if any(w in msg_l for w in ["consumable", "consumables", "media", "rolls", "paper and ribbon", "accessories"]):
+    if is_consumables_query:
         for sku in ["CX2-MS46-2PC", "CX2-MS57-2PC", "CX2-MS68-2PC", "CITIZEN-PEN"]:
             if sku in PRODUCT_CARD_DEFS:
                 c = dict(PRODUCT_CARD_DEFS[sku])
@@ -210,15 +247,37 @@ def build_matched_cards(target_sku: Optional[str], intent: str, user_msg: str, t
                 cards.append(c)
         return cards
 
-    # 3. Direct SKU match
+    # 3. Explicit "like cx 02", "items like cx 02", "printers like cx 02", or general printers query (4 printer items)
+    is_printers_query = any(w in msg_l for w in [
+        "like cx 02", "like cx02", "like cx-02", "items like cx 02", "items like cx02", "printers like cx 02",
+        "printers like cx02", "printers", "printer", "photo printers", "photo printer", "citizen printers",
+        "which printers", "what printers", "show printers", "list printers", "all printers", "models"
+    ]) or (
+        intent in ("category_browse", "bundle_catalog") and any(w in msg_l for w in ["citizen", "photo", "booth", "kiosk", "event", "printer"])
+    )
+
+    is_direct_single_sku = target_sku and target_sku in PRODUCT_CARD_DEFS and not any(p in msg_l for p in [
+        "like cx", "other", "all", "compare", "printers", "options", "models", "alternatives"
+    ])
+
+    if is_printers_query and not is_direct_single_sku:
+        # Return 4 printer cards (CX-02, CX-02W, CY-02, CZ-01)
+        for sku in ["CX-02", "CX-02W", "CY-02", "CZ-01"]:
+            if sku in PRODUCT_CARD_DEFS:
+                c = dict(PRODUCT_CARD_DEFS[sku])
+                c["price_subtext"] = c["price_display"]
+                cards.append(c)
+        return cards
+
+    # 4. Direct SKU match
     if target_sku and target_sku in PRODUCT_CARD_DEFS:
         c = dict(PRODUCT_CARD_DEFS[target_sku])
         c["price_subtext"] = "Commercial Quote on Request" if intent == "quote" else c["price_display"]
         cards.append(c)
         return cards
 
-    # 4. Contextual photo printer / photo booth / specs match
-    cx02_terms = ["cx-02", "cx02", "printer", "photo booth", "photobooth", "event", "wedding", "kiosk", "speed", "dimension", "dimensions", "resolution", "dpi", "specs", "specification"]
+    # 5. Contextual photo booth / event / specs match (fallback to CX-02)
+    cx02_terms = ["cx-02", "cx02", "photo booth", "photobooth", "event", "wedding", "speed", "dimension", "dimensions", "resolution", "dpi", "specs", "specification"]
     if any(t in msg_l for t in cx02_terms) and not any(u in msg_l for u in ["epson", "scanner", "dnp", "fujifilm"]):
         c = dict(PRODUCT_CARD_DEFS["CX-02"])
         c["price_subtext"] = "Commercial Quote on Request" if intent == "quote" else c["price_display"]
@@ -1292,6 +1351,36 @@ class CX02Pipeline:
                     "tools_called": tools_called,
                     "chunks_retrieved": [],
                     "cards": [],
+                    "language": read_ctx.language,
+                    "resolved_sku": None,
+                    "is_anaphora": False,
+                    "understanding": understand_res.model_dump(),
+                    "sales_state": decision.current_state.value,
+                    "state_decision": decision.model_dump(),
+                    "prompt_version": Config.PROMPT_VERSION
+                }
+
+            if any(w in msg_lower for w in ["photo printers", "photo printer", "printers like cx 02", "printers like cx02", "items like cx 02", "items like cx02", "citizen printers", "which printers", "what printers", "show printers", "view printers", "our printers", "printer lineup"]) or (
+                msg_lower.strip() in ["printer", "printers", "printers?", "photo printers?", "models"]
+            ):
+                reply = (
+                    "Kepler Tech supplies the complete Citizen commercial photo printer lineup in Dubai:\n\n"
+                    "• **Citizen CX-02** (Active Flagship): **4,385.00 AED** — Compact 4x6\", 5x7\", 6x8\" dye-sub printer for event photo booths & studios.\n"
+                    "• **Citizen CX-02W** (Wide Format): **6,820.00 AED** — Large format dye-sublimation printer supporting 8x10\" and 8x12\" prints.\n"
+                    "• **Citizen CY-02** (High Capacity): **3,400.00 AED** — High-capacity commercial kiosk printer producing 700 prints per roll.\n"
+                    "• **Citizen CZ-01** (Ultra Compact): **3,200.00 AED** — Lightweight 5.8kg compact event printer for 4x4\" and 4x6\" photos.\n\n"
+                    "All prices are subject to 5% UAE VAT and confirmation by our sales desk. Which printer best fits your event or kiosk setup?"
+                )
+                cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["CX-02", "CX-02W", "CY-02", "CZ-01"] if s in PRODUCT_CARD_DEFS]
+                log_message(sender_id=sender_id, role="user", content=user_msg, message_id=message_id, channel=channel)
+                log_message(sender_id=sender_id, role="assistant", content=reply, channel=channel)
+                return {
+                    "reply": reply,
+                    "intent": "category_browse",
+                    "priority": priority,
+                    "tools_called": tools_called,
+                    "chunks_retrieved": [],
+                    "cards": cards,
                     "language": read_ctx.language,
                     "resolved_sku": None,
                     "is_anaphora": False,
