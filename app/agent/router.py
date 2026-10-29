@@ -267,7 +267,7 @@ def classify_intent(message: str) -> Dict[str, Any]:
     unrelated_topics = [
         "television", "tv", "toyota", "nissan", "flight", "weather",
         "football", "crypto", "bitcoin", "restaurant", "burger", "pizza",
-        "pasta", "joke", "capital of", "recipe", r"2\s*\+\s*2", "poem", "cricket"
+        "pasta", "biriyani", "biryani", "food", "joke", "capital of", "recipe", r"2\s*\+\s*2", "poem", "cricket"
     ]
     for topic in unrelated_topics:
         if re.search(r"\b" + topic + r"\b" if not topic.startswith(r"\b") else topic, clean_msg):
