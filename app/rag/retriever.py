@@ -62,7 +62,8 @@ COMMON_INQUIRY_TERMS = {
     "بالكيلوجرام", "تستغرق", "التسامي", "والبصمات", "البصمات", "بصمات", "يو", "اس", "بي",
     "سائط", "وحماية", "الفعاليات", "الورق",
     "kam", "sur3at", "teba3at", "hal", "yeshteghel", "el", "3ala", "lama3",
-    "ചെയ്യാൻ", "എത്ര", "എടുക്കും", "ഇവന്റുകൾക്ക്", "അനുയോജ്യമാണോ", "വാറന്റി", "ലഭിക്കുമോ"
+    "ചെയ്യാൻ", "എത്ര", "എടുക്കും", "ഇവന്റുകൾക്ക്", "അനുയോജ്യമാണോ", "വാറന്റി", "ലഭിക്കുമോ",
+    "wondering", "wonder", "whether", "curious"
 }
 
 
@@ -156,7 +157,7 @@ def retrieve(
         return []
 
     # Filter chunks by category/model if specified
-    q_lower = query.lower()
+    q_lower = query.lower().replace("×", "x").replace("✕", "x").replace("✖", "x").replace("–", "-").replace("—", "-")
 
     # Rejection of unlisted competitor brands and non-commercial consumer lines (Rule 4)
     UNLISTED_BRANDS = [
@@ -200,7 +201,7 @@ def retrieve(
             "shuf", "bikam", "se3r", "marhaba", "wayn"
         ])
         if not has_our_product:
-            q_keywords = extract_keywords(query)
+            q_keywords = extract_keywords(q_lower)
             from app.rag.relevance import SYNONYMS
             catalog_vocab = _CATALOG_VOCABULARY or set()
             for kw in q_keywords:

@@ -2037,7 +2037,11 @@ class CX02Pipeline:
             if is_6x9_inquiry:
                 chunks = []
             elif intent in ("datasheet", "rag") or has_knowledge_terms:
-                chunks = retrieve(user_msg, top_k=2, category=sales_state.category, model=sales_state.current_model)
+                chunks = retrieve(user_msg, top_k=4, category=sales_state.category, model=sales_state.current_model)
+                if any(s in msg_lower for s in ["speed", "fast", "seconds", "second"]) and not any("speed" in c.get("section", "").lower() for c in chunks):
+                    speed_c = retrieve(f"{user_msg} print speed seconds", top_k=1, category=sales_state.category, model=sales_state.current_model)
+                    if speed_c:
+                        chunks = chunks + speed_c
 
             # 3. Synthesize response combining RAG and Tool results
             is_quote_called = any(tr.get("tool") == "create_quote" for tr in tools_called)
@@ -2145,9 +2149,12 @@ class CX02Pipeline:
                             parts.append(res.get("message", "Could not generate quote."))
 
             if not parts:
-                chunks = retrieve(user_msg, top_k=2, category=sales_state.category, model=sales_state.current_model)
-                comp_chunks = retrieve_company(user_msg, top_k=2)
-                all_chunks = chunks + [c for c in comp_chunks if c.get("text")]
+                chunks = retrieve(user_msg, top_k=4, category=sales_state.category, model=sales_state.current_model)
+                if not chunks:
+                    comp_chunks = retrieve_company(user_msg, top_k=2)
+                    all_chunks = [c for c in comp_chunks if c.get("text")]
+                else:
+                    all_chunks = chunks
                 if all_chunks:
                     try:
                         llm_response = llm_module.generate_llm_response(
