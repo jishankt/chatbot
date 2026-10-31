@@ -63,7 +63,11 @@ COMMON_INQUIRY_TERMS = {
     "سائط", "وحماية", "الفعاليات", "الورق",
     "kam", "sur3at", "teba3at", "hal", "yeshteghel", "el", "3ala", "lama3",
     "ചെയ്യാൻ", "എത്ര", "എടുക്കും", "ഇവന്റുകൾക്ക്", "അനുയോജ്യമാണോ", "വാറന്റി", "ലഭിക്കുമോ",
-    "wondering", "wonder", "whether", "curious"
+    "wondering", "wonder", "whether", "curious", "switch", "between", "switching", "differ",
+    "difference", "differs", "choose", "choice", "choosing", "under", "over", "around",
+    "less", "more", "than", "handle", "handles", "handling", "feature", "features",
+    "support", "supports", "options", "option", "both", "either", "capability", "capabilities",
+    "able", "enable", "enables"
 }
 
 

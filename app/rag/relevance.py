@@ -205,8 +205,9 @@ SYNONYMS: Dict[str, Set[str]] = {
 
 
 def extract_keywords(text: str) -> List[str]:
-    # Normalize dimension separators (e.g., 4×6 -> 4x6) and special dashes
+    # Normalize dimension separators (e.g., 4×6 -> 4x6, 4 x 6 -> 4x6) and special dashes
     norm = text.lower().replace("×", "x").replace("✕", "x").replace("✖", "x").replace("–", "-").replace("—", "-")
+    norm = re.sub(r'(\d+)\s*x\s*(\d+)', r'\1x\2', norm)
     # First extract dimension tokens like 4x6, 5x7, 6x8, 300x600 as atomic units
     dim_tokens = re.findall(r"\d+x\d+", norm)
     # Remove dimension substrings to avoid double-counting
