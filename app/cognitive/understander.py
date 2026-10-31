@@ -520,6 +520,6 @@ def understand_message(read_ctx: ReadContext) -> UnderstandResult:
     # Attempt fast LLM extraction only when intent is ambiguous / unknown
     llm_dict = None
     if not Config.FORCE_EXTRACTIVE_MODE and circuit_breaker.can_attempt():
-        llm_dict = extract_llm_nlu(read_ctx.normalized_text, timeout=2.0)
+        llm_dict = extract_llm_nlu(read_ctx.normalized_text, timeout=5.0)
 
     return arbitrate_understanding(rule_res, llm_dict)
