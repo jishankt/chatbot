@@ -1,0 +1,10 @@
+[Unit]
+Description=Kepler Tech Sales AI - Trigger Retry of Failed Handoffs Every 10 Minutes
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=10min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

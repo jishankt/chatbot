@@ -93,12 +93,19 @@ class Templates:
         spec_header: str = ""
     ) -> str:
         est = f" {estimate_note}" if estimate_note else ""
+        roll_info = ""
+        if "4x6" in size:
+            roll_info = " (400 prints per roll, 2 rolls per box)"
+        elif "5x7" in size:
+            roll_info = " (230 prints per roll, 2 rolls per box)"
+        elif "6x8" in size:
+            roll_info = " (200 prints per roll, 2 rolls per box)"
         return (
             f"{spec_header}"
             f"📊 *Running Cost Calculation ({size})*:\n"
             f"• Media SKU: {media_name} ({media_sku})\n"
             f"• Box Price: {box_price:,.2f} AED\n"
-            f"• Yield: {prints_per_box} prints/box{est}\n"
+            f"• Yield: {prints_per_box} prints/box{roll_info}{est}\n"
             f"• *Cost per Print: {formatted_cost}*"
         )
 
@@ -146,8 +153,9 @@ def compose_response(
                 user_message=user_message,
                 context_chunks=chunks,
                 conversation_history=conversation_history,
-                timeout=4.0
+                timeout=15.0
             )
+
             # Validate only the LLM-generated portion; deterministic templates
             # are grounded by construction and must not be validated here.
             is_valid, reason = validate_output(candidate, chunks, user_message)
@@ -158,7 +166,9 @@ def compose_response(
                 )
                 rag_text = make_extractive_fallback(chunks, user_message)
             else:
-                rag_text = candidate
+                rag_text = candidate.strip()
+                if "Citizen CX-02" not in rag_text and "citizen cx-02" not in rag_text.lower():
+                    rag_text = f"Here are the official specifications for the *Citizen CX-02*:\n\n{rag_text}"
         parts.append(rag_text)
 
     # 2. Render tool outputs deterministically

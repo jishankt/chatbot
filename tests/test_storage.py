@@ -90,3 +90,83 @@ def test_handoff_storage(temp_db):
     handoffs = get_handoffs(10)
     assert len(handoffs) == 1
     assert handoffs[0]["reason"] == "Asked for DNP printer"
+    assert handoffs[0]["phone"] == "+971550001122"
+
+
+def test_aes_gcm_encryption_at_rest(temp_db):
+    import sqlite3
+    raw_phone = "+971508901641"
+    raw_name = "Tariq Al-Mansoor"
+    raw_email = "tariq@example.ae"
+    raw_content = "Please quote me 5 units of Citizen CX-02 printer."
+
+    # 1. Store via app storage functions
+    log_message(sender_id="user_enc", role="user", content=raw_content, message_id="msg_enc_1")
+    save_lead(sender_id="user_enc", name=raw_name, phone=raw_phone, email=raw_email, notes="VIP client")
+    save_quote(quote_id="Q-ENC-1", items=[{"sku": "CX-02", "qty": 5}], subtotal=21925.0, total=21925.0, sender_id="user_enc", customer_name=raw_name, phone=raw_phone)
+    hid = save_handoff(reason="Bulk order discount", summary="Wants special pricing for 5 units", phone=raw_phone, sender_id="user_enc")
+
+    # 2. Inspect raw SQLite database directly - verify encrypted at rest
+    conn = sqlite3.connect(str(temp_db))
+    cur = conn.cursor()
+
+    cur.execute("SELECT content FROM messages WHERE message_id = 'msg_enc_1'")
+    db_content = cur.fetchone()[0]
+    assert db_content.startswith("enc:v1:")
+    assert raw_content not in db_content
+
+    cur.execute("SELECT name, phone, email FROM leads WHERE sender_id = 'user_enc'")
+    db_name, db_phone, db_email = cur.fetchone()
+    assert db_name.startswith("enc:v1:")
+    assert db_phone.startswith("enc:v1:")
+    assert db_email.startswith("enc:v1:")
+    assert raw_name not in db_name
+    assert raw_phone not in db_phone
+
+    cur.execute("SELECT customer_name, phone FROM quotes WHERE quote_id = 'Q-ENC-1'")
+    db_qname, db_qphone = cur.fetchone()
+    assert db_qname.startswith("enc:v1:")
+    assert db_qphone.startswith("enc:v1:")
+
+    cur.execute("SELECT phone FROM handoffs WHERE id = ?", (hid,))
+    db_hphone = cur.fetchone()[0]
+    assert db_hphone.startswith("enc:v1:")
+    conn.close()
+
+    # 3. Verify seamless app decryption
+    history = get_conversation_history("user_enc")
+    assert history[0]["content"] == raw_content
+
+    leads = get_leads(limit=5)
+    matching_lead = next(l for l in leads if l["sender_id"] == "user_enc")
+    assert matching_lead["name"] == raw_name
+    assert matching_lead["phone"] == raw_phone
+    assert matching_lead["email"] == raw_email
+
+    quote = get_quote("Q-ENC-1")
+    assert quote["customer_name"] == raw_name
+    assert quote["phone"] == raw_phone
+
+    handoffs = get_handoffs(limit=5)
+    matching_handoff = next(h for h in handoffs if h["id"] == hid)
+    assert matching_handoff["phone"] == raw_phone
+
+
+def test_aes_gcm_backward_compatibility(temp_db):
+    import sqlite3
+    # Insert legacy unencrypted records directly
+    conn = sqlite3.connect(str(temp_db))
+    cur = conn.cursor()
+    cur.execute("INSERT INTO messages (message_id, sender_id, channel, role, content) VALUES ('legacy_1', 'user_leg', 'web', 'user', 'Legacy unencrypted text')")
+    cur.execute("INSERT INTO leads (sender_id, name, phone, email, notes) VALUES ('user_leg', 'Legacy User', '+971501112233', 'legacy@kepler.ae', 'legacy')")
+    conn.commit()
+    conn.close()
+
+    # App read functions should gracefully handle unencrypted data
+    history = get_conversation_history("user_leg")
+    assert history[0]["content"] == "Legacy unencrypted text"
+
+    leads = get_leads(limit=5)
+    matching = next(l for l in leads if l["sender_id"] == "user_leg")
+    assert matching["name"] == "Legacy User"
+    assert matching["phone"] == "+971501112233"

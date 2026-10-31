@@ -134,6 +134,7 @@ def get_price(sku: str) -> Dict[str, Any]:
         "as_of": as_of,
         "stale_note": stale_note,
         "estimate_note": prod.get("estimate_note"),
+        "to_confirm_note": prod.get("to_confirm_note"),
         "url": prod.get("url")
     }
 

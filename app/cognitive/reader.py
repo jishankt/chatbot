@@ -94,6 +94,9 @@ class ReadContext:
     disambiguation: Optional[Dict[str, Any]] = None
     detected_brand: Optional[str] = None
     detected_category: Optional[str] = None
+    detected_paper_size: Optional[str] = None
+    detected_volume: Optional[str] = None
+    detected_budget: Optional[float] = None
     metadata: Dict[str, Any] = field(default_factory=dict)
 
 
@@ -179,35 +182,41 @@ def extract_sku_direct(text: str) -> Optional[str]:
     """Extracts explicit product SKU or alias from the text without context."""
     raw_lower = text.lower()
 
-    # 1. Normalizer alias table match
-    canonical, _, _ = normalize_model_or_sku(text)
-    if canonical:
-        return canonical
-
-    # 2. Unsupported items check
+    # 1. Unsupported items check
     if any(u in raw_lower for u in UNSUPPORTED_ITEMS):
         return None
 
-    # 3. Check for specific CX numbers (like CX-04 etc)
-    cx_m = re.search(r"\bcx[-_]?(0?[0-9]+)\b", raw_lower)
-    if cx_m:
-        num = int(cx_m.group(1))
-        return f"CX-{num:02d}"
-
-    # 4. Accessories
+    # 2. Accessories
     if any(b in raw_lower for b in ["bag", "case", "شنطة", "شنطه", "حقيبة", "حقيبه", "ബാഗ്"]):
         return "CX-02-BAG"
     if any(p in raw_lower for p in ["cleaning pen", "تنظيف", "قلم", "ക്ലീനിംഗ്"]):
         return "CITIZEN-PEN"
 
-    # 5. Explicit media formats if mentioned alongside media/paper/rolls
-    if any(m in raw_lower for m in ["media", "paper", "roll", "rolls", "box"]):
+    # 3. Explicit media formats if mentioned alongside media/paper/rolls
+    if any(m in raw_lower for m in ["media", "paper", "roll", "rolls", "box", "ورق"]):
         if any(s in raw_lower for s in ["4x6", "4*6", "10x15", "٤×٦", "ms46"]):
             return "CX2-MS46-2PC"
         if any(s in raw_lower for s in ["5x7", "5*7", "127x178", "٥×٧", "ms57"]):
             return "CX2-MS57-2PC"
         if any(s in raw_lower for s in ["6x8", "6*8", "152x203", "٦×٨", "ms68"]):
             return "CX2-MS68-2PC"
+        if "6x9" in raw_lower:
+            return "6x9"
+
+    # 4. Normalizer alias table match
+    canonical, _, _ = normalize_model_or_sku(text)
+    if canonical:
+        return canonical
+
+    # 5. Check for specific CX numbers (like CX-04 etc)
+    cx_m = re.search(r"\bcx[-_]?(0?[0-9]+)\b", raw_lower)
+    if cx_m:
+        num = int(cx_m.group(1))
+        return f"CX-{num:02d}"
+
+    # Arabic direct printer check
+    if "الطابعة" in text and ("سعر" in text or "كم" in text) and not any(other in raw_lower for other in ["epson", "ابسون", "إبسون", "سكانر", "plotter"]):
+        return "CX-02"
 
     # 6. Never default generic 'printer', 'photo printer', or 'media' to CX-02 (Rule 5)
     return None
@@ -259,6 +268,8 @@ def resolve_anaphora_sku(current_text: str, history: List[Dict[str, str]], sales
     when anaphoric pronouns or elliptical phrasing is used.
     """
     lower = current_text.lower()
+    if any(u in lower for u in UNSUPPORTED_ITEMS):
+        return None
     is_anaphoric = any(indicator in lower for indicator in ANAPHORA_INDICATORS)
 
     parsed_qty = parse_quantity(current_text)
@@ -277,7 +288,12 @@ def resolve_anaphora_sku(current_text: str, history: List[Dict[str, str]], sales
 
     # Search history backwards for the most recently referenced SKU or model (user or assistant)
     for turn in reversed(history):
+        if turn.get("role") == "assistant" and sales_state and sales_state.category in ("scanner", "cad_plotter", "business_mfp"):
+            continue
         content = turn.get("content", "")
+        can, _, _ = normalize_model_or_sku(content)
+        if can:
+            return can
         c_low = content.lower()
         if "cy-02" in c_low or "cy02" in c_low or "cy 02" in c_low:
             return "CY-02"
@@ -297,17 +313,61 @@ def resolve_anaphora_sku(current_text: str, history: List[Dict[str, str]], sales
 def read_message(raw_text: str, history: Optional[List[Dict[str, str]]] = None, sales_state: Optional[Any] = None) -> ReadContext:
     """
     Entry point for Cognitive Step 1: READ.
-    Normalizes text, detects language, interprets bare numbers / chips, resolves anaphora & self-corrections.
+    Normalizes text, detects language, interprets bare numbers / chips, resolves anaphora & self-corrections,
+    and extracts customer requirement slots (paper size, volume, budget, application category).
     """
     normalized = normalize_text(raw_text)
     language = detect_language(normalized)
     qty = parse_quantity(normalized)
+    norm_low = normalized.lower()
 
     # 0. Check phantom models and ambiguous models
     phantom = detect_phantom_model(normalized)
     ambiguous = detect_ambiguous_model(normalized)
     det_brand = normalize_brand(normalized)
     canonical_model, model_brand, model_cat = normalize_model_or_sku(normalized)
+
+    # 0.5 Requirement Slot Extraction (Paper Size, Volume, Budget, Business Application)
+    det_size = None
+    size_m = re.search(r"\b(a[0-4]|24[\"\s]|36[\"\s]|44[\"\s]|4x6|5x7|6x8|8x10|8x12|4x4)\b", norm_low)
+    if size_m:
+        raw_s = size_m.group(1).replace("\"", "").strip()
+        det_size = raw_s.upper() if raw_s.startswith("a") else raw_s.lower()
+
+    det_volume = None
+    vol_m = re.search(r"(\b\d{1,6}\b)\s*(prints?|pages?)\s*(per|\/)?\s*(day|month)?", norm_low)
+    if vol_m:
+        unit = vol_m.group(4) or "day"
+        det_volume = f"{vol_m.group(1)} prints/{unit}"
+    elif any(k in norm_low for k in ["high volume", "busy kiosk", "700 prints", "heavy volume", "without refilling"]):
+        det_volume = "high_capacity_kiosk"
+    elif any(k in norm_low for k in ["low volume", "compact", "portable", "occasional"]):
+        det_volume = "low_portable"
+
+    det_budget = None
+    budget_m = re.search(r"\b(budget|under|around|max|maximum)\s*(?:is|of|around)?\s*(\d{3,6})\b", norm_low)
+    if budget_m:
+        try:
+            det_budget = float(budget_m.group(2))
+        except ValueError:
+            det_budget = None
+
+    if not model_cat:
+        if any(w in norm_low for w in ["architecture", "architectural", "blueprint", "blueprints", "cad", "technical drawing", "technical", "plotter", "plotters", "engineering"]):
+            model_cat = "cad_plotter"
+            det_brand = det_brand or "Epson"
+        elif any(w in norm_low for w in ["sublimation", "mugs", "mug", "t-shirt", "tshirt", "heat press", "crafts"]):
+            model_cat = "sublimation"
+            det_brand = det_brand or "Epson"
+        elif any(w in norm_low for w in ["office", "workforce", "invoicing", "documents", "business printer", "duplex mfp"]):
+            model_cat = "business_mfp"
+            det_brand = det_brand or "Epson"
+        elif any(w in norm_low for w in ["scanner", "document scan", "digitize", "duplex scan"]):
+            model_cat = "scanner"
+            det_brand = det_brand or "Epson"
+        elif any(w in norm_low for w in ["photo booth", "photobooth", "event photo", "studio", "portraits", "wedding", "passport photo", "4x6 photo", "photo printer", "photo printers"]):
+            model_cat = "photo"
+            det_brand = det_brand or "Citizen"
 
     direct_sku = canonical_model if canonical_model else extract_sku_direct(normalized)
     if canonical_model and model_brand:
@@ -327,9 +387,11 @@ def read_message(raw_text: str, history: Optional[List[Dict[str, str]]] = None, 
                 num = m.group(1).replace(",", "")
                 unit = m.group(5) if m.group(5) else "day"
                 interpreted_ctx = f"volume: {num} prints per {unit}"
+                det_volume = interpreted_ctx
         elif sales_state.last_bot_question == "paper_size":
             if norm_clean in ["a1", "a0", "a2", "a3", "a4", "4x6", "5x7", "6x8", "8x10", "8x12", "24", "36", "44"]:
                 interpreted_ctx = f"paper_size: {norm_clean.upper()}"
+                det_size = norm_clean.upper() if norm_clean.startswith("a") else norm_clean.lower()
         elif sales_state.last_bot_question == "function":
             if any(f in norm_clean for f in ["print only", "mfp", "scan", "scanner", "copy"]):
                 interpreted_ctx = f"function: {norm_clean}"
@@ -342,13 +404,16 @@ def read_message(raw_text: str, history: Optional[List[Dict[str, str]]] = None, 
     is_anaphora = False
     sku_source = "explicit" if direct_sku else None
 
-    norm_low = normalized.lower()
-
     # Determine current context model from state or recent history
     curr_ctx_model = sales_state.current_model if sales_state else None
     if not curr_ctx_model and history:
         for turn in reversed(history):
-            c_low = turn.get("content", "").lower()
+            c = turn.get("content", "")
+            can, _, _ = normalize_model_or_sku(c)
+            if can:
+                curr_ctx_model = can
+                break
+            c_low = c.lower()
             if "cy-02" in c_low or "cy02" in c_low or "cy 02" in c_low:
                 curr_ctx_model = "CY-02"
                 break
@@ -385,7 +450,9 @@ def read_message(raw_text: str, history: Optional[List[Dict[str, str]]] = None, 
                 reference_type = "plural"
                 sku_source = "state"
 
-    if curr_ctx_model:
+    has_unsupported = any(u in norm_low for u in UNSUPPORTED_ITEMS)
+
+    if curr_ctx_model and not has_unsupported:
         if any(w in norm_low for w in ["its media", "its paper", "its ink", "media for this", "ink for this", "paper for this", "consumables for this"]):
             resolved_model = curr_ctx_model
             is_anaphora = True
@@ -406,15 +473,14 @@ def read_message(raw_text: str, history: Optional[List[Dict[str, str]]] = None, 
             is_anaphora = True
             reference_type = "quote"
             sku_source = "state"
-        elif any(w in norm_low for w in ["how much is it", "is it in stock", "tell me about it", "price for it", "more details on it", "specifications for it"]):
+        elif any(w in norm_low for w in ["how much is it", "is it in stock", "tell me about it", "price for it", "more details on it", "specifications for it", "price of that", "price of that one"]):
             resolved_model = curr_ctx_model
             resolved_sku = curr_ctx_model
             is_anaphora = True
             reference_type = "single"
             sku_source = "state"
 
-
-    if not resolved_sku and (history or sales_state):
+    if not resolved_sku and (history or sales_state) and not has_unsupported:
         context_sku = resolve_anaphora_sku(normalized, history or [], sales_state)
         if context_sku:
             resolved_sku = context_sku
@@ -423,8 +489,60 @@ def read_message(raw_text: str, history: Optional[List[Dict[str, str]]] = None, 
             reference_type = reference_type or "single"
             sku_source = "state"
 
-    # NOTE: Never default unknown or ambiguous queries to CX-02 (Rule 5).
-    # If the user asks general questions without a product, resolved_sku remains None.
+    # 4. Requirements-based product resolution across turns (Fetch product by user requirements)
+    if not resolved_sku and not has_unsupported:
+        active_cat = model_cat or (sales_state.category if sales_state else None)
+        active_size = det_size or (sales_state.paper_size if sales_state else None)
+        active_vol = det_volume or (sales_state.volume if sales_state else None)
+
+        is_req_lookup = any(w in norm_low for w in [
+            "what do you have", "which printer", "what printer", "recommend", "options",
+            "which model", "what should i get", "fits my", "for me", "in a1", "in 24", "in 8x10", "in 8x12",
+            "a1 size", "a0 size", "8x10 size", "price", "how much", "cost", "details"
+        ]) or is_anaphora
+
+        if is_req_lookup and active_cat:
+            if active_cat == "cad_plotter":
+                if active_size in ("A0", "36"):
+                    resolved_sku = "SC-T5100"
+                elif active_size in ("44", "DUAL"):
+                    resolved_sku = "SC-T7700D"
+                else:
+                    resolved_sku = "SC-T3100"
+                resolved_model = resolved_sku
+                is_anaphora = True
+                sku_source = "requirements_history"
+            elif active_cat == "sublimation":
+                resolved_sku = "SC-F100"
+                resolved_model = resolved_sku
+                is_anaphora = True
+                sku_source = "requirements_history"
+            elif active_cat == "business_mfp":
+                resolved_sku = "WF-C5890"
+                resolved_model = resolved_sku
+                is_anaphora = True
+                sku_source = "requirements_history"
+            elif active_cat == "scanner":
+                resolved_sku = "DS-530II"
+                resolved_model = resolved_sku
+                is_anaphora = True
+                sku_source = "requirements_history"
+            elif active_cat == "photo":
+                if active_size in ("8x10", "8x12"):
+                    resolved_sku = "CX-02W"
+                elif active_vol == "high_capacity_kiosk" or (sales_state and any(k in (sales_state.volume or "").lower() for k in ["kiosk", "700", "high"])):
+                    resolved_sku = "CY-02"
+                elif active_size == "4x4" or active_vol == "low_portable":
+                    resolved_sku = "CZ-01"
+                elif active_size in ("4x6", "5x7", "6x8"):
+                    resolved_sku = "CX-02"
+                elif sales_state and sales_state.current_model:
+                    resolved_sku = sales_state.current_model
+
+                if resolved_sku:
+                    resolved_model = resolved_sku
+                    is_anaphora = True
+                    sku_source = "requirements_history"
 
     return ReadContext(
         raw_text=raw_text,
@@ -446,6 +564,9 @@ def read_message(raw_text: str, history: Optional[List[Dict[str, str]]] = None, 
         disambiguation=ambiguous,
         detected_brand=det_brand,
         detected_category=model_cat,
+        detected_paper_size=det_size,
+        detected_volume=det_volume,
+        detected_budget=det_budget,
         metadata={
             "char_count": len(raw_text),
             "normalized_char_count": len(normalized)

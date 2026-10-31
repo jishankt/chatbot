@@ -7,7 +7,7 @@ from app.utils.phone import mask_phone_number
 
 logger = logging.getLogger(__name__)
 
-GRAPH_API_VERSION = "v19.0"
+GRAPH_API_VERSION = getattr(Config, "WHATSAPP_GRAPH_API_VERSION", "v21.0")
 
 
 def send_whatsapp_message(

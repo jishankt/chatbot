@@ -1,4 +1,4 @@
-<!-- RawSource: data/raw/kepler_citizen_photo_printers_brochure.txt, data/raw/cx02_datasheet.txt, data/raw/cx02_product_page.txt -->
+<!-- RawSource: data/raw/kepler_citizen_photo_printers_brochure.txt, data/raw/cx02_datasheet.txt, data/raw/cx02_product_page.txt, /opt/salesai/data/verified_descriptions.json, /opt/salesai/data/sheets/master_complete_products.csv -->
 <!-- Source: https://www.keplertechllc.com/product-category/printers/dye-sublimation-citizen-photo-printer/ -->
 <!-- Source: https://www.keplertechllc.com/product/citizen-cy-02-photo-printer/ -->
 <!-- Source: https://www.keplertechllc.com/product/citizen-cz-01-photo-printer/ -->
@@ -20,26 +20,26 @@ All four models feature a thermal dye-sublimation transfer process with clear pr
 ## Citizen CY-02 High-Capacity Photo Printer Specifications
 The Citizen CY-02 is engineered for high-volume commercial printing environments where minimizing media replenishment frequency is critical:
 - Official Dubai Supplier: Kepler Tech LLC (Phone: +971 4 323 1008, Office No.1, Abdulla Al Awar Building, Khalid Bin Waleed Road, Dubai).
-- Verified AED Price: 3,400.00 AED (Subject to 5% UAE VAT; price subject to confirmation by our sales desk).
+- Verified AED Price: 3400.0 AED (Subject to 5% UAE VAT; price subject to confirmation by our sales desk).
 - Print Media Capacity: High-capacity roll format delivering up to 700 prints per roll on 4x6 inch (10x15 cm) or 350 prints per roll on 6x8 inch (15x20 cm), significantly reducing refill labor and operational interruptions.
-- Print Speeds: 4x6 inch from ~12.4 seconds (High-Speed mode down to ~8.4 seconds); 5x7 inch ~19.9 seconds; 6x8 inch ~21.9 seconds.
+- Print Speeds: 4x6 inch from ~12.4 seconds (High-Speed mode down to ~8.4 seconds); 6x8 inch ~21.9 seconds.
 - Supported Formats: 4x6 inch (10x15 cm), 5x7 inch (13x18 cm), and 6x8 inch (15x20 cm).
 - Dual Print Modes: High-Speed mode (300 x 300 dpi) and High-Quality mode (300 x 600 dpi).
 - Surface Finishes: Glossy and Matte finishes selectable directly from the printer driver without changing paper rolls.
-- Physical Specs: Dimensions 322 (W) x 351 (D) x 281 (H) mm; Weight approx. 13.8 kg.
+- Physical Specs: Dimensions 32.2 x 35.1 x 28.1 cm; Weight approx. 13.8 kg.
 - Media Handling: Easy drop-in paper loading and streamlined ribbon handling.
 - Compatible Genuine Consumables:
-  * Citizen CY-MS46 (4x6" Media Set - 2 rolls, 1,400 prints total): 625.00 AED
-  * Citizen CY-MS68 (6x8" Media Set - 2 rolls, 700 prints total): 740.00 AED
-  * Citizen CY-02 Printer Carry Bag (CY02Bag): 335.00 AED
-  * Citizen Thermal Head Cleaning Pen (CITIZEN-PEN): 190.00 AED
+  * Citizen CY-MS46 (4x6" Media Set - 2 rolls, 1,400 prints total)
+  * Citizen CY-MS68 (6x8" Media Set - 2 rolls, 700 prints total)
+  * Citizen CY-02 Printer Carry Bag (CY02Bag)
+  * Citizen Thermal Head Cleaning Pen (CITIZEN-PEN): 190.0 AED
 - Applications: Unattended retail kiosks, theme parks, tourist attractions, high-throughput commercial photo labs, and busy event photo booths.
 
 ## Citizen CZ-01 Ultra-Compact Portable Photo Printer Specifications
 The Citizen CZ-01 is an ultra-compact, lightweight dye-sublimation printer engineered for maximum mobility without compromising print quality:
 - Official Dubai Supplier: Kepler Tech LLC (Phone: +971 4 323 1008).
-- Verified AED Price: 3,200.00 AED (Subject to 5% UAE VAT; price subject to confirmation by our sales desk).
-- Ultra-Lightweight & Space-Saving: Weighs just 5.8 kg (less than half the weight of CX-02 and CY-02), occupying roughly 31% volume and 44% footprint of conventional commercial photo printers. Dimensions: 208 (W) x 240 (D) x 198 (H) mm.
+- Verified AED Price: 3200.0 AED (Subject to 5% UAE VAT; price subject to confirmation by our sales desk).
+- Ultra-Lightweight & Space-Saving: Weighs just 5.8 kg (less than half the weight of CX-02 and CY-02), occupying roughly 31% volume and 44% footprint of conventional commercial photo printers. Dimensions: 20.8 x 24.0 x 19.8 cm.
 - Anti-Curl Function: Built-in mechanical anti-curl technology ensures prints emerge completely flat straight from the printer slot.
 - Advanced Internal Cooling System: Specially designed airflow architecture prevents overheating during continuous event shooting sessions.
 - Energy Efficient: Eco-friendly power management featuring a 28% reduction in power consumption compared to prior generations.
@@ -51,28 +51,28 @@ The Citizen CZ-01 is an ultra-compact, lightweight dye-sublimation printer engin
 - Resolution: 300 x 300 dpi (High-Speed) and 300 x 600 dpi (High-Quality).
 - Interface: USB 2.0 Full Speed, compatible with Windows 10/11, macOS, with SDK available for photobooth software integration.
 - Compatible Genuine Consumables:
-  * Citizen CZ-MS46 (4x6" Media Set): 295.00 AED
-  * Citizen CZ-MS458 (4.5x8" Media Set): 340.00 AED
-  * Citizen CZ-01 Padded Carry Bag (CZ01 Carry Bag): 250.00 AED
-  * Citizen Thermal Head Cleaning Pen (CITIZEN-PEN): 190.00 AED
+  * Citizen CZ-MS46 (4x6" Media Set)
+  * Citizen CZ-MS458 (4.5x8" Media Set)
+  * Citizen CZ-01 Padded Carry Bag (CZ01 Carry Bag)
+  * Citizen Thermal Head Cleaning Pen (CITIZEN-PEN): 190.0 AED
 - Applications: Mobile event photographers, wedding photobook makers, compact photo booths, pop-up studios, and on-location print-on-demand setups.
 
 ## Citizen CX-02W Wide-Format 8-Inch Photo Printer Specifications
 The Citizen CX-02W is a wide-format dye-sublimation photo printer designed for larger professional portrait and studio prints:
 - Official Dubai Supplier: Kepler Tech LLC (Phone: +971 4 323 1008).
-- Verified AED Price: 6,820.00 AED (Subject to 5% UAE VAT; price subject to confirmation by our sales desk).
-- Wide-Format Capabilities: Supports 8x10 inch (203 x 254 mm) and 8x12 inch (203 x 305 mm) large prints, as well as A4 format (210 x 297 mm) and panoramic multi-cut options ranging from 8x2 inches up to 8x32 inches.
+- Verified AED Price: 6820.0 AED (Subject to 5% UAE VAT; price subject to confirmation by our sales desk).
+- Wide-Format Capabilities: Supports 8x10 inch  and 8x12 inch  large prints, as well as A4 format (210 x 297 mm) and panoramic multi-cut options ranging from 8x2 inches up to 8x32 inches.
 - Media Capacity: 110 prints per roll for 8x12 inch / A4 media; 120 prints per roll for 8x10 inch media.
 - Print Speeds: 8x10 inch ~33.7 seconds; 8x12 inch ~39.2 seconds; A4 ~38.4 seconds.
 - Specialty Media Compatibility: Compatible with premium specialty photo papers including Silver Pearl and Metallic media, delivering luxury finishes for studio clients.
 - Advanced Driver Grey Calibration: Features fine-tuned grey calibration in the driver for accurate monochrome portraits, subtle tonal gradations, and lifelike skin tones.
 - Ribbon Rewind Function: Built-in ribbon rewind eliminates paper and ribbon waste on partial runs and multi-cut configurations.
 - Energy Saving Sleep Mode: Reduces standby power consumption by up to 98% (under 0.5W).
-- Physical Specs: Dimensions 322 (W) x 366 (D) x 170 (H) mm; Weight approx. 14 kg.
+- Physical Specs: Dimensions 32.2 (W) x 366 (D) x 170 (H) mm; Weight approx. 14 kg.
 - Compatible Genuine Consumables:
   * Citizen CX2W 8x12 (812) Media Sets
   * Citizen CX2W 8x10 Media Sets
-  * Citizen Thermal Head Cleaning Pen (CITIZEN-PEN): 190.00 AED
+  * Citizen Thermal Head Cleaning Pen (CITIZEN-PEN): 190.0 AED
 - Applications: Professional portrait studios, school graduation portraits, sports team packages, event group photos, and luxury photo gifts.
 
 ## Citizen Photo Printer Model Selection and Conflict Resolution Guide
@@ -99,12 +99,12 @@ When advising customers on selecting the right Citizen photo printer, the sales 
 ## Kepler Tech LLC Authorized Distribution, UAE & Regional Delivery, and Maintenance
 Kepler Tech LLC is the premier commercial partner for Citizen Systems dye-sublimation photo printers in the GCC and Africa:
 - Dubai Commercial Office: Office No.1, Abdulla Al Awar Building, D79 Khalid Bin Waleed Road, Bur Dubai, Dubai, United Arab Emirates.
-- Contact Details: Tel: +971 4 323 1008 | WhatsApp: +971 50 890 1641 | Email: sales@keplertechllc.com | Web: www.keplertechllc.com.
+- Contact Details: Tel: +971 4 323 1008 | WhatsApp: +971 4 323 1008 | Email: sales@keplertechllc.com | Web: www.keplertechllc.com.
 - Delivery Times & Logistics:
   * UAE Domestic: Rapid delivery within 1 to 2 business days across Dubai, Abu Dhabi, Sharjah, and all emirates.
   * GCC & Middle East: Export delivery within 6 to 8 business days to Saudi Arabia, Oman, Qatar, Kuwait, and Bahrain via FedEx and Aramex.
   * Africa Regional: Air freight and courier shipping (6 to 8 business days) to Kenya, Nigeria, Ghana, Tanzania, Uganda, South Africa, and across the African continent.
 - Thermal Printhead Maintenance with CITIZEN-PEN:
-  * The Citizen Thermal Head Cleaning Pen (CITIZEN-PEN, 190.00 AED) is an official genuine maintenance accessory compatible with CX-02, CX-02W, CY-02, and CZ-01.
+  * The Citizen Thermal Head Cleaning Pen (CITIZEN-PEN, 190.0 AED) is an official genuine maintenance accessory compatible with CX-02, CX-02W, CY-02, and CZ-01.
   * Formulated with high-purity isopropyl alcohol and an abrasive-free felt tip, it safely dissolves adhesive buildup, burnt dye particles, and environmental dust from the thermal printhead heating elements without scratching the microscopic glass glaze.
   * Regular cleaning prevents permanent white streaks, uneven density lines, and premature head failure, preserving factory print quality throughout the printer's lifecycle.

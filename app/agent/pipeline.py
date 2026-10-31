@@ -4,7 +4,7 @@ from typing import Dict, Any, List, Optional
 from app.config import Config
 from app.agent.router import classify_intent, PRICE_KEYWORDS, DATASHEET_KEYWORDS
 from app.agent.guardrails import check_pre_guardrails, check_post_guardrails
-from app.agent.llm import generate_llm_response
+import app.agent.llm as llm_module
 from app.agent.validator import make_extractive_fallback
 from app.rag.retriever import retrieve, retrieve_company
 from app.tools.pricing import get_price, check_stock, list_products, calculate_cost_per_print
@@ -251,9 +251,13 @@ def build_matched_cards(target_sku: Optional[str], intent: str, user_msg: str, t
     is_printers_query = any(w in msg_l for w in [
         "like cx 02", "like cx02", "like cx-02", "items like cx 02", "items like cx02", "printers like cx 02",
         "printers like cx02", "printers", "printer", "photo printers", "photo printer", "citizen printers",
-        "which printers", "what printers", "show printers", "list printers", "all printers", "models"
+        "which printers", "what printers", "show printers", "list printers", "all printers", "models",
+        "dye sub", "dye-sub", "dyesub", "sublimation", "thermal photo",
+        "داي سب", "سبليميشن", "سبلميشن", "سوبليميشن", "تسامي", "طابعة حرارية", "طابعات حرارية"
     ]) or (
-        intent in ("category_browse", "bundle_catalog") and any(w in msg_l for w in ["citizen", "photo", "booth", "kiosk", "event", "printer"])
+        intent in ("category_browse", "bundle_catalog") and any(w in msg_l for w in [
+            "citizen", "photo", "booth", "kiosk", "event", "printer", "dye", "sublim", "داي", "سبليم", "تسامي"
+        ])
     )
 
     is_direct_single_sku = target_sku and target_sku in PRODUCT_CARD_DEFS and not any(p in msg_l for p in [
@@ -525,8 +529,10 @@ class CX02Pipeline:
         priority = routing["priority"]
 
         # Conflict Resolution & Recommendation Disambiguation
-        has_large_format = any(w in msg_lower for w in ["8x10", "8x12", "8 inch", "8\"", "large format", "large prints", "studio portrait"])
-        has_high_roll_capacity = any(w in msg_lower for w in ["700", "700 prints", "high capacity roll", "unattended", "avoid refill", "no refill", "frequent refill"])
+        has_large_format = any(w in msg_lower for w in ["8x10", "8x12", "8 inch", "8\"", "large format", "large prints", "studio portrait", "graduation portrait"])
+        has_high_roll_capacity = any(w in msg_lower for w in ["700 prints", "high capacity roll", "high roll capacity", "roll capacity", "unattended", "avoid refill", "no refill", "frequent refill", "refill often", "less refills"]) or (
+            any(r in msg_lower for r in ["refill", "refills", "reloading", "paper change"]) and any(w in msg_lower for w in ["frequent", "often", "cannot afford", "minimize", "reduce", "avoid", "less", "downtime", "theme park", "kiosk", "busy"])
+        ) or bool(re.search(r"\b700\b", msg_lower) and not any(t in msg_lower for t in ["7700", "t7700", "sc-t7700"]))
         has_ultra_light = any(w in msg_lower for w in ["5.8", "5.8kg", "ultra-compact", "ultra compact", "ultra lightweight", "ultra light", "under 6kg", "under 6 kg"])
 
         # Conflict 1: 8x10 large format AND 700 prints per roll capacity
@@ -583,18 +589,172 @@ class CX02Pipeline:
                 "prompt_version": Config.PROMPT_VERSION
             }
 
-        # Ambiguous Recommendation: User asks generally "which printer should I buy / recommend a printer" without specs
-        is_general_recommendation = any(p in msg_lower for p in [
-            "which printer should i buy", "which printer do you recommend", "recommend a printer",
-            "what printer do you suggest", "suggest a printer", "help me choose a printer",
-            "which one is best for me", "which model should i choose", "which citizen printer", "what printer should i"
-        ]) and not any(m in msg_lower for m in ["cx-02", "cx02", "cy-02", "cy02", "cz-01", "cz01", "cx-02w", "cx02w"])
-        if is_general_recommendation and not has_large_format and not has_high_roll_capacity and not has_ultra_light:
+        # Single-Requirement Matches (when customer states specific operational requirement without conflict)
+        if has_high_roll_capacity and not has_large_format:
             reply = (
-                "To recommend the ideal Citizen commercial photo printer for your business, could you clarify:\n\n"
-                "1. **Print Formats**: Do you need standard 4×6\" event prints, compact 4×4\" square prints, or large 8×10\" / 8×12\" studio portraits?\n"
-                "2. **Primary Priority**: Is your main priority **mobility** (ultra-lightweight 5.8 kg CZ-01), **maximum roll capacity** to minimize refills (up to 700 prints CY-02), **large format** (CX-02W), or **fast all-around event booth printing** (CX-02)?\n\n"
-                "Once you share your preference, I will guide you to the exact model and genuine consumables!"
+                "For high-volume retail kiosks, amusement attractions, and unattended operations where minimizing reloading downtime is critical, "
+                "our primary recommendation is the **Citizen CY-02 Photo Printer**:\n\n"
+                "• **High Roll Capacity**: Holds up to **700 prints per roll** on 4×6\" (over double standard capacity), drastically reducing refill downtime.\n"
+                "• **Media Formats**: Supports 4×6\" (CY-MS46) and 6×8\" (CY-MS68) genuine media sets.\n"
+                "• **Heavy-Duty Commercial Design**: Built for continuous, high-duty commercial kiosk installations.\n\n"
+                "Would you like official pricing or genuine media set details for the CY-02?"
+            )
+            cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["CY-02"] if s in PRODUCT_CARD_DEFS]
+            log_message(sender_id=sender_id, role="user", content=user_msg, message_id=message_id, channel=channel)
+            log_message(sender_id=sender_id, role="assistant", content=reply, channel=channel)
+            return {
+                "reply": reply,
+                "intent": "recommendation_cy02",
+                "priority": priority,
+                "tools_called": tools_called,
+                "chunks_retrieved": [],
+                "cards": cards,
+                "language": read_ctx.language,
+                "resolved_sku": "CY-02",
+                "is_anaphora": False,
+                "understanding": understand_res.model_dump(),
+                "sales_state": decision.current_state.value if hasattr(decision.current_state, "value") else str(decision.current_state),
+                "state_decision": decision.model_dump(),
+                "prompt_version": Config.PROMPT_VERSION
+            }
+
+        if has_ultra_light and not has_large_format:
+            reply = (
+                "For mobile event photographers, pop-up events, and tight photo booth spaces requiring maximum portability, "
+                "our top recommendation is the **Citizen CZ-01 Photo Printer**:\n\n"
+                "• **Ultra-Lightweight & Compact**: Only **5.8 kg** and compact dimensions, making it effortlessly portable.\n"
+                "• **Anti-Curl Mechanism**: Keeps photo prints completely flat even when using roll media.\n"
+                "• **Photo Formats**: Supports standard 4×6\" prints and compact 4×4\" square photos.\n\n"
+                "Would you like pricing or protective carry bag options for the CZ-01?"
+            )
+            cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["CZ-01"] if s in PRODUCT_CARD_DEFS]
+            log_message(sender_id=sender_id, role="user", content=user_msg, message_id=message_id, channel=channel)
+            log_message(sender_id=sender_id, role="assistant", content=reply, channel=channel)
+            return {
+                "reply": reply,
+                "intent": "recommendation_cz01",
+                "priority": priority,
+                "tools_called": tools_called,
+                "chunks_retrieved": [],
+                "cards": cards,
+                "language": read_ctx.language,
+                "resolved_sku": "CZ-01",
+                "is_anaphora": False,
+                "understanding": understand_res.model_dump(),
+                "sales_state": decision.current_state.value if hasattr(decision.current_state, "value") else str(decision.current_state),
+                "state_decision": decision.model_dump(),
+                "prompt_version": Config.PROMPT_VERSION
+            }
+
+        if has_large_format and not has_high_roll_capacity and not has_ultra_light:
+            reply = (
+                "For portrait studios, professional event photographers, and fine art studios requiring wide-format dye-sub output, "
+                "our top recommendation is the **Citizen CX-02W Photo Printer**:\n\n"
+                "• **Wide-Format Dye-Sub**: Specialized 8-inch chassis engineered for **8×10\"** and **8×12\"** large studio portraits.\n"
+                "• **Lab-Grade Color Quality**: Rich dynamic range and grey calibration with durable protective overcoat.\n"
+                "• **Compact Footprint**: Full studio portrait capability in a transportable 14 kg unit.\n\n"
+                "Would you like official pricing or genuine 8×12 media roll details for the CX-02W?"
+            )
+            cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["CX-02W"] if s in PRODUCT_CARD_DEFS]
+            log_message(sender_id=sender_id, role="user", content=user_msg, message_id=message_id, channel=channel)
+            log_message(sender_id=sender_id, role="assistant", content=reply, channel=channel)
+            return {
+                "reply": reply,
+                "intent": "recommendation_cx02w",
+                "priority": priority,
+                "tools_called": tools_called,
+                "chunks_retrieved": [],
+                "cards": cards,
+                "language": read_ctx.language,
+                "resolved_sku": "CX-02W",
+                "is_anaphora": False,
+                "understanding": understand_res.model_dump(),
+                "sales_state": decision.current_state.value if hasattr(decision.current_state, "value") else str(decision.current_state),
+                "state_decision": decision.model_dump(),
+                "prompt_version": Config.PROMPT_VERSION
+            }
+
+        # Architectural CAD / Blueprints / Plotter Match
+        if any(w in msg_lower for w in ["cad", "blueprint", "blueprints", "architectural", "technical drawings"]) and not any(cx in msg_lower for cx in ["cx-02", "cx02"]):
+            reply = (
+                "For CAD blueprints, engineering plans, and architectural line drawings, our primary recommendation is the **Epson SureColor SC-T3100**:\n\n"
+                "• **Precision CAD Output**: High-resolution 2,400 × 1,200 DPI with UltraChrome XD2 all-pigment archival inks for crisp, smudge-resistant lines\n"
+                "• **Media Formats**: 24-inch wide roll-fed plotter supporting A1, A2, A3, and A4 cut sheets\n"
+                "• **Fast Printing**: A1 technical line drawings printed in as fast as **34 seconds**\n"
+                "• **Commercial Pricing**: **3,880.00 AED + VAT** (Available at Kepler Tech Dubai)\n\n"
+                "Would you like an official commercial quotation or technical datasheet for the SC-T3100?"
+            )
+            cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["SC-T3100"] if s in PRODUCT_CARD_DEFS]
+            log_message(sender_id=sender_id, role="user", content=user_msg, message_id=message_id, channel=channel)
+            log_message(sender_id=sender_id, role="assistant", content=reply, channel=channel)
+            return {
+                "reply": reply,
+                "intent": "recommendation_cad",
+                "priority": priority,
+                "tools_called": tools_called,
+                "chunks_retrieved": [],
+                "cards": cards,
+                "language": read_ctx.language,
+                "resolved_sku": "SC-T3100",
+                "is_anaphora": False,
+                "understanding": understand_res.model_dump(),
+                "sales_state": decision.current_state.value if hasattr(decision.current_state, "value") else str(decision.current_state),
+                "state_decision": decision.model_dump(),
+                "prompt_version": Config.PROMPT_VERSION
+            }
+
+        # Document Scanner Match
+        if any(w in msg_lower for w in ["document scanner", "sheetfed scanner", "scan records", "office scanner"]) and not any(cx in msg_lower for cx in ["cx-02", "cx02"]):
+            reply = (
+                "For fast business record archiving and sheetfed scanning, our top recommendation is the **Epson WorkForce DS-530II Document Scanner**:\n\n"
+                "• **Speed**: Fast duplex scanning at **35 ppm / 70 ipm**\n"
+                "• **Capacity**: 50-sheet Automatic Document Feeder (ADF)\n"
+                "• **Media Support**: Handles business cards, ID cards, receipts, and extra-long documents\n"
+                "• **Official Distributor**: Distributed and serviced in the UAE by Kepler Tech LLC\n\n"
+                "Would you like an official quotation or details on our high-speed scanners?"
+            )
+            cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["DS-530II"] if s in PRODUCT_CARD_DEFS]
+            log_message(sender_id=sender_id, role="user", content=user_msg, message_id=message_id, channel=channel)
+            log_message(sender_id=sender_id, role="assistant", content=reply, channel=channel)
+            return {
+                "reply": reply,
+                "intent": "recommendation_scanner",
+                "priority": priority,
+                "tools_called": tools_called,
+                "chunks_retrieved": [],
+                "cards": cards,
+                "language": read_ctx.language,
+                "resolved_sku": "DS-530II",
+                "is_anaphora": False,
+                "understanding": understand_res.model_dump(),
+                "sales_state": decision.current_state.value if hasattr(decision.current_state, "value") else str(decision.current_state),
+                "state_decision": decision.model_dump(),
+                "prompt_version": Config.PROMPT_VERSION
+            }
+
+        # Open-ended or broad printer inquiries without specific model or category
+        has_specific_product = any(m in msg_lower for m in [
+            "cx-02", "cx02", "cy-02", "cy02", "cz-01", "cz01", "cx-02w", "cx02w",
+            "t3100", "t5100", "t7700", "p700", "p900", "c5890", "ds-530", "ds-770"
+        ])
+        is_broad_printer_inquiry = (
+            re.match(r"^(i\s+need|looking\s+for|we\s+need|want\s+to\s+buy|want|do\s+you\s+have)\s+(a\s+)?printers?[\s.?!]*$", msg_lower)
+            or any(p in msg_lower for p in [
+                "what printers do you have", "what printers do you sell", "what printers do you offer",
+                "what kind of printers", "types of printers", "printers in stock", "commercial printers available"
+            ])
+        ) and not has_specific_product and not any(kw in msg_lower for kw in ["photo", "cad", "plotter", "scanner", "office", "blueprint", "sublimation"])
+
+        if is_broad_printer_inquiry:
+            reply = (
+                "Welcome to Kepler Tech! We are an authorized distributor in Dubai for **Citizen** and **Epson** commercial printing systems.\n\n"
+                "To recommend the right equipment for your workflow, could you clarify:\n\n"
+                "1. **Primary Application**:\n"
+                "   • **Event Photo Booths & Kiosks**: Citizen CX-02, CY-02, CZ-01 (instant 4×6\", 5×7\", 6×8\" roll photo prints)\n"
+                "   • **Architectural CAD / Blueprints / Posters**: Epson SureColor Large Format Plotters (SC-T3100, SC-T5100)\n"
+                "   • **High-Speed Office MFPs & Document Scanners**: Epson WorkForce & Sheetfed Scanners\n\n"
+                "2. **Format & Volume**: What print sizes and estimated monthly volume do you plan to produce?\n\n"
+                "Once you share your use case, I will guide you to the exact model, official specifications, and commercial pricing!"
             )
             cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["CX-02", "CY-02", "CZ-01", "CX-02W"] if s in PRODUCT_CARD_DEFS]
             log_message(sender_id=sender_id, role="user", content=user_msg, message_id=message_id, channel=channel)
@@ -608,6 +768,84 @@ class CX02Pipeline:
                 "cards": cards,
                 "language": read_ctx.language,
                 "resolved_sku": None,
+                "is_anaphora": False,
+                "understanding": understand_res.model_dump(),
+                "sales_state": decision.current_state.value if hasattr(decision.current_state, "value") else str(decision.current_state),
+                "state_decision": decision.model_dump(),
+                "prompt_version": Config.PROMPT_VERSION
+            }
+
+        # Ambiguous Recommendation: User asks generally "which printer should I buy / recommend a printer" without specs
+        is_general_recommendation = any(p in msg_lower for p in [
+            "which printer should i buy", "which printer do you recommend", "recommend a printer",
+            "what printer do you suggest", "suggest a printer", "help me choose a printer",
+            "which one is best for me", "which model should i choose", "which citizen printer", "what printer should i",
+            "recommend a photo printer", "which photo printer", "best photo printer", "suggest a photo printer",
+            "need a photo printer", "looking for a photo printer", "printer for my photo booth", "printer for photobooth",
+            "i need a dye sub printer", "need a dye sub printer", "looking for a dye sub printer", "recommend a dye sub printer",
+            "which dye sub printer", "best dye sub printer", "i need a dyesub printer", "looking for a dyesub printer",
+            "طابعة صور", "طابعه صور", "طابعة للفعاليات", "طابعه للفعاليات", "طابعة لحفلات", "طابعه لحفلات", "طابعة زفاف", "طابعه زفاف", "طابعة للاعراس", "طابعه للاعراس", "افضل طابعة صور", "افضل طابعه صور",
+            "احتاج طابعة داي سب", "احتاج طابعه داي سب", "احتاج طابعة سبليميشن", "احتاج طابعه سبليميشن", "احتاج طابعة تسامي", "احتاج طابعه تسامي", "افضل طابعة داي سب", "افضل طابعه داي سب", "طابعة داي سب", "طابعه داي سب"
+        ]) and not has_specific_product
+
+        if is_general_recommendation and not has_large_format and not has_high_roll_capacity and not has_ultra_light:
+            # If the user specifically mentions photo booth / weddings / event party booths, connect directly to Citizen CX-02!
+            if any(pb in msg_lower for pb in [
+                "photo booth", "photobooth", "booth", "event party", "wedding",
+                "حفلات", "زفاف", "أعراس", "اعراس", "فعاليات", "مناسبات", "فوتوبوث", "كشك تصوير"
+            ]):
+                if read_ctx.language == "ar":
+                    reply = (
+                        "لطابعات صور الفعاليات وأكشاك التصوير وحفلات الزفاف، خيارنا الأساسي المعتمد هو **Citizen CX-02**:\n\n"
+                        "• **سرعة فائقة**: طباعة مقاس 4×6 بوصة في **8.4 ثوانٍ** فقط بجودة معملية ممتازة\n"
+                        "• **تصميم مدمج**: هيكل معدني متين بوزن 12 كجم مناسب تماماً لأكشاك التصوير المتنقلة والسيارات\n"
+                        "• **خاصية إعادة لف الشريط**: طباعة مقاسات متعددة (4×6 و 5×7 و 6×8) دون إهدار الشريط الحراري\n"
+                        "• **السعر الرسمي**: **4,385.00 درهم إماراتي + 5% ضريبة** (متوفرة في مستودع دبي)\n"
+                        "• **رولات الورق الأصلية**: طقم وسائط 4×6 بوصة (CX2-MS46-2PC) بسعر **490.00 درهم** (~800 صورة تقديراً)\n\n"
+                        "هل تود الحصول على عرض أسعار رسمي لطابعة CX-02 مع رولات الورق أو حقيبة النقل؟"
+                    )
+                else:
+                    reply = (
+                        "For photo booth operators and event photographers, our primary recommendation is the **Citizen CX-02 Photo Printer**:\n\n"
+                        "• **High Speed**: Lab-quality 4×6\" photos in just **8.4 seconds**\n"
+                        "• **Ultra-Compact Chassis**: Only 12 kg metal chassis, engineered for mobile booth enclosures and tight setups\n"
+                        "• **Ribbon Rewind**: Print 4×6\", 5×7\", and 6×8\" formats from standard media without wasting unused ribbon\n"
+                        "• **Official Pricing**: **4,385.00 AED + VAT** (In stock at our Dubai warehouse)\n"
+                        "• **Genuine Media**: 4×6\" Media Set (CX2-MS46-2PC) at **490.00 AED** (~800 prints estimate)\n\n"
+                        "Would you like an official quote for the CX-02 with media packs, or a carry bag for mobile transport?"
+                    )
+                cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["CX-02", "CX2-MS46-2PC", "CX-02-BAG"] if s in PRODUCT_CARD_DEFS]
+            else:
+                if read_ctx.language == "ar":
+                    reply = (
+                        "لتحديد طابعة الصور الحرارية (Dye-Sublimation) الأنسب من سيتيزن (Citizen) لمشروعك، يرجى توضيح:\n\n"
+                        "1. **أحجام الطباعة المطلوبة**: هل تحتاج مقاس 4×6 بوصة التقليدي للفعاليات، أو صور مربعة 4×4، أو مقاسات استوديو كبيرة 8×10 و 8×12 بوصة؟\n"
+                        "2. **الأولوية الرئيسية في التشغيل**:\n"
+                        "   • **سهولة النقل وخفة الوزن**: طابعة CZ-01 فائقة الخفة (5.8 كجم)\n"
+                        "   • **سعة الرول العالية للأكشاك المزدحمة**: طابعة CY-02 (حتى 700 صورة لكل رول لتقليل فترات التبديل)\n"
+                        "   • **السرعة القياسية وأكشاك التصوير الشاملة**: طابعة CX-02 الرائدة (طباعة 4×6 في 8.4 ثوانٍ مع خاصية توفير الشريط)\n"
+                        "   • **الأحجام الكبيرة للاستوديوهات والمعارض**: طابعة CX-02W العريضة\n\n"
+                        "بمجرد تحديد احتياجاتك، سأزودك بكافة المواصفات والأسعار ومجموعات الوسائط الأصلية!"
+                    )
+                else:
+                    reply = (
+                        "To recommend the ideal Citizen commercial photo printer for your business, could you clarify:\n\n"
+                        "1. **Print Formats**: Do you need standard 4×6\" event prints, compact 4×4\" square prints, or large 8×10\" / 8×12\" studio portraits?\n"
+                        "2. **Primary Priority**: Is your main priority **mobility** (ultra-lightweight 5.8 kg CZ-01), **maximum roll capacity** to minimize refills (up to 700 prints CY-02), **large format** (CX-02W), or **fast all-around event booth printing** (CX-02)?\n\n"
+                        "Once you share your preference, I will guide you to the exact model and genuine consumables!"
+                    )
+                cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["CX-02", "CY-02", "CZ-01", "CX-02W"] if s in PRODUCT_CARD_DEFS]
+            log_message(sender_id=sender_id, role="user", content=user_msg, message_id=message_id, channel=channel)
+            log_message(sender_id=sender_id, role="assistant", content=reply, channel=channel)
+            return {
+                "reply": reply,
+                "intent": "clarification_recommendation",
+                "priority": priority,
+                "tools_called": tools_called,
+                "chunks_retrieved": [],
+                "cards": cards,
+                "language": read_ctx.language,
+                "resolved_sku": "CX-02" if "CX-02" in reply else None,
                 "is_anaphora": False,
                 "understanding": understand_res.model_dump(),
                 "sales_state": decision.current_state.value if hasattr(decision.current_state, "value") else str(decision.current_state),
@@ -946,15 +1184,45 @@ class CX02Pipeline:
                     "• **Citizen CZ-01**: Ultra-compact and lightweight (5.8 kg) for tight spaces, supporting 4x4\" square photobook prints and 4x6\" photos in 16.3s.\n\n"
                     "Would you like to compare sample print quality or pricing for your event workflow?"
                 )
-            elif "citizen" in msg_lower:
-                reply = (
-                    "Kepler Tech supplies the complete Citizen commercial photo printer lineup:\n"
-                    "• **Citizen CX-02** (Active flagship): Compact 4x6\", 5x7\", 6x8\" dye-sub printer (**4,385.00 AED**)\n"
-                    "• **Citizen CY-02**: High-capacity commercial kiosk printer for 4x6\" and 6x8\" (**3,400.00 AED**)\n"
-                    "• **Citizen CZ-01**: Ultra-compact lightweight event printer for 4x4\" and 4x6\" (**3,200.00 AED**)\n"
-                    "• **Citizen CX-02W**: Wide-format dye-sub for 8x10\" and 8x12\" prints (**6,820.00 AED**)\n\n"
-                    "All prices are subject to 5% UAE VAT and subject to sales desk confirmation. Which model best fits your event or kiosk setup?"
-                )
+            elif any(w in msg_lower for w in [
+                "mug", "mugs", "t-shirt", "t-shirts", "tshirt", "tshirts", "shirt", "shirts",
+                "cup", "cups", "tumbler", "tumblers", "heat press", "apparel", "textile", "textiles", "fabric", "fabrics",
+                "اكواب", "أكواب", "كوب", "تيشرت", "تيشرتات", "ملابس", "قميص", "قماش", "مكبس حراري"
+            ]) and any(s in msg_lower for s in ["sublimation", "sublim", "dye sub", "dyesub", "سبليميشن", "سبلميشن", "داي سب", "تسامي"]):
+                if read_ctx.language == "ar":
+                    reply = (
+                        "لطباعة التسامي الحراري على الأكواب، والتيشرتات، والهدايا الدعائية، توفر شركة كيبلر تك طابعة **Epson SureColor SC-F100** المكتبية للسبليميشن (**1,950.00 درهم**) وطابعة **Epson SureColor SC-F500** مقاس 24 بوصة.\n\n"
+                        "*(تنويه: طابعات سيتيزن مثل CX-02 و CY-02 هي طابعات صور حرارية مخصصة للصور الفوتوغرافية وأكشاك التصوير مباشرة، وليست للطباعة على الأكواب والأقمشة بالمكبس الحراري).*\n\n"
+                        "هل تود الحصول على المواصفات الفنية أو عرض أسعار لطابعة إبسون SC-F100؟"
+                    )
+                else:
+                    reply = (
+                        "For mug, apparel, and gift sublimation transfer printing, Kepler Tech supplies the **Epson SureColor SC-F100** desktop dye-sublimation printer (**1,950.00 AED**) and the 24\" **Epson SureColor SC-F500**.\n\n"
+                        "*(Note: Citizen CX-02, CY-02, and CZ-01 are thermal dye-sub printers engineered specifically for direct photo booth and studio photo prints, not transfer heat-pressing onto mugs or fabrics).*\n\n"
+                        "Would you like technical specifications or an official commercial quote for the Epson SC-F100?"
+                    )
+            elif "citizen" in msg_lower or any(w in msg_lower for w in [
+                "dye sub", "dyesub", "dye-sub", "sublimation", "thermal photo", "photo printer", "photo printers",
+                "داي سب", "سبليميشن", "سبلميشن", "سوبليميشن", "تسامي", "حرارية"
+            ]):
+                if read_ctx.language == "ar":
+                    reply = (
+                        "توفر شركة كيبلر تك (Kepler Tech) في دبي مجموعة طابعات الصور الحرارية داي-سبليميشن (Dye-Sublimation) الأصلية من **سيتيزن (Citizen)**:\n\n"
+                        "• **Citizen CX-02** (الرائدة للفعاليات واستوديوهات التصوير): **4,385.00 درهم** — طباعة سريعة 8.4 ثوانٍ لأحجام 4x6 و 5x7 و 6x8 بوصة.\n"
+                        "• **Citizen CX-02W** (لأحجام الصور العريضة): **6,820.00 درهم** — لأحجام 8x10 و 8x12 بوصة.\n"
+                        "• **Citizen CY-02** (سعة عالية للأكشاك): **3,400.00 درهم** — سعة حتى 700 صورة لكل رول لتقليل فترات التبديل.\n"
+                        "• **Citizen CZ-01** (خفيفة الوزن ومتنقلة 5.8 كجم): **3,200.00 درهم** — لأحجام 4x4 و 4x6 بوصة.\n\n"
+                        "الأسعار خاضعة لضريبة القيمة المضافة 5% وتأكيد مكتب المبيعات. أي طابعة تناسب متطلبات مشروعك؟"
+                    )
+                else:
+                    reply = (
+                        "Kepler Tech supplies the complete Citizen commercial dye-sublimation photo printer lineup in Dubai:\n\n"
+                        "• **Citizen CX-02** (Active Flagship): **4,385.00 AED** — Compact 4x6\", 5x7\", 6x8\" dye-sub printer for event photo booths & studios.\n"
+                        "• **Citizen CX-02W** (Wide Format): **6,820.00 AED** — Large format dye-sublimation printer supporting 8x10\" and 8x12\" prints.\n"
+                        "• **Citizen CY-02** (High Capacity): **3,400.00 AED** — High-capacity commercial kiosk printer producing 700 prints per roll.\n"
+                        "• **Citizen CZ-01** (Ultra Compact): **3,200.00 AED** — Lightweight 5.8kg compact event printer for 4x4\" and 4x6\" photos.\n\n"
+                        "All prices are subject to 5% UAE VAT and confirmation by our sales desk. Which printer best fits your event or kiosk setup?"
+                    )
             elif any(ep in msg_lower for ep in ["epson", "plotter", "surecolor", "workforce", "large format"]):
                 reply = (
                     "Kepler Tech LLC is an authorized partner for **Epson** commercial printing systems and scanners in the UAE:\n"
@@ -963,7 +1231,8 @@ class CX02Pipeline:
                     "• **Dye Sublimation**: SureColor **SC-F100** (A4 — **1,950.00 AED**), **SC-F500** (24\" — Pricing via official quotation)\n"
                     "• **Office & Enterprise MFP**: WorkForce Pro **WF-C5890** (**1,656.00 AED**), WorkForce Enterprise **AM-C4000/C5000/C6000** (Pricing via official quotation)\n"
                     "• **Document Scanners**: WorkForce **DS-530II**, **DS-770II** (Pricing via official quotation)\n\n"
-                    "Verified prices are subject to 5% UAE VAT and confirmation by our sales desk. Would you like specifications or an official quote for any of these systems?"
+                    "🔗 Browse Epson Systems: https://www.keplertechllc.com/product-category/printers/epson-large-format-inkjet-printer/\n\n"
+                    "Verified prices are subject to 5% UAE VAT and confirmation by our sales desk. Would you like our technical sales specialist to prepare specifications or an official quote for any of these systems?"
                 )
             elif any(w in msg_lower for w in ["aircast", "aircastpro", "wireless"]):
                 reply = (
@@ -1118,14 +1387,25 @@ class CX02Pipeline:
                     "The official Citizen Thermal Cleaning Pen (190 AED) contains a specialized solvent formulated to dissolve thermal dye buildup "
                     "without scratching delicate micro-heating elements, preventing costly printhead replacements (which can cost thousands of dirhams)."
                 )
-            elif "inkjet" in msg_lower:
-                reply = (
-                    "For event and photo booth workflows, dye-sublimation offers key advantages over inkjet:\n"
-                    "• Fast 8.4s print speed vs minutes on inkjet.\n"
-                    "• Instant dry waterproof overcoat with fingerprint resistance.\n"
-                    "• Continuous roll feed prevents paper feed jams common with inkjet photo sheets.\n"
-                    "For fine art gallery portraits and large posters, however, our Epson large-format inkjet printers are the preferred choice."
-                )
+            elif any(w in msg_lower for w in ["inkjet", "انكجت", "انك جت", "طابعة حبر", "حبر نفاث"]):
+                if read_ctx.language == "ar":
+                    reply = (
+                        "لتطبيقات أكشاك التصوير والفعاليات واستوديوهات التصوير السريع، تتفوق طابعات داي-سبليميشن (Dye-Sublimation) على طابعات الحبر النفاث (Inkjet) بعدة مميزات رئيسية:\n"
+                        "• **السرعة**: طباعة الصورة مقاس 4×6 في **8.4 ثوانٍ** فقط مقابل دقيقة أو أكثر في طابعات الحبر.\n"
+                        "• **الجفاف الفوري**: صور جافة ومقاومة للماء وبصمات الأصابع تماماً بفضل طبقة الحماية الشفافة فور خروجها.\n"
+                        "• **الاعتمادية العالية**: لا توجد رؤوس حبر سائل معرضة للجفاف أو الانسداد أثناء التوقف بين الفعاليات.\n"
+                        "• **تكلفة ثابتة ومحسوبة**: رولات الورق والشريط الحراري المتطابقة تضمن تكلفة دقيقة وثابتة لكل صورة.\n\n"
+                        "(أما للمطبوعات الفنية الكبيرة والبوسترات العريضة Fine Art، فإن طابعات إبسون Inkjet الكبيرة تظل الخيار الأمثل)."
+                    )
+                else:
+                    reply = (
+                        "For event and photo booth workflows, dye-sublimation offers key advantages over inkjet:\n"
+                        "• Fast 8.4s print speed vs minutes on inkjet.\n"
+                        "• Instant dry waterproof overcoat with fingerprint resistance.\n"
+                        "• Continuous roll feed prevents paper feed jams common with inkjet photo sheets.\n"
+                        "• No liquid ink to clog or dry out between events.\n\n"
+                        "For fine art gallery portraits and large posters over 12 inches, our Epson large-format inkjet printers are the preferred choice."
+                    )
             elif "dnp" in msg_lower:
                 reply = (
                     "We do not make competitor claims. The Citizen CX-02 is chosen by professionals for its ultra-compact 12 kg chassis, "
@@ -1391,19 +1671,82 @@ class CX02Pipeline:
                 tools_called.append({"tool": "handoff_to_human", "result": ho})
                 reply = f"{cost_res.get('message')}\n\n{ho['customer_message']}"
 
-        # Branch 11: Bundle / Catalog
+        # Branch 11: Bundle / Catalog / Consumables
         elif intent == "bundle_catalog":
             cat_res = list_products()
             tools_called.append({"tool": "list_products", "result": cat_res})
-            lines = [f"• *{p['name']}* ({p['sku']}): *{p['formatted_price']}*" for p in cat_res.get("products", [])]
-            catalog_text = "\n".join(lines)
-            stale_warning = f"\n\n⚠️ {cat_res['stale_note']}" if cat_res.get("stale_note") else ""
-            reply = (
-                f"📋 *Kepler Tech LLC — Official Citizen CX-02 Catalog & Media Sets*:\n\n"
-                f"{catalog_text}{stale_warning}\n\n"
-                f"Official media sets available for CX-02: 4x6\", 5x7\", and 6x8\" (genuine Citizen ribbon and paper rolls).\n"
-                f"All products are available from our Dubai distribution center."
-            )
+
+            is_consumable_req = any(c in msg_lower for c in ["consumable", "consumables", "media", "paper", "ribbon", "ink", "roll", "rolls", "refill", "refills"])
+            active_model = (read_ctx.resolved_model or (sales_state.current_model if sales_state else "") or "").lower()
+
+            if is_consumable_req:
+                if any(ep in msg_lower for ep in ["epson", "cad", "plotter", "t3100", "t5100"]) or "sc-t" in active_model:
+                    reply = (
+                        "For Epson SureColor CAD plotters (such as SC-T3100 and SC-T5100), "
+                        "Kepler Tech supplies genuine **UltraChrome XD2** archival all-pigment ink cartridges (Black, Cyan, Magenta, Yellow), "
+                        "replacement auto cutter blades, maintenance boxes, and wide-format bond paper rolls.\n\n"
+                        "Please share your plotter model or ink part code, and our Dubai sales desk will confirm current pack pricing!"
+                    )
+                    cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["SC-T3100"] if s in PRODUCT_CARD_DEFS]
+                elif "cy-02" in active_model or "cy02" in active_model or "cy-02" in msg_lower or "cy02" in msg_lower:
+                    reply = (
+                        "**Citizen CY-02 Genuine Media Sets** (High-Capacity Kiosk):\n\n"
+                        "• **4×6\" Media Set (CY-MS46)**: 2 rolls, up to 700 prints per roll (1,400 prints per box)\n"
+                        "• **6×8\" Media Set (CY-MS68)**: 2 rolls, up to 350 prints per roll (700 prints per box)\n"
+                        "• **Citizen Thermal Head Cleaning Pen (CITIZEN-PEN)**: **190.00 AED**\n\n"
+                        "All media sets include matched dye-sub ribbons and paper rolls."
+                    )
+                    cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["CY-02", "CITIZEN-PEN"] if s in PRODUCT_CARD_DEFS]
+                elif "cz-01" in active_model or "cz01" in active_model or "cz-01" in msg_lower or "cz01" in msg_lower:
+                    reply = (
+                        "**Citizen CZ-01 Genuine Media Sets** (Ultra-Compact Mobile):\n\n"
+                        "• **4×6\" Media Set (CZ-MS46)**: Compact matched rolls for standard 4×6 photo prints\n"
+                        "• **4×4\" Media Set (CZ-MS44)**: Compact matched rolls for square photobook prints\n"
+                        "• **Citizen Thermal Head Cleaning Pen (CITIZEN-PEN)**: **190.00 AED**\n\n"
+                        "All media sets include matched dye-sub ribbons and paper rolls."
+                    )
+                    cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["CZ-01", "CITIZEN-PEN"] if s in PRODUCT_CARD_DEFS]
+                elif "cx-02w" in active_model or "cx02w" in active_model or "cx-02w" in msg_lower or "cx02w" in msg_lower:
+                    reply = (
+                        "**Citizen CX-02W Genuine Media Sets** (Wide-Format Studio Portrait):\n\n"
+                        "• **8×10\" Media Set**: Studio portrait rolls yielding 120 prints per roll\n"
+                        "• **8×12\" Media Set (CX2W 812)**: Wide-format studio and event prints yielding 110 prints per roll\n"
+                        "• **Citizen Thermal Head Cleaning Pen (CITIZEN-PEN)**: **190.00 AED**\n\n"
+                        "All media sets include matched dye-sub ribbons and paper rolls."
+                    )
+                    cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["CX-02W", "CITIZEN-PEN"] if s in PRODUCT_CARD_DEFS]
+                else:
+                    reply = (
+                        "We supply genuine **Citizen CX-02** thermal dye-sublimation media sets and official consumables (In Stock, Dubai warehouse):\n\n"
+                        "• **4×6\" Media Set (CX2-MS46-2PC)**: **490.00 AED** (~800 prints estimate / 2 rolls per box)\n"
+                        "• **5×7\" Media Set (CX2-MS57-2PC)**: **500.00 AED** (460 prints verified / 2 rolls per box)\n"
+                        "• **6×8\" Media Set (CX2-MS68-2PC)**: **500.00 AED** (~400 prints estimate / 2 rolls per box)\n"
+                        "• **Citizen Thermal Head Cleaning Pen (CITIZEN-PEN)**: **190.00 AED**\n"
+                        "• **Citizen CX-02 Protective Carry Bag (CX-02-BAG)**: **325.00 AED**\n\n"
+                        "All prices are subject to 5% UAE VAT. Which photo format do you need for your operations?"
+                    )
+                    cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["CX2-MS46-2PC", "CX2-MS57-2PC", "CX2-MS68-2PC", "CITIZEN-PEN", "CX-02-BAG"] if s in PRODUCT_CARD_DEFS]
+            else:
+                reply = (
+                    "📋 **Kepler Tech LLC — Commercial Printing Solutions Catalog** (Dubai Distribution):\n\n"
+                    "• **Citizen Photo Printers**:\n"
+                    "  - **Citizen CX-02** (Flagship 4×6, 5×7, 6×8): **4,385.00 AED**\n"
+                    "  - **Citizen CX-02W** (Wide-format 8×10, 8×12): **6,820.00 AED**\n"
+                    "  - **Citizen CY-02** (High-capacity 700 prints/roll): **3,400.00 AED**\n"
+                    "  - **Citizen CZ-01** (Ultra-compact 5.8kg): **3,200.00 AED**\n\n"
+                    "• **Citizen CX-02 Media & Consumables**:\n"
+                    "  - 4×6\" Media Set (CX2-MS46-2PC): **490.00 AED**\n"
+                    "  - 5×7\" Media Set (CX2-MS57-2PC): **500.00 AED**\n"
+                    "  - 6×8\" Media Set (CX2-MS68-2PC): **500.00 AED**\n"
+                    "  - Thermal Head Cleaning Pen: **190.00 AED**\n"
+                    "  - Protective Carry Bag: **325.00 AED**\n\n"
+                    "• **Epson CAD Plotters & Document Scanners**:\n"
+                    "  - **Epson SureColor SC-T3100** (24\" CAD Plotter): **3,880.00 AED**\n"
+                    "  - **Epson SureColor SC-T5100** (36\" CAD Plotter): **9,700.00 AED**\n"
+                    "  - **Epson WorkForce DS-530II Scanner**: Pricing via official quotation\n\n"
+                    "Which equipment or consumable category best matches your business workflow?"
+                )
+                cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["CX-02", "CX2-MS46-2PC", "SC-T3100", "DS-530II"] if s in PRODUCT_CARD_DEFS]
 
         # General Multi-intent / Hybrid Handling (Pricing, Quotes, Links, and Knowledge RAG)
         else:
@@ -1458,17 +1801,32 @@ class CX02Pipeline:
                     "prompt_version": Config.PROMPT_VERSION
                 }
 
-            if any(w in msg_lower for w in ["photo printers", "photo printer", "printers like cx 02", "printers like cx02", "items like cx 02", "items like cx02", "citizen printers", "which printers", "what printers", "show printers", "view printers", "our printers", "printer lineup"]) or (
-                msg_lower.strip() in ["printer", "printers", "printers?", "photo printers?", "models"]
+            if any(w in msg_lower for w in [
+                "photo printers", "photo printer", "printers like cx 02", "printers like cx02", "items like cx 02", "items like cx02",
+                "citizen printers", "which printers", "what printers", "show printers", "view printers", "our printers", "printer lineup",
+                "dye sub printers", "dye sub printer", "dyesub printers", "dyesub printer", "dye sublimation printers", "dye sublimation printer",
+                "thermal photo printers", "thermal photo printer", "داي سب", "سبليميشن", "سبلميشن", "سوبليميشن", "تسامي"
+            ]) or (
+                msg_lower.strip() in ["printer", "printers", "printers?", "photo printers?", "models", "dye sub", "dyesub", "sublimation"]
             ):
-                reply = (
-                    "Kepler Tech supplies the complete Citizen commercial photo printer lineup in Dubai:\n\n"
-                    "• **Citizen CX-02** (Active Flagship): **4,385.00 AED** — Compact 4x6\", 5x7\", 6x8\" dye-sub printer for event photo booths & studios.\n"
-                    "• **Citizen CX-02W** (Wide Format): **6,820.00 AED** — Large format dye-sublimation printer supporting 8x10\" and 8x12\" prints.\n"
-                    "• **Citizen CY-02** (High Capacity): **3,400.00 AED** — High-capacity commercial kiosk printer producing 700 prints per roll.\n"
-                    "• **Citizen CZ-01** (Ultra Compact): **3,200.00 AED** — Lightweight 5.8kg compact event printer for 4x4\" and 4x6\" photos.\n\n"
-                    "All prices are subject to 5% UAE VAT and confirmation by our sales desk. Which printer best fits your event or kiosk setup?"
-                )
+                if read_ctx.language == "ar":
+                    reply = (
+                        "توفر شركة كيبلر تك (Kepler Tech) في دبي مجموعة طابعات الصور الحرارية داي-سبليميشن (Dye-Sublimation) الأصلية من **سيتيزن (Citizen)**:\n\n"
+                        "• **Citizen CX-02** (الرائدة للفعاليات واستوديوهات التصوير): **4,385.00 درهم** — طباعة سريعة 8.4 ثوانٍ لأحجام 4x6 و 5x7 و 6x8 بوصة.\n"
+                        "• **Citizen CX-02W** (لأحجام الصور العريضة): **6,820.00 درهم** — لأحجام 8x10 و 8x12 بوصة.\n"
+                        "• **Citizen CY-02** (سعة عالية للأكشاك): **3,400.00 درهم** — سعة حتى 700 صورة لكل رول لتقليل فترات التبديل.\n"
+                        "• **Citizen CZ-01** (خفيفة الوزن ومتنقلة 5.8 كجم): **3,200.00 درهم** — لأحجام 4x4 و 4x6 بوصة.\n\n"
+                        "الأسعار خاضعة لضريبة القيمة المضافة 5% وتأكيد مكتب المبيعات. أي طابعة تناسب متطلبات مشروعك؟"
+                    )
+                else:
+                    reply = (
+                        "Kepler Tech supplies the complete Citizen commercial photo printer lineup in Dubai:\n\n"
+                        "• **Citizen CX-02** (Active Flagship): **4,385.00 AED** — Compact 4x6\", 5x7\", 6x8\" dye-sub printer for event photo booths & studios.\n"
+                        "• **Citizen CX-02W** (Wide Format): **6,820.00 AED** — Large format dye-sublimation printer supporting 8x10\" and 8x12\" prints.\n"
+                        "• **Citizen CY-02** (High Capacity): **3,400.00 AED** — High-capacity commercial kiosk printer producing 700 prints per roll.\n"
+                        "• **Citizen CZ-01** (Ultra Compact): **3,200.00 AED** — Lightweight 5.8kg compact event printer for 4x4\" and 4x6\" photos.\n\n"
+                        "All prices are subject to 5% UAE VAT and confirmation by our sales desk. Which printer best fits your event or kiosk setup?"
+                    )
                 cards = [dict(PRODUCT_CARD_DEFS[s]) for s in ["CX-02", "CX-02W", "CY-02", "CZ-01"] if s in PRODUCT_CARD_DEFS]
                 log_message(sender_id=sender_id, role="user", content=user_msg, message_id=message_id, channel=channel)
                 log_message(sender_id=sender_id, role="assistant", content=reply, channel=channel)
@@ -1537,6 +1895,8 @@ class CX02Pipeline:
             # 1. Execute tool if pricing or quote or link is asked
             if intent in ("price", "quote", "link") or has_price_terms:
                 target_sku = determine_target_sku(user_msg, read_ctx=read_ctx)
+                if sales_state and sales_state.category == "scanner" and not any(m in msg_lower for m in ["cx-02", "cx02", "cy-02", "cz-01", "ms46", "ms57", "ms68"]):
+                    target_sku = None
 
                 if target_sku is None:
                     unsupported_inquiry = any(u in msg_lower for u in ["adapter", "tripod", "cable", "battery", "stand", "bluetooth", "wireless", "xyz"])
@@ -1548,7 +1908,7 @@ class CX02Pipeline:
                             "• Corporate Website: https://www.keplertechllc.com/\n"
                             "• Online Store: https://www.keplertech.ae/"
                         )
-                    elif not unsupported_inquiry and any(sc in user_history_text for sc in ["scanner", "scanning"]):
+                    elif not unsupported_inquiry and (any(sc in user_history_text for sc in ["scanner", "scanning"]) or (sales_state and sales_state.category == "scanner")):
                         parts.append(
                             "Kepler Tech supplies official commercial document scanners and multifunction scanning solutions. "
                             "Pricing for scanners is determined based on scanning volume, resolution, and feed capacity.\n\n"
@@ -1682,16 +2042,59 @@ class CX02Pipeline:
             # 3. Synthesize response combining RAG and Tool results
             is_quote_called = any(tr.get("tool") == "create_quote" for tr in tools_called)
             is_price_called = any(tr.get("tool") == "get_price" for tr in tools_called)
-            technical_asked = any(t in msg_lower for t in ["spec", "resolution", "dpi", "dimension", "dimensions", "weight", "speed", "size", "difference", "compare", "why", "how", "what is", "technology"])
+            is_pure_price_inquiry = is_price_called and not any(t in msg_lower for t in [
+                "speed", "fast", "seconds", "dpi", "resolution", "weight", "dimension", "dimensions",
+                "watt", "rewind", "overcoat", "maintenance", "cleaning", "difference", "compare", "why"
+            ])
+            technical_asked = any(t in msg_lower for t in [
+                "spec", "resolution", "dpi", "dimension", "dimensions", "weight", "speed", "size",
+                "difference", "compare", "why", "technology", "how fast", "how does"
+            ]) and not is_pure_price_inquiry
 
-            if chunks and not is_quote_called and (technical_asked or not is_price_called):
-                llm_response = generate_llm_response(
-                    user_message=user_msg,
-                    context_chunks=chunks,
-                    conversation_history=history
-                )
-                if llm_response:
-                    parts.append(llm_response)
+            is_dye_sub_education = any(w in msg_lower for w in [
+                "what is dye sub", "what is dyesub", "what is dye sublimation",
+                "how does dye sub work", "how does dyesub work", "how dye sublimation works",
+                "explain dye sub", "explain dye sublimation", "how does dye-sublimation work",
+                "what is thermal dye sub", "dye sub technology", "dyesub technology"
+            ]) or (
+                any(d in msg_lower for d in ["dye sub", "dyesub", "dye sublimation", "داي سب", "سبليميشن", "تسامي"])
+                and any(q in msg_lower for q in ["what is", "how does", "how it works", "explain", "ما هي", "ما هو", "كيف تعمل", "كيف يشتغل", "وش هو", "ايش هو"])
+            )
+
+            if is_dye_sub_education:
+                if read_ctx.language == "ar":
+                    parts.append(
+                        "تقنية داي-سبليميشن (Dye-Sublimation / التسامي الحراري) تعتمد على نقل الصبغة من شريط حراري إلى ورق الصور مباشرة باستخدام درجات حرارة دقيقة، مع إضافة طبقة حماية شفافة (Overcoat).\n\n"
+                        "**أهم مميزات هذه التقنية**:\n"
+                        "• **جفاف فوري ومقاومة للماء**: الصور تخرج جافة تماماً ومقاومة للماء وبصمات الأصابع فور خروجها من الطابعة.\n"
+                        "• **جودة معملية متصلة (Continuous-Tone)**: ألوان ناعمة وحقيقية بدون نقاط حبر مرئية (بخلاف طابعات الحبر النفاث Inkjet).\n"
+                        "• **طبقة حماية عازلة**: تحمي الصور من الرطوبة والبهتان والأشعة فوق البنفسجية لسنوات طويلة.\n"
+                        "• **سرعة استثنائية**: طابعة Citizen CX-02 تطبع مقاس 4×6 بوصة في **8.4 ثوانٍ** فقط، مع إمكانية التبديل بين اللامع (Glossy) والمطفي (Matte) من إعدادات البرنامج مباشرة.\n\n"
+                        "هل تبحث عن طابعة صور لكشك تصوير (Photo Booth) أو استوديو تصوير فوتوغرافي؟"
+                    )
+                else:
+                    parts.append(
+                        "Dye-sublimation (thermal dye-diffusion transfer) uses heat to infuse solid dye from a ribbon directly into specially coated photo paper. "
+                        "It applies Cyan, Magenta, Yellow, plus a clear protective overcoat layer (OP).\n\n"
+                        "**Key Advantages for Events & Studios**:\n"
+                        "• **Instant Dry & Durable**: 100% water-resistant, fingerprint-proof, and smudge-free immediately upon ejecting.\n"
+                        "• **Continuous-Tone Lab Quality**: Smooth photographic transitions without visible inkjet droplets.\n"
+                        "• **Protective Overcoat**: UV and moisture barrier that protects prints for decades.\n"
+                        "• **Rapid Output**: The Citizen CX-02 prints a 4×6\" photo in just **8.4 seconds** with driver-selectable Glossy and Matte finishes without changing media rolls.\n\n"
+                        "Are you considering dye-sub for an event photo booth, photography studio, or commercial kiosk?"
+                    )
+            elif chunks and not is_quote_called and (technical_asked or not is_price_called):
+                try:
+                    llm_response = llm_module.generate_llm_response(
+                        user_message=user_msg,
+                        context_chunks=chunks,
+                        conversation_history=history
+                    )
+                    if llm_response:
+                        parts.append(llm_response)
+                except Exception as e:
+                    logger.info(f"LLM generation failed: {e}. Using extractive fallback.")
+                    parts.append(make_extractive_fallback(chunks, user_msg, language=read_ctx.language))
 
             if tools_called:
                 for tr in tools_called:
@@ -1704,13 +2107,22 @@ class CX02Pipeline:
                             old_str = f" (Original: ~{res['formatted_old_price']}~)" if res.get("formatted_old_price") else ""
                             stale_str = f"\n⚠️ {res['stale_note']}" if res.get("stale_note") else ""
                             est_str = f"\nℹ️ {res['estimate_note']}" if res.get("estimate_note") else ""
-                            parts.append(
-                                f"The official price for the **{res['name']}** (SKU: {res['sku']}) is "
-                                f"**{res['formatted_price']}**{old_str}.\n"
-                                f"• VAT: Prices are subject to 5% UAE VAT.\n"
-                                f"• Note: Price subject to confirmation by our sales desk.{est_str}{stale_str}\n"
-                                f"• Availability: {'In Stock (Dubai warehouse)' if res['in_stock'] else 'Available on order'}."
-                            )
+                            if read_ctx and read_ctx.language == "ar":
+                                parts.append(
+                                    f"السعر التجاري المعتمد لـ **{res['name']}** (رمز: {res['sku']}) هو "
+                                    f"**{res['formatted_price']}**{old_str}.\n"
+                                    f"• الضريبة: خاضعة لنسبة 5% ضريبة القيمة المضافة في الإمارات.\n"
+                                    f"• ملاحظة: السعر خاضع للتأكيد النهائي من مكتب المبيعات.{est_str}{stale_str}\n"
+                                    f"• التوفر: {'متوفرة في مستودع دبي' if res['in_stock'] else 'متوفرة بالطلب'}."
+                                )
+                            else:
+                                parts.append(
+                                    f"The official price for the **{res['name']}** (SKU: {res['sku']}) is "
+                                    f"**{res['formatted_price']}**{old_str}.\n"
+                                    f"• VAT: Prices are subject to 5% UAE VAT.\n"
+                                    f"• Note: Price subject to confirmation by our sales desk.{est_str}{stale_str}\n"
+                                    f"• Availability: {'In Stock (Dubai warehouse)' if res['in_stock'] else 'Available on order'}."
+                                )
                         elif res.get("status") == "quote_required":
                             parts.append(res["message"])
                         elif res.get("status") == "not_listed":
@@ -1737,15 +2149,19 @@ class CX02Pipeline:
                 comp_chunks = retrieve_company(user_msg, top_k=2)
                 all_chunks = chunks + [c for c in comp_chunks if c.get("text")]
                 if all_chunks:
-                    llm_response = generate_llm_response(
-                        user_message=user_msg,
-                        context_chunks=all_chunks,
-                        conversation_history=history
-                    )
-                    if llm_response and "NO_ANSWER" not in llm_response:
-                        parts.append(llm_response)
-                    else:
-                        parts.append(make_extractive_fallback(all_chunks, user_msg))
+                    try:
+                        llm_response = llm_module.generate_llm_response(
+                            user_message=user_msg,
+                            context_chunks=all_chunks,
+                            conversation_history=history
+                        )
+                        if llm_response and "NO_ANSWER" not in llm_response:
+                            parts.append(llm_response)
+                        else:
+                            parts.append(make_extractive_fallback(all_chunks, user_msg, language=read_ctx.language))
+                    except Exception as e:
+                        logger.info(f"LLM generation failed: {e}. Using extractive fallback.")
+                        parts.append(make_extractive_fallback(all_chunks, user_msg, language=read_ctx.language))
 
             if parts:
                 reply = "\n\n".join(parts)

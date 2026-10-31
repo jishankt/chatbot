@@ -1,0 +1,6 @@
+# /etc/cron.d/sales_handoff_retry or /opt/basics/config/cron.d/sales_handoff_retry
+# Kepler Tech Sales AI - Retry failed salesperson handoff notifications every 10 minutes
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+*/10 * * * * root cd /opt/basics && /opt/basics/venv/bin/python /opt/basics/scripts/retry_handoffs.py >> /var/log/sales_handoff_retry.log 2>&1

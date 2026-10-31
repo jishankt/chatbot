@@ -14,12 +14,12 @@ Print sizes supported by the Citizen CX-02 hardware:
 - 3.5 x 5 inches (89 x 127 mm): hardware supported by Citizen CX-02 specifications
 
 ## Print Speeds (Maximum)
-- 4 x 6 inches: 8.4 seconds (High Speed mode) / 9.8 seconds (High Quality mode)
-- 5 x 7 inches: 14.2 seconds
-- 6 x 8 inches: 15.6 seconds
-- 6 x 9 inches: 20.8 seconds
+- 4 x 6 inches: 8.4 seconds in High-Speed mode (or 9.8 seconds in High-Quality mode). Lab-quality prints can be produced in approximately 8 seconds.
+- 5 x 7 inches: 14.2 seconds.
+- 6 x 8 inches: 15.6 seconds.
+- 6 x 9 inches: 20.8 seconds.
 
 ## Finishing Options and Surface Control
-- Official Datasheet specifies two finishing options selectable through printer driver: Glossy or Matte surface.
-- Citizen's website CX-02 specifications also state: "Glossy / Matte / Fine Matte / Luster", and Kepler Tech's product page text mentions glossy, luster, and matte finishes selectable in driver settings.
-- Note on Luster: The official datasheet specifies glossy and matte, while Citizen's site and Kepler's product text mention luster and fine matte. Our team will confirm driver luster support for your workflow.
+- Two driver-selectable finishing options on the standard media: Glossy or Matte surface, selectable directly through printer driver software without replacing ribbon or paper.
+- Citizen CX-02 driver settings also support Fine Matte and Luster finishes for professional portrait and studio applications.
+- Note on Luster: The official datasheet specifies glossy and matte, while Citizen's manufacturer specifications also document luster and fine matte. Our team will confirm driver luster settings for your specific workflow.

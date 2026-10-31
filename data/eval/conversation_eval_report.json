@@ -1,0 +1,215 @@
+{
+  "total_scripts": 100,
+  "total_turns": 330,
+  "execution_time_seconds": 288.1,
+  "rubric_scores": {
+    "accuracy": 86.5,
+    "understanding": 86.9,
+    "tone": 100.0,
+    "flow": 82.5,
+    "no_repeated_questions": 98.5,
+    "overall_average": 90.9
+  },
+  "sample_evaluations": [
+    {
+      "id": "PB_01",
+      "persona": "Photo Booth Operator (Dubai event photo booth)",
+      "language": "en",
+      "accuracy": 70.0,
+      "understanding": 100.0,
+      "tone": 100.0,
+      "flow": 100.0,
+      "no_repeated_questions": 100.0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Hi, I run a Dubai event photo booth. What is the price of the Citizen CX-02 printer?",
+          "reply_snippet": "Here are the verified details for the Citizen CX-02 (Applications and Ideal Use Cases):\n\nThe Citizen...",
+          "reply_source": "llm",
+          "latency_ms": 1425.8
+        },
+        {
+          "turn": 2,
+          "user": "Can it do 2x6 dual cut strips?",
+          "reply_snippet": "Here are the verified details for the Citizen CX-02 (4. Software & Event Solutions):\n\n- Solutions: E...",
+          "reply_source": "llm",
+          "latency_ms": 1572.0
+        },
+        {
+          "turn": 3,
+          "user": "How much is the 4x6 media roll box for it?",
+          "reply_snippet": "The price of the 4x6\" Media Set (SKU: CX2.4x6, model: CX2-MS46-2PC) is **490.00 AED**.\n\nThe official...",
+          "reply_source": "llm",
+          "latency_ms": 2949.4
+        },
+        {
+          "turn": 4,
+          "user": "Can you prepare an official quote for 1 printer and 2 media boxes?",
+          "reply_snippet": "📄 *Official Quotation (Q-8A2DEA1D)*\nCustomer: Valued Customer\nSupplier: Kepler Tech LLC (Dubai)\n----...",
+          "reply_source": "llm",
+          "latency_ms": 42.4
+        }
+      ]
+    },
+    {
+      "id": "PB_02",
+      "persona": "Photo Booth Operator (Abu Dhabi wedding photobooth)",
+      "language": "en",
+      "accuracy": 70.0,
+      "understanding": 100.0,
+      "tone": 100.0,
+      "flow": 100.0,
+      "no_repeated_questions": 100.0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Hi, I run a Abu Dhabi wedding photobooth. What is the price of the Citizen CX-02 printer?",
+          "reply_snippet": "Here are the verified details for the Citizen CX-02 (Applications and Ideal Use Cases):\n\nThe Citizen...",
+          "reply_source": "llm",
+          "latency_ms": 1480.4
+        },
+        {
+          "turn": 2,
+          "user": "How fast does it print 4x6 photos?",
+          "reply_snippet": "The Citizen CX-02 prints 4x6 inch photos in **8.4 seconds** in High-Speed mode, or **9.8 seconds** i...",
+          "reply_source": "llm",
+          "latency_ms": 2170.3
+        },
+        {
+          "turn": 3,
+          "user": "How much is the 5x7 media roll box for it?",
+          "reply_snippet": "The price of the **5x7\" Media Set** (SKU: CX0257, model: CX2-MS57-2PC) is **490.00 AED**.\n\nThe offic...",
+          "reply_source": "llm",
+          "latency_ms": 2560.1
+        },
+        {
+          "turn": 4,
+          "user": "Can you prepare an official quote for 1 printer and 2 media boxes?",
+          "reply_snippet": "📄 *Official Quotation (Q-D24DC4DB)*\nCustomer: Valued Customer\nSupplier: Kepler Tech LLC (Dubai)\n----...",
+          "reply_source": "llm",
+          "latency_ms": 40.9
+        }
+      ]
+    },
+    {
+      "id": "PB_03",
+      "persona": "Photo Booth Operator (Sharjah mobile photobooth kiosk)",
+      "language": "en",
+      "accuracy": 70.0,
+      "understanding": 100.0,
+      "tone": 100.0,
+      "flow": 100.0,
+      "no_repeated_questions": 100.0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Hi, I run a Sharjah mobile photobooth kiosk. What is the price of the Citizen CX-02 printer?",
+          "reply_snippet": "Here are the verified details for the Citizen CX-02 (Applications and Ideal Use Cases):\n\nThe Citizen...",
+          "reply_source": "llm",
+          "latency_ms": 1145.1
+        },
+        {
+          "turn": 2,
+          "user": "Do you carry the protective carry bag?",
+          "reply_snippet": "Yes, we carry the Citizen CX-02 Printer Carry Bag (SKU: Citizen CX-02 Bag, internal id: CX-02-BAG). ...",
+          "reply_source": "llm",
+          "latency_ms": 3241.7
+        },
+        {
+          "turn": 3,
+          "user": "How much is the 4x6 media roll box for it?",
+          "reply_snippet": "The price of the 4x6\" Media Set (SKU: CX2.4x6, model: CX2-MS46-2PC) is **490.00 AED**.\n\nThe official...",
+          "reply_source": "llm",
+          "latency_ms": 3055.0
+        },
+        {
+          "turn": 4,
+          "user": "Can you prepare an official quote for 1 printer and 2 media boxes?",
+          "reply_snippet": "📄 *Official Quotation (Q-A1E9EC61)*\nCustomer: Valued Customer\nSupplier: Kepler Tech LLC (Dubai)\n----...",
+          "reply_source": "llm",
+          "latency_ms": 42.7
+        }
+      ]
+    },
+    {
+      "id": "PB_04",
+      "persona": "Photo Booth Operator (Party photobooth rental Dubai)",
+      "language": "en",
+      "accuracy": 70.0,
+      "understanding": 90.0,
+      "tone": 100.0,
+      "flow": 100.0,
+      "no_repeated_questions": 100.0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Hi, I run a Party photobooth rental Dubai. What is the price of the Citizen CX-02 printer?",
+          "reply_snippet": "Yes, we provide flexible short-term printer rentals for weddings, corporate events, and photo booths...",
+          "reply_source": "llm",
+          "latency_ms": 34.5
+        },
+        {
+          "turn": 2,
+          "user": "How often do I need to clean the printhead?",
+          "reply_snippet": "Regarding printhead cleaning and preventative maintenance for the CX-02:\n\n- Scope: Multi-brand diagn...",
+          "reply_source": "llm",
+          "latency_ms": 1626.3
+        },
+        {
+          "turn": 3,
+          "user": "How much is the 6x8 media roll box for it?",
+          "reply_snippet": "Regarding genuine Citizen CX-02 media rolls and box print yields:\n\nPrint sizes supported by the Citi...",
+          "reply_source": "llm",
+          "latency_ms": 2312.5
+        },
+        {
+          "turn": 4,
+          "user": "Can you prepare an official quote for 1 printer and 2 media boxes?",
+          "reply_snippet": "📄 *Official Quotation (Q-0ADF5647)*\nCustomer: Valued Customer\nSupplier: Kepler Tech LLC (Dubai)\n----...",
+          "reply_source": "llm",
+          "latency_ms": 42.5
+        }
+      ]
+    },
+    {
+      "id": "PB_05",
+      "persona": "Photo Booth Operator (Corporate booth activation)",
+      "language": "en",
+      "accuracy": 70.0,
+      "understanding": 100.0,
+      "tone": 100.0,
+      "flow": 100.0,
+      "no_repeated_questions": 100.0,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Hi, I run a Corporate booth activation. What is the price of the Citizen CX-02 printer?",
+          "reply_snippet": "The official price for the *Citizen CX-02 Photo Printer* (SKU: CX-02) is *4,385.00 AED* (Original: ~...",
+          "reply_source": "llm",
+          "latency_ms": 24.4
+        },
+        {
+          "turn": 2,
+          "user": "Does it support ribbon rewind technology?",
+          "reply_snippet": "Yes, the Citizen CX-02 supports a ribbon rewind technology that prevents waste of ribbon and paper w...",
+          "reply_source": "llm",
+          "latency_ms": 2279.0
+        },
+        {
+          "turn": 3,
+          "user": "How much is the 4x6 media roll box for it?",
+          "reply_snippet": "The price of the 4x6\" Media Set (SKU: CX2.4x6, model: CX2-MS46-2PC) is *490.00 AED*.\n\nThe official p...",
+          "reply_source": "llm",
+          "latency_ms": 2539.9
+        },
+        {
+          "turn": 4,
+          "user": "Can you prepare an official quote for 1 printer and 2 media boxes?",
+          "reply_snippet": "📄 *Official Quotation (Q-EB2AB784)*\nCustomer: Valued Customer\nSupplier: Kepler Tech LLC (Dubai)\n----...",
+          "reply_source": "llm",
+          "latency_ms": 44.2
+        }
+      ]
+    }
+  ]
+}

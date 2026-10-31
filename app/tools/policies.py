@@ -7,17 +7,31 @@ POLICY_NAMES_MAP = {
     "warranties": "warranty",
     "guarantee": "warranty",
     "delivery": "delivery_charges",
+    "delivery charge": "delivery_charges",
+    "delivery charges": "delivery_charges",
+    "delivery fee": "delivery_charges",
+    "delivery fees": "delivery_charges",
+    "shipping": "delivery_charges",
+    "shipping charge": "delivery_charges",
+    "shipping charges": "delivery_charges",
+    "shipping cost": "delivery_charges",
+    "shipping costs": "delivery_charges",
     "delivery_time": "order_processing",
+    "delivery time": "order_processing",
     "order_processing": "order_processing",
+    "order processing": "order_processing",
     "processing": "order_processing",
     "transit_time": "transit_time",
+    "transit time": "transit_time",
     "transit": "transit_time",
     "shipping_time": "transit_time",
-    "shipping": "delivery_charges",
+    "shipping time": "transit_time",
     "delivery_charges": "delivery_charges",
-    "shipping_cost": "delivery_charges",
     "payment": "payment_methods",
-    "payment_methods": "payment_methods",
+    "payment method": "payment_methods",
+    "payment methods": "payment_methods",
+    "payment options": "payment_methods",
+    "how to pay": "payment_methods",
     "cod": "payment_methods",
     "cancellation": "cancellation_policy",
     "cancel": "cancellation_policy",
@@ -58,15 +72,16 @@ GCC_COUNTRIES = {"uae", "united arab emirates", "saudi arabia", "ksa", "kuwait",
 NON_GCC_INDICATORS = {"kenya", "nigeria", "africa", "uk", "usa", "europe", "india", "egypt", "outside gcc"}
 
 
-def get_policy(policy_name: str, destination: Optional[str] = None) -> Dict[str, Any]:
+def get_policy(policy_name: str, destination: Optional[str] = None, country: Optional[str] = None) -> Dict[str, Any]:
     with open(Config.POLICIES_PATH, "r", encoding="utf-8") as f:
         policies = json.load(f)
 
     clean_name = policy_name.strip().lower()
+    dest = destination or country
 
     # Check for outside-GCC delivery requests
     is_outside_gcc = False
-    if destination and destination.strip().lower() not in GCC_COUNTRIES:
+    if dest and dest.strip().lower() not in GCC_COUNTRIES:
         is_outside_gcc = True
     elif any(ind in clean_name for ind in NON_GCC_INDICATORS):
         is_outside_gcc = True
@@ -78,7 +93,7 @@ def get_policy(policy_name: str, destination: Optional[str] = None) -> Dict[str,
             "status": "handoff",
             "policy": "delivery_outside_gcc",
             "handoff": True,
-            "message": f"{terms_text} Delivery outside the GCC is handled by our sales desk for custom export and shipping options.",
+            "message": f"{terms_text} Delivery outside the GCC is handled by our sales specialist team for custom export and shipping options.",
             "requires_sales_desk": True
         }
 
@@ -94,17 +109,17 @@ def get_policy(policy_name: str, destination: Optional[str] = None) -> Dict[str,
             "policy": canonical_key,
             "handoff": True,
             "message": (
-                f"Official terms for {friendly_title} require confirmation from Kepler Tech LLC sales desk. "
-                f"Please reach our Dubai team at {company.get('phone', '00971 4 323 1008')} or "
-                f"WhatsApp {company.get('whatsapp', '+971 50 890 1641')}."
+                f"Official terms for {friendly_title} require confirmation from Kepler Tech LLC sales desk specialist team. "
+                f"Please reach our Dubai team at {company.get('phone', Config.KEPLER_PHONE)} or "
+                f"WhatsApp {company.get('whatsapp', Config.KEPLER_WHATSAPP)}."
             )
         }
 
     # If action is explicitly handoff
     if isinstance(val, dict) and val.get("action") == "handoff":
-        msg = val.get("terms", "This inquiry requires confirmation from our sales desk.")
+        msg = val.get("terms", "This inquiry requires confirmation from our sales specialist team.")
         if canonical_key == "delivery_outside_gcc" and "outside the gcc" not in msg.lower():
-            msg = f"{msg} Delivery outside the GCC is handled by our sales desk for custom export and shipping options."
+            msg = f"{msg} Delivery outside the GCC is handled by our sales specialist team for custom export and shipping options."
         return {
             "status": "handoff",
             "policy": canonical_key,

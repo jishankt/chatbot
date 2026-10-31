@@ -5,7 +5,7 @@ from app.agent.guardrails import check_pre_guardrails, check_post_guardrails
 def test_guardrail_competitor_rejection():
     queries = [
         "What is the price of DNP DS620?",
-        "How does CX-02 compare to Epson SureLab D500?",
+        "How does CX-02 compare to Kodak 305?",
         "Do you sell Fujifilm Frontier printers?",
         "Can I buy HiTi P525L here?",
         "Tell me about Sinfonia CS2",
@@ -15,10 +15,11 @@ def test_guardrail_competitor_rejection():
         is_safe, fail_type, details = check_pre_guardrails(q)
         assert not is_safe, f"Expected unsafe for: {q}"
         assert fail_type == "competitor"
-        assert "CX-02" in details.get("response", "")
+        assert "Kepler" in details.get("response", "") or "Citizen" in details.get("response", "")
 
 
-def test_guardrail_other_citizen_models_rejection():
+def test_guardrail_other_citizen_models_allowed_in_preguardrails():
+    # WP0.6: Citizen models removed from guardrail regexes, handled as known products pending details
     queries = [
         "What is the price of Citizen CX-02W wide printer?",
         "Do you sell the Citizen CY-02?",
@@ -27,8 +28,7 @@ def test_guardrail_other_citizen_models_rejection():
     ]
     for q in queries:
         is_safe, fail_type, details = check_pre_guardrails(q)
-        assert not is_safe, f"Expected rejection for model in: {q}"
-        assert fail_type == "other_model"
+        assert is_safe, f"Expected other Citizen models to pass pre-guardrails: {q}"
 
 
 def test_guardrail_prompt_injection_rejection():
@@ -63,7 +63,10 @@ def test_guardrail_legitimate_queries_allowed():
         "What is the print speed of the Citizen CX-02?",
         "How much does the CX2-MS46-2PC media pack cost?",
         "What are the dimensions of the CX-02 printer?",
-        "Can I get a quotation for 2 printers?"
+        "Can I get a quotation for 2 printers?",
+        "Do you sell Epson printers?",
+        "Do you do printer repair?",
+        "Do you ship to Kuwait?"
     ]
     for q in legit:
         is_safe, fail_type, details = check_pre_guardrails(q)

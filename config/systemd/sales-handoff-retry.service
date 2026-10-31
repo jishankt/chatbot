@@ -1,0 +1,11 @@
+[Unit]
+Description=Kepler Tech Sales AI - Retry Failed Handoff Notifications
+After=network.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/basics
+ExecStart=/opt/basics/venv/bin/python /opt/basics/scripts/retry_handoffs.py
+StandardOutput=journal
+StandardError=journal

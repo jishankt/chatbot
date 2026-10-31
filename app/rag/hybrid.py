@@ -127,8 +127,15 @@ def hybrid_retrieve(
     if not query_tokens:
         return []
 
+    # Expand query tokens with synonyms for cross-lingual / multilingual BM25 matching
+    from app.rag.relevance import SYNONYMS
+    bm25_query_tokens = list(query_tokens)
+    for qt in query_tokens:
+        if qt in SYNONYMS:
+            bm25_query_tokens.extend(list(SYNONYMS[qt]))
+
     # --- BM25 leg ---
-    bm25_ranked = _bm25_ranks(query_tokens, chunks, bm25_model)
+    bm25_ranked = _bm25_ranks(bm25_query_tokens, chunks, bm25_model)
     # Build raw score lookup for attribution
     bm25_score_map: Dict[int, float] = {idx: s for idx, s in bm25_ranked}
     max_bm25 = max((s for _, s in bm25_ranked), default=1.0) or 1.0
@@ -182,6 +189,7 @@ def hybrid_retrieve(
             "chunk_id": chunk.get("chunk_id", f"chunk_{chunk_idx:03d}"),
             "model": chunk.get("model", "CX-02"),
             "section": chunk.get("section", ""),
+            "title": chunk.get("title", chunk.get("section", "")),
             "text": chunk_text,
             "source_url": chunk.get("source_url", ""),
             "source_file": chunk.get("file", ""),

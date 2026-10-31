@@ -22,14 +22,25 @@ def test_scope_yaml_structure():
     assert "CX-02-BAG" in acc_ids
     assert "CITIZEN-PEN" in acc_ids
 
+    assert "company_scope" in scope
+    assert scope["company_scope"] == "kepler_printers"
+    assert "product_detail_active" in scope
+    assert "CX-02" in scope["product_detail_active"]
+    assert "brands_sold" in scope
+    assert "Epson" in scope["brands_sold"]
+    assert "Citizen" in scope["brands_sold"]
+
     assert "blocked_brands" in scope
     assert "dnp" in scope["blocked_brands"]
-    assert "epson" in scope["blocked_brands"]
+    assert "epson" not in scope["blocked_brands"]
     assert "fujifilm" in scope["blocked_brands"]
 
     assert "handoff_only_products" in scope
     assert "cx-02w" in scope["handoff_only_products"]
     assert "cy-02" in scope["handoff_only_products"]
+
+    assert "catalog_categories" in scope
+    assert len(scope["catalog_categories"]) >= 5
 
     assert "large_quantity_handoff_threshold" in scope
     assert scope["large_quantity_handoff_threshold"] == 10
@@ -47,13 +58,16 @@ def test_products_json_schema_enrichment():
         "compatible_with", "unverified_fields", "attributes", "url"
     ]
 
+    with open(BASE_DIR / "config" / "scope.yaml", "r", encoding="utf-8") as f:
+        scope = yaml.safe_load(f)
+
     for sku, prod in products.items():
         for field in required_agnostic_fields:
             assert field in prod, f"Product {sku} missing required field '{field}'"
-        assert prod["brand"] == "Citizen"
+        assert prod["brand"] in scope["brands_sold"]
         assert prod["currency"] == "AED"
-        assert prod["purchase_mode"] in ("cart", "enquiry")
-        assert isinstance(prod["price"], float)
+        assert prod["purchase_mode"] in ("cart", "enquiry", "quote")
+        assert prod["price"] is None or isinstance(prod["price"], float)
         assert isinstance(prod["compatible_with"], list)
         assert isinstance(prod["attributes"], dict)
 

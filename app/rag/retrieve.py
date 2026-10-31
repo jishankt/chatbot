@@ -9,8 +9,8 @@ CHUNKS_PATH = Path(__file__).resolve().parent.parent.parent / "data" / "chunks.j
 
 
 def tokenize(text: str) -> List[str]:
-    """Tokenize and normalize text into lowercase alphanumeric words."""
-    return re.findall(r"\b[a-zA-Z0-9_\-\.\"]+\b", text.lower())
+    """Tokenize and normalize text into lowercase words supporting Unicode / Arabic."""
+    return re.findall(r"(?u)\b[\w\-\.\"]+\b", text.lower())
 
 
 class CX02Retriever:

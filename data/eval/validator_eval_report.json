@@ -1,0 +1,25 @@
+{
+  "transcripts": {
+    "source": "database_messages",
+    "total_evaluated": 234,
+    "passed": 220,
+    "rejected_or_fallback": 14,
+    "fallback_rate_pct": 5.98,
+    "rejection_reasons": {
+      "Ungrounded number or spec detected": 14
+    },
+    "false_rejections": []
+  },
+  "eval_set": {
+    "source": "eval_set_sample",
+    "total_evaluated": 60,
+    "passed": 21,
+    "rejected_or_fallback": 39,
+    "fallback_rate_pct": 65.0,
+    "rejection_reasons": {
+      "Ungrounded banned claim detected": 33,
+      "Ungrounded number or spec detected": 6
+    },
+    "false_rejections": []
+  }
+}

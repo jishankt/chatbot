@@ -6,6 +6,9 @@ from pathlib import Path
 
 
 def create_app(config_class=Config):
+    from app.config import validate_config
+    validate_config()
+
     app = Flask(__name__)
     app.config.from_object(config_class)
 
@@ -19,6 +22,10 @@ def create_app(config_class=Config):
 
     # Register blueprints
     app.register_blueprint(api_bp)
+
+    # Trust reverse proxy headers (Nginx) for remote_addr, scheme, and host
+    from werkzeug.middleware.proxy_fix import ProxyFix
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 
     return app
 

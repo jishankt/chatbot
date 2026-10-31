@@ -3,11 +3,106 @@
     "name": "Kepler Tech LLC",
     "address": "D79 Khalid Bin Waleed Road, Dubai",
     "phone": "00971 4 323 1008",
+    "second_phone": "00971 55 835 8586",
     "whatsapp": "+971 50 890 1641",
-    "hours": "Mon-Fri 8:30-17:30, Sat 8:30-13:00"
+    "tracking_phone": "+971 521 21 4898",
+    "email": "info@keplertech.ae",
+    "hours": "Mon-Fri 8:30-17:30, Sat 8:30-13:00",
+    "source_url": "https://www.keplertech.ae/contact-us/",
+    "source_date": "2026-10-26"
   },
   "warranty": null,
+  "generic_warranty": {
+    "terms": "All hardware supplied by Kepler Tech carries full manufacturer warranty. We provide genuine manufacturer-backed warranty support; specific duration and terms for individual models (including the Citizen CX-02 warranty) will be confirmed by our technical team.",
+    "statement": "All products carry full manufacturer warranty; our team will confirm the specific Citizen CX-02 warranty.",
+    "source_url": "https://www.keplertechllc.com/countries-we-serve/",
+    "source_date": "2026-10-26",
+    "confirm_before_use": true
+  },
+  "free_shipping": {
+    "threshold_aed": 400.0,
+    "destination": "UAE",
+    "terms": "Free shipping on orders over 400 AED across the UAE. For smaller deliveries, older 2023 terms state flat rate AED 10; our team will confirm.",
+    "source_url": "https://www.keplertechllc.com/countries-we-serve/",
+    "source_date": "2026-10-26",
+    "confirm_before_use": true
+  },
+  "country_delivery_times": {
+    "uae": {
+      "country": "United Arab Emirates",
+      "days": "1–3",
+      "free_shipping_threshold_aed": 400.0,
+      "notes": "1–3 day delivery across Dubai and all Emirates. Free shipping on orders over 400 AED. (FAQ states 1–2 days; older 2023 terms state flat rate AED 10; our team will confirm).",
+      "source_url": "https://www.keplertechllc.com/",
+      "source_date": "2026-10-26"
+    },
+    "saudi_arabia": {
+      "country": "Saudi Arabia",
+      "days": "5–8",
+      "notes": "5–8 day delivery to Riyadh, Jeddah, Dammam & beyond. VAT Inclusive Pricing.",
+      "source_url": "https://www.keplertechllc.com/countries-we-serve/saudi-arabia/",
+      "source_date": "2026-10-26"
+    },
+    "kuwait": {
+      "country": "Kuwait",
+      "days": "4–6",
+      "notes": "4–6 day delivery across Kuwait City & all governorates. VAT Inclusive Pricing.",
+      "source_url": "https://www.keplertechllc.com/countries-we-serve/kuwait/",
+      "source_date": "2026-10-26"
+    },
+    "qatar": {
+      "country": "Qatar",
+      "days": "4–6",
+      "notes": "4–6 day delivery to Doha & all municipalities. VAT Inclusive Pricing.",
+      "source_url": "https://www.keplertechllc.com/countries-we-serve/qatar/",
+      "source_date": "2026-10-26"
+    },
+    "bahrain": {
+      "country": "Bahrain",
+      "days": "4–6",
+      "notes": "4–6 day delivery to Manama & all governorates. VAT Inclusive Pricing.",
+      "source_url": "https://www.keplertechllc.com/countries-we-serve/bahrain/",
+      "source_date": "2026-10-26"
+    },
+    "oman": {
+      "country": "Oman",
+      "days": "4–7",
+      "notes": "4–7 day delivery to Muscat, Sohar, Salalah & beyond. VAT Inclusive Pricing.",
+      "source_url": "https://www.keplertechllc.com/countries-we-serve/oman/",
+      "source_date": "2026-10-26"
+    },
+    "africa": {
+      "region": "Africa",
+      "days": "6–8",
+      "notes": "Pan-Africa shipping to Nigeria, South Africa, Kenya, Ghana, Ethiopia, Tanzania, Rwanda, Uganda and more via international air/ocean freight.",
+      "source_url": "https://www.keplertechllc.com/countries-we-serve/africa/",
+      "source_date": "2026-10-26"
+    },
+    "source_url": "https://www.keplertechllc.com/countries-we-serve/",
+    "source_date": "2026-10-26",
+    "confirm_before_use": true
+  },
+  "order_processing": {
+    "terms": "All orders are processed within 24 hours (1 to 2 business days) after receiving order confirmation.",
+    "business_hours": "24h",
+    "source_url": "https://www.keplertechllc.com/countries-we-serve/",
+    "source_date": "2026-10-26",
+    "confirm_before_use": true
+  },
+  "bulk_discounts": {
+    "terms": "Volume discounts exist for bulk orders, studio bundles, and reseller consignments. Specific discount figures and tailored tier quotations are handled directly by our corporate sales team.",
+    "action": "handoff",
+    "source_url": "https://www.keplertechllc.com/countries-we-serve/",
+    "source_date": "2026-10-26",
+    "confirm_before_use": true
+  },
   "vat_treatment": null,
+  "vat_gcc": {
+    "terms": "Pricing for non-UAE GCC countries (Saudi Arabia, Kuwait, Qatar, Bahrain, Oman) is VAT-inclusive per our official Countries We Serve policy. UAE VAT treatment is subject to customer quotation confirmation.",
+    "source_url": "https://www.keplertechllc.com/countries-we-serve/",
+    "source_date": "2026-10-26",
+    "confirm_before_use": true
+  },
   "payment_methods": {
     "terms": "Payment methods accepted are Credit Card (Visa, MasterCard in AED), Debit Card, and PayPal. You must pay for the goods at the time of placing your order. Goods will not be dispatched until payment is received in full.",
     "methods": ["Credit Card", "Debit Card", "PayPal"],
@@ -33,30 +128,24 @@
     "confirm_before_use": true
   },
   "delivery_charges": {
-    "terms": "UAE Delivery Fees will be a Flat Rate of AED 10 and Delivery Fees outside UAE will be mentioned on the checkout page depending on the country and location.",
+    "terms": "Free shipping on orders over 400 AED in the UAE (2026 policy; older 2023 terms state flat rate AED 10; our team will confirm). Delivery fees outside UAE are calculated at checkout based on destination country.",
     "uae_flat_aed": 10.0,
-    "section": "Section 10c",
-    "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
-    "source_date": "2023-09-19",
-    "confirm_before_use": true
-  },
-  "order_processing": {
-    "terms": "All orders are processed within 1 to 2 business days (excluding weekends and holidays) after receiving your order confirmation email. You will receive another notification when your order has shipped.",
-    "business_days": "1-2",
-    "section": "Section 10b",
-    "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
-    "source_date": "2023-09-19",
+    "uae_free_threshold_aed": 400.0,
+    "free_shipping_threshold_aed": 400.0,
+    "section": "Section 10c / Countries We Serve",
+    "source_url": "https://www.keplertechllc.com/countries-we-serve/",
+    "source_date": "2026-10-26",
     "confirm_before_use": true
   },
   "transit_time": {
-    "terms": "Domestic deliveries are fulfilled within 1 to 2 days; international shipments typically take between 6 to 8 days. Our primary carrier partners include FedEx and Aramex. Kepler Tech uses reasonable efforts to deliver goods within the timeframe specified on our website, but does not guarantee delivery within that timeframe.",
-    "domestic_days": "1-2",
-    "international_days": "6-8",
+    "terms": "UAE domestic deliveries are fulfilled within 1 to 3 business days (FAQ states 1 to 2 days; our team will confirm); international GCC shipments typically take 4 to 8 days; Pan-Africa shipments take 6 to 8 days.",
+    "domestic_days": "1-3",
+    "international_days": "4-8",
     "carriers": ["FedEx", "Aramex"],
     "guaranteed": false,
-    "section": "FAQ / Section 7b",
-    "source_url": "https://www.keplertechllc.com/faq/",
-    "source_date": "2024-04-26",
+    "section": "Countries We Serve / FAQ",
+    "source_url": "https://www.keplertechllc.com/countries-we-serve/",
+    "source_date": "2026-10-26",
     "confirm_before_use": true
   },
   "pickup": {
@@ -77,19 +166,19 @@
     "confirm_before_use": true
   },
   "delivery_outside_gcc": {
-    "terms": "We only deliver our products to the UAE, Oman, and all other GCC countries.",
+    "terms": "Kepler Tech delivers across all GCC countries and ships to destinations across Africa. For worldwide destinations outside GCC and Africa, our team will confirm shipping options.",
     "action": "handoff",
     "rule_source": "internal",
-    "section": "Section 10a",
-    "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
-    "source_date": "2023-09-19",
+    "section": "Countries We Serve",
+    "source_url": "https://www.keplertechllc.com/countries-we-serve/",
+    "source_date": "2026-10-26",
     "confirm_before_use": true
   },
   "import_duty_vat_outside_uae": {
-    "terms": "The customer is responsible for paying both the import customs duty and VAT in the destination country.",
-    "section": "Section 4d",
-    "source_url": "https://www.keplertechllc.com/terms-and-conditions/",
-    "source_date": "2023-09-19",
+    "terms": "Prices for non-UAE GCC destinations include VAT per Countries We Serve policy. For customs duties and import clearance in Africa or international destinations, our freight team assists with documentation.",
+    "section": "Countries We Serve",
+    "source_url": "https://www.keplertechllc.com/countries-we-serve/",
+    "source_date": "2026-10-26",
     "confirm_before_use": true
   },
   "price_changes": {

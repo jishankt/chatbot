@@ -1,5 +1,5 @@
 import re
-from typing import Any, Optional, Tuple
+from typing import Any, Optional, Tuple, List, Dict
 import yaml
 from pathlib import Path
 from app.config import Config, BASE_DIR
@@ -101,3 +101,76 @@ def get_large_quantity_threshold() -> int:
         except Exception:
             pass
     return 10
+
+
+def parse_multi_item_quantities(text: str) -> Optional[List[Dict[str, Any]]]:
+    """
+    Parses multiple items and their respective quantities from text, e.g.:
+      "Quote me 2 CX-02 printers and 4 boxes of 4x6 media"
+      "1 printer and 2 bags"
+    Returns a list of dicts: [{"sku": "<SKU>", "qty": int}, ...] or None if not multi-item.
+    """
+    norm = normalize_digits(text.lower())
+    norm = norm.replace("×", "x").replace("*", "x")
+
+    items = []
+
+    # 1. Printer quantity
+    printer_patterns = [
+        r"\b(\d+)\s*(?:x\s*)?(?:citizen\s*)?(?:cx[- ]*0?2\s*)?(?:photo\s*)?printers?\b",
+        r"\b(\d+)\s*(?:x\s*)?(?:units?|machines?)\b",
+        r"(?:quote\s+me|need|want|buy|order)\s+(\d+)\s*(?:citizen\s*)?(?:cx[- ]*0?2|printer)",
+        r"(?:cx[- ]*0?2|citizen\s*printer)\s*x?\s*(\d+)\b"
+    ]
+    printer_qty = None
+    for pat in printer_patterns:
+        m = re.search(pat, norm)
+        if m:
+            val = int(m.group(1))
+            if val != 2 or ("cx" not in m.group(0) or re.search(r"\b2\s+(?:cx|printer)", norm)):
+                printer_qty = val
+                break
+
+    if printer_qty is None and any(p in norm for p in ["cx-02", "cx02", "printer", "unit"]) and ("quote" in norm or "quotation" in norm):
+        printer_qty = 1
+
+    # 2. Media sets
+    media_defs = [
+        ("CX2-MS46-2PC", [r"\b(\d+)\s*(?:boxes?|rolls?|sets?|packs?|cartons?|x)?\s*(?:of\s+)?(?:4x6|10x15|ms46)\b", r"\b(?:4x6|10x15|ms46)[^\d]*(\d+)\s*(?:boxes?|rolls?|sets?)?\b"]),
+        ("CX2-MS57-2PC", [r"\b(\d+)\s*(?:boxes?|rolls?|sets?|packs?|cartons?|x)?\s*(?:of\s+)?(?:5x7|127x178|ms57)\b", r"\b(?:5x7|127x178|ms57)[^\d]*(\d+)\s*(?:boxes?|rolls?|sets?)?\b"]),
+        ("CX2-MS68-2PC", [r"\b(\d+)\s*(?:boxes?|rolls?|sets?|packs?|cartons?|x)?\s*(?:of\s+)?(?:6x8|152x203|ms68)\b", r"\b(?:6x8|152x203|ms68)[^\d]*(\d+)\s*(?:boxes?|rolls?|sets?)?\b"]),
+    ]
+
+    found_media = False
+    for sku, patterns in media_defs:
+        for pat in patterns:
+            m = re.search(pat, norm)
+            if m:
+                qty = int(m.group(1))
+                items.append({"sku": sku, "qty": qty})
+                found_media = True
+                break
+
+    if not found_media and any(m in norm for m in ["media", "paper", "rolls", "consumables"]):
+        m_generic = re.search(r"\b(\d+)\s*(?:boxes?|rolls?|sets?|packs?|cartons?|x)?\s*(?:of\s+)?(?:media|paper|rolls|consumables)\b", norm)
+        if m_generic:
+            items.append({"sku": "CX2-MS46-2PC", "qty": int(m_generic.group(1))})
+            found_media = True
+
+    # 3. Accessories: Carry Bag and Cleaning Pen
+    bag_m = re.search(r"\b(\d+)\s*(?:x\s*)?(?:carry\s*)?bags?\b", norm)
+    if bag_m:
+        items.append({"sku": "CX-02-BAG", "qty": int(bag_m.group(1))})
+    elif "bag" in norm and any(m in norm for m in ["and", "with", "+"]):
+        items.append({"sku": "CX-02-BAG", "qty": 1})
+
+    pen_m = re.search(r"\b(\d+)\s*(?:x\s*)?(?:cleaning\s*)?pens?\b", norm)
+    if pen_m:
+        items.append({"sku": "CITIZEN-PEN", "qty": int(pen_m.group(1))})
+    elif "pen" in norm and any(m in norm for m in ["and", "with", "+"]):
+        items.append({"sku": "CITIZEN-PEN", "qty": 1})
+
+    if printer_qty is not None and (found_media or len(items) > 0 or ("printer" in norm and any(m in norm for m in ["media", "paper", "bag", "pen"]))):
+        items.insert(0, {"sku": "CX-02", "qty": printer_qty})
+
+    return items if len(items) >= 2 else None

@@ -1,0 +1,51 @@
+name: CX-02 Sales AI CI
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  security-and-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.lock
+          pip install pip-audit bandit pytest
+
+      - name: Dependency vulnerability audit (pip-audit)
+        run: |
+          pip-audit -r requirements.lock --desc
+
+      - name: Static AST security scan (bandit)
+        run: |
+          bandit -r app/ -ll -x tests/
+
+      - name: Secret leak detection (gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run automated test suite (pytest)
+        env:
+          APP_ENV: testing
+          SECRET_KEY: test_secret_key_ci_only_32_chars_min
+          AUDIT_HMAC_KEY: test_audit_hmac_ci_only_32_chars_min
+          ADMIN_API_KEY: test_admin_api_key_ci_32_chars_min
+          PII_ENCRYPTION_KEY: dGVzdF9waWlfZW5jcnlwdGlvbl9rZXlfMzJieXRlczE=
+        run: |
+          pytest -v tests/

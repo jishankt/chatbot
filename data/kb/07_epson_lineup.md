@@ -10,7 +10,7 @@ The Epson SureColor SC-T3100 is an entry-level 24-inch wireless technical CAD/GI
 - Print Resolution: 2,400 x 1,200 DPI.
 - Ink Technology: Epson UltraChrome XD2 all-pigment inks (water and smudge resistant).
 - Connectivity: Wi-Fi, Wi-Fi Direct, Gigabit Ethernet, USB 3.0.
-- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 3,880.00 AED + VAT).
+- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 3880.0 AED + VAT).
 
 ## Epson SureColor SC-T5100 Technical CAD Plotter Specifications
 The Epson SureColor SC-T5100 is a 36-inch professional technical CAD and GIS plotter:
@@ -20,7 +20,7 @@ The Epson SureColor SC-T5100 is a 36-inch professional technical CAD and GIS plo
 - Print Resolution: 2,400 x 1,200 DPI.
 - Ink Technology: Epson UltraChrome XD2 all-pigment inks (moisture and archival resistant).
 - Connectivity: Wireless Wi-Fi, Ethernet, USB 3.0.
-- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 9,700.00 AED + VAT).
+- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 9700.0 AED + VAT).
 
 ## Epson SureColor SC-T7700D Dual-Roll Plotter Specifications
 The Epson SureColor SC-T7700D is a heavy-duty 44-inch dual-roll production technical CAD and poster printer:
@@ -38,7 +38,7 @@ The Epson SureColor SC-P700 is a professional 13-inch desktop photo and fine art
 - Print Speed: Approx. 90 seconds for 8x10 inch / 150 seconds for 13x19 inch prints on Premium Glossy paper.
 - Print Resolution: 5,760 x 1,440 DPI.
 - Ink Technology: UltraChrome PRO10 10-colour pigment inks with Black Enhance Overcoat (BEO) for unmatched D-Max.
-- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 3,400.00 AED + VAT).
+- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 3400.0 AED + VAT).
 
 ## Epson SureColor SC-P900 17-Inch Photo Printer Specifications
 The Epson SureColor SC-P900 is a professional 17-inch desktop fine art and exhibition photo printer:
@@ -47,7 +47,7 @@ The Epson SureColor SC-P900 is a professional 17-inch desktop fine art and exhib
 - Print Speed: Approx. 90 seconds for 8x10 inch / 280 seconds for 17x22 inch prints on Premium Glossy paper.
 - Print Resolution: 5,760 x 1,440 DPI.
 - Ink Technology: UltraChrome PRO10 10-colour pigment inks with dedicated Matte Black and Photo Black lines (no switching).
-- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 4,880.00 AED + VAT).
+- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 4880.0 AED + VAT).
 
 ## Epson SureColor SC-P9500 44-Inch Production Fine Art Plotter Specifications
 The Epson SureColor SC-P9500 is a 44-inch flagship fine art and contract proofing plotter:
@@ -65,7 +65,7 @@ The Epson SureColor SC-F100 is a compact A4 dye-sublimation printer:
 - Print Speed: Approx. 65 seconds per A4 sublimation transfer page.
 - Print Resolution: 600 x 1,200 DPI.
 - Ink Technology: Epson UltraChrome DS genuine dye-sublimation ink bottles (OEKO-TEX ECO PASSPORT certified). Refillable ink tanks.
-- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 1,950.00 AED + VAT).
+- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 1950.0 AED + VAT).
 
 ## Epson WorkForce Pro WF-C5890 DWF Business Multifunction Printer Specifications
 The Epson WorkForce Pro WF-C5890 DWF is a high-speed A4 business colour multifunction printer (Print, Scan, Copy, Fax):
@@ -75,7 +75,7 @@ The Epson WorkForce Pro WF-C5890 DWF is a high-speed A4 business colour multifun
 - Print Resolution: 4,800 x 1,200 DPI.
 - Ink Technology: Epson DURABrite Ultra all-pigment inks (water, highlighter, and smudge resistant). High-yield Replaceable Ink Pack System (RIPS).
 - Technology: PrecisionCore Heat-Free technology delivering ultra-low power consumption and fast first page out time.
-- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 1,656.00 AED + VAT).
+- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 1656.0 AED + VAT).
 
 ## Epson WorkForce Document Scanners Specifications (DS-530II and DS-770II)
 Epson WorkForce sheetfed duplex document scanners are engineered for business record archiving and high-volume scanning:

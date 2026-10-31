@@ -240,7 +240,9 @@
     "raw_sources": [
       "data/raw/kepler_citizen_photo_printers_brochure.txt",
       "data/raw/cx02_datasheet.txt",
-      "data/raw/cx02_product_page.txt"
+      "data/raw/cx02_product_page.txt",
+      "/opt/salesai/data/verified_descriptions.json",
+      "/opt/salesai/data/sheets/master_complete_products.csv"
     ]
   },
   {
@@ -248,7 +250,7 @@
     "file": "06_citizen_lineup.md",
     "section": "Citizen CY-02 High-Capacity Photo Printer Specifications",
     "title": "Citizen CY-02 High-Capacity Photo Printer Specifications",
-    "text": "## Citizen CY-02 High-Capacity Photo Printer Specifications\nThe Citizen CY-02 is engineered for high-volume commercial printing environments where minimizing media replenishment frequency is critical:\n- Official Dubai Supplier: Kepler Tech LLC (Phone: +971 4 323 1008, Office No.1, Abdulla Al Awar Building, Khalid Bin Waleed Road, Dubai).\n- Verified AED Price: 3,400.00 AED (Subject to 5% UAE VAT; price subject to confirmation by our sales desk).\n- Print Media Capacity: High-capacity roll format delivering up to 700 prints per roll on 4x6 inch (10x15 cm) or 350 prints per roll on 6x8 inch (15x20 cm), significantly reducing refill labor and operational interruptions.\n- Print Speeds: 4x6 inch from ~12.4 seconds (High-Speed mode down to ~8.4 seconds); 5x7 inch ~19.9 seconds; 6x8 inch ~21.9 seconds.\n- Supported Formats: 4x6 inch (10x15 cm), 5x7 inch (13x18 cm), and 6x8 inch (15x20 cm).\n- Dual Print Modes: High-Speed mode (300 x 300 dpi) and High-Quality mode (300 x 600 dpi).\n- Surface Finishes: Glossy and Matte finishes selectable directly from the printer driver without changing paper rolls.\n- Physical Specs: Dimensions 322 (W) x 351 (D) x 281 (H) mm; Weight approx. 13.8 kg.\n- Media Handling: Easy drop-in paper loading and streamlined ribbon handling.\n- Compatible Genuine Consumables:\n  * Citizen CY-MS46 (4x6\" Media Set - 2 rolls, 1,400 prints total): 625.00 AED\n  * Citizen CY-MS68 (6x8\" Media Set - 2 rolls, 700 prints total): 740.00 AED\n  * Citizen CY-02 Printer Carry Bag (CY02Bag): 335.00 AED\n  * Citizen Thermal Head Cleaning Pen (CITIZEN-PEN): 190.00 AED\n- Applications: Unattended retail kiosks, theme parks, tourist attractions, high-throughput commercial photo labs, and busy event photo booths.",
+    "text": "## Citizen CY-02 High-Capacity Photo Printer Specifications\nThe Citizen CY-02 is engineered for high-volume commercial printing environments where minimizing media replenishment frequency is critical:\n- Official Dubai Supplier: Kepler Tech LLC (Phone: +971 4 323 1008, Office No.1, Abdulla Al Awar Building, Khalid Bin Waleed Road, Dubai).\n- Verified AED Price: 3400.0 AED (Subject to 5% UAE VAT; price subject to confirmation by our sales desk).\n- Print Media Capacity: High-capacity roll format delivering up to 700 prints per roll on 4x6 inch (10x15 cm) or 350 prints per roll on 6x8 inch (15x20 cm), significantly reducing refill labor and operational interruptions.\n- Print Speeds: 4x6 inch from ~12.4 seconds (High-Speed mode down to ~8.4 seconds); 6x8 inch ~21.9 seconds.\n- Supported Formats: 4x6 inch (10x15 cm), 5x7 inch (13x18 cm), and 6x8 inch (15x20 cm).\n- Dual Print Modes: High-Speed mode (300 x 300 dpi) and High-Quality mode (300 x 600 dpi).\n- Surface Finishes: Glossy and Matte finishes selectable directly from the printer driver without changing paper rolls.\n- Physical Specs: Dimensions 32.2 x 35.1 x 28.1 cm; Weight approx. 13.8 kg.\n- Media Handling: Easy drop-in paper loading and streamlined ribbon handling.\n- Compatible Genuine Consumables:\n  * Citizen CY-MS46 (4x6\" Media Set - 2 rolls, 1,400 prints total)\n  * Citizen CY-MS68 (6x8\" Media Set - 2 rolls, 700 prints total)\n  * Citizen CY-02 Printer Carry Bag (CY02Bag)\n  * Citizen Thermal Head Cleaning Pen (CITIZEN-PEN): 190.0 AED\n- Applications: Unattended retail kiosks, theme parks, tourist attractions, high-throughput commercial photo labs, and busy event photo booths.",
     "model": "CX-02",
     "namespace": "cx02",
     "site": "corporate",
@@ -257,7 +259,9 @@
     "raw_sources": [
       "data/raw/kepler_citizen_photo_printers_brochure.txt",
       "data/raw/cx02_datasheet.txt",
-      "data/raw/cx02_product_page.txt"
+      "data/raw/cx02_product_page.txt",
+      "/opt/salesai/data/verified_descriptions.json",
+      "/opt/salesai/data/sheets/master_complete_products.csv"
     ]
   },
   {
@@ -265,7 +269,7 @@
     "file": "06_citizen_lineup.md",
     "section": "Citizen CZ-01 Ultra-Compact Portable Photo Printer Specifications",
     "title": "Citizen CZ-01 Ultra-Compact Portable Photo Printer Specifications",
-    "text": "## Citizen CZ-01 Ultra-Compact Portable Photo Printer Specifications\nThe Citizen CZ-01 is an ultra-compact, lightweight dye-sublimation printer engineered for maximum mobility without compromising print quality:\n- Official Dubai Supplier: Kepler Tech LLC (Phone: +971 4 323 1008).\n- Verified AED Price: 3,200.00 AED (Subject to 5% UAE VAT; price subject to confirmation by our sales desk).\n- Ultra-Lightweight & Space-Saving: Weighs just 5.8 kg (less than half the weight of CX-02 and CY-02), occupying roughly 31% volume and 44% footprint of conventional commercial photo printers. Dimensions: 208 (W) x 240 (D) x 198 (H) mm.\n- Anti-Curl Function: Built-in mechanical anti-curl technology ensures prints emerge completely flat straight from the printer slot.\n- Advanced Internal Cooling System: Specially designed airflow architecture prevents overheating during continuous event shooting sessions.\n- Energy Efficient: Eco-friendly power management featuring a 28% reduction in power consumption compared to prior generations.\n- Print Speeds: 4x4 inch ~16.3 seconds; 4x6 inch ~18.8 seconds; 4.5x8 inch ~23.1 seconds.\n- Print Formats & Capacity:\n  * 4x6 inch standard photos and 4x4 inch square Instagram-style prints: 150 prints per roll.\n  * 4.5x8 inch semi-panoramic and 4.5x4.5 inch prints: 110 prints per roll.\n- Surface Finishes: Glossy, Matte, and Partial Matte selectable through the printer driver.\n- Resolution: 300 x 300 dpi (High-Speed) and 300 x 600 dpi (High-Quality).\n- Interface: USB 2.0 Full Speed, compatible with Windows 10/11, macOS, with SDK available for photobooth software integration.\n- Compatible Genuine Consumables:\n  * Citizen CZ-MS46 (4x6\" Media Set): 295.00 AED\n  * Citizen CZ-MS458 (4.5x8\" Media Set): 340.00 AED\n  * Citizen CZ-01 Padded Carry Bag (CZ01 Carry Bag): 250.00 AED\n  * Citizen Thermal Head Cleaning Pen (CITIZEN-PEN): 190.00 AED\n- Applications: Mobile event photographers, wedding photobook makers, compact photo booths, pop-up studios, and on-location print-on-demand setups.",
+    "text": "## Citizen CZ-01 Ultra-Compact Portable Photo Printer Specifications\nThe Citizen CZ-01 is an ultra-compact, lightweight dye-sublimation printer engineered for maximum mobility without compromising print quality:\n- Official Dubai Supplier: Kepler Tech LLC (Phone: +971 4 323 1008).\n- Verified AED Price: 3200.0 AED (Subject to 5% UAE VAT; price subject to confirmation by our sales desk).\n- Ultra-Lightweight & Space-Saving: Weighs just 5.8 kg (less than half the weight of CX-02 and CY-02), occupying roughly 31% volume and 44% footprint of conventional commercial photo printers. Dimensions: 20.8 x 24.0 x 19.8 cm.\n- Anti-Curl Function: Built-in mechanical anti-curl technology ensures prints emerge completely flat straight from the printer slot.\n- Advanced Internal Cooling System: Specially designed airflow architecture prevents overheating during continuous event shooting sessions.\n- Energy Efficient: Eco-friendly power management featuring a 28% reduction in power consumption compared to prior generations.\n- Print Speeds: 4x4 inch ~16.3 seconds; 4x6 inch ~18.8 seconds; 4.5x8 inch ~23.1 seconds.\n- Print Formats & Capacity:\n  * 4x6 inch standard photos and 4x4 inch square Instagram-style prints: 150 prints per roll.\n  * 4.5x8 inch semi-panoramic and 4.5x4.5 inch prints: 110 prints per roll.\n- Surface Finishes: Glossy, Matte, and Partial Matte selectable through the printer driver.\n- Resolution: 300 x 300 dpi (High-Speed) and 300 x 600 dpi (High-Quality).\n- Interface: USB 2.0 Full Speed, compatible with Windows 10/11, macOS, with SDK available for photobooth software integration.\n- Compatible Genuine Consumables:\n  * Citizen CZ-MS46 (4x6\" Media Set)\n  * Citizen CZ-MS458 (4.5x8\" Media Set)\n  * Citizen CZ-01 Padded Carry Bag (CZ01 Carry Bag)\n  * Citizen Thermal Head Cleaning Pen (CITIZEN-PEN): 190.0 AED\n- Applications: Mobile event photographers, wedding photobook makers, compact photo booths, pop-up studios, and on-location print-on-demand setups.",
     "model": "CX-02",
     "namespace": "cx02",
     "site": "corporate",
@@ -274,7 +278,9 @@
     "raw_sources": [
       "data/raw/kepler_citizen_photo_printers_brochure.txt",
       "data/raw/cx02_datasheet.txt",
-      "data/raw/cx02_product_page.txt"
+      "data/raw/cx02_product_page.txt",
+      "/opt/salesai/data/verified_descriptions.json",
+      "/opt/salesai/data/sheets/master_complete_products.csv"
     ]
   },
   {
@@ -282,7 +288,7 @@
     "file": "06_citizen_lineup.md",
     "section": "Citizen CX-02W Wide-Format 8-Inch Photo Printer Specifications",
     "title": "Citizen CX-02W Wide-Format 8-Inch Photo Printer Specifications",
-    "text": "## Citizen CX-02W Wide-Format 8-Inch Photo Printer Specifications\nThe Citizen CX-02W is a wide-format dye-sublimation photo printer designed for larger professional portrait and studio prints:\n- Official Dubai Supplier: Kepler Tech LLC (Phone: +971 4 323 1008).\n- Verified AED Price: 6,820.00 AED (Subject to 5% UAE VAT; price subject to confirmation by our sales desk).\n- Wide-Format Capabilities: Supports 8x10 inch (203 x 254 mm) and 8x12 inch (203 x 305 mm) large prints, as well as A4 format (210 x 297 mm) and panoramic multi-cut options ranging from 8x2 inches up to 8x32 inches.\n- Media Capacity: 110 prints per roll for 8x12 inch / A4 media; 120 prints per roll for 8x10 inch media.\n- Print Speeds: 8x10 inch ~33.7 seconds; 8x12 inch ~39.2 seconds; A4 ~38.4 seconds.\n- Specialty Media Compatibility: Compatible with premium specialty photo papers including Silver Pearl and Metallic media, delivering luxury finishes for studio clients.\n- Advanced Driver Grey Calibration: Features fine-tuned grey calibration in the driver for accurate monochrome portraits, subtle tonal gradations, and lifelike skin tones.\n- Ribbon Rewind Function: Built-in ribbon rewind eliminates paper and ribbon waste on partial runs and multi-cut configurations.\n- Energy Saving Sleep Mode: Reduces standby power consumption by up to 98% (under 0.5W).\n- Physical Specs: Dimensions 322 (W) x 366 (D) x 170 (H) mm; Weight approx. 14 kg.\n- Compatible Genuine Consumables:\n  * Citizen CX2W 8x12 (812) Media Sets\n  * Citizen CX2W 8x10 Media Sets\n  * Citizen Thermal Head Cleaning Pen (CITIZEN-PEN): 190.00 AED\n- Applications: Professional portrait studios, school graduation portraits, sports team packages, event group photos, and luxury photo gifts.",
+    "text": "## Citizen CX-02W Wide-Format 8-Inch Photo Printer Specifications\nThe Citizen CX-02W is a wide-format dye-sublimation photo printer designed for larger professional portrait and studio prints:\n- Official Dubai Supplier: Kepler Tech LLC (Phone: +971 4 323 1008).\n- Verified AED Price: 6820.0 AED (Subject to 5% UAE VAT; price subject to confirmation by our sales desk).\n- Wide-Format Capabilities: Supports 8x10 inch  and 8x12 inch  large prints, as well as A4 format (210 x 297 mm) and panoramic multi-cut options ranging from 8x2 inches up to 8x32 inches.\n- Media Capacity: 110 prints per roll for 8x12 inch / A4 media; 120 prints per roll for 8x10 inch media.\n- Print Speeds: 8x10 inch ~33.7 seconds; 8x12 inch ~39.2 seconds; A4 ~38.4 seconds.\n- Specialty Media Compatibility: Compatible with premium specialty photo papers including Silver Pearl and Metallic media, delivering luxury finishes for studio clients.\n- Advanced Driver Grey Calibration: Features fine-tuned grey calibration in the driver for accurate monochrome portraits, subtle tonal gradations, and lifelike skin tones.\n- Ribbon Rewind Function: Built-in ribbon rewind eliminates paper and ribbon waste on partial runs and multi-cut configurations.\n- Energy Saving Sleep Mode: Reduces standby power consumption by up to 98% (under 0.5W).\n- Physical Specs: Dimensions 32.2 (W) x 366 (D) x 170 (H) mm; Weight approx. 14 kg.\n- Compatible Genuine Consumables:\n  * Citizen CX2W 8x12 (812) Media Sets\n  * Citizen CX2W 8x10 Media Sets\n  * Citizen Thermal Head Cleaning Pen (CITIZEN-PEN): 190.0 AED\n- Applications: Professional portrait studios, school graduation portraits, sports team packages, event group photos, and luxury photo gifts.",
     "model": "CX-02",
     "namespace": "cx02",
     "site": "corporate",
@@ -291,7 +297,9 @@
     "raw_sources": [
       "data/raw/kepler_citizen_photo_printers_brochure.txt",
       "data/raw/cx02_datasheet.txt",
-      "data/raw/cx02_product_page.txt"
+      "data/raw/cx02_product_page.txt",
+      "/opt/salesai/data/verified_descriptions.json",
+      "/opt/salesai/data/sheets/master_complete_products.csv"
     ]
   },
   {
@@ -308,7 +316,9 @@
     "raw_sources": [
       "data/raw/kepler_citizen_photo_printers_brochure.txt",
       "data/raw/cx02_datasheet.txt",
-      "data/raw/cx02_product_page.txt"
+      "data/raw/cx02_product_page.txt",
+      "/opt/salesai/data/verified_descriptions.json",
+      "/opt/salesai/data/sheets/master_complete_products.csv"
     ]
   },
   {
@@ -316,7 +326,7 @@
     "file": "06_citizen_lineup.md",
     "section": "Kepler Tech LLC Authorized Distribution, UAE & Regional Delivery, and Maintenance",
     "title": "Kepler Tech LLC Authorized Distribution, UAE & Regional Delivery, and Maintenance",
-    "text": "## Kepler Tech LLC Authorized Distribution, UAE & Regional Delivery, and Maintenance\nKepler Tech LLC is the premier commercial partner for Citizen Systems dye-sublimation photo printers in the GCC and Africa:\n- Dubai Commercial Office: Office No.1, Abdulla Al Awar Building, D79 Khalid Bin Waleed Road, Bur Dubai, Dubai, United Arab Emirates.\n- Contact Details: Tel: +971 4 323 1008 | WhatsApp: +971 50 890 1641 | Email: sales@keplertechllc.com | Web: www.keplertechllc.com.\n- Delivery Times & Logistics:\n  * UAE Domestic: Rapid delivery within 1 to 2 business days across Dubai, Abu Dhabi, Sharjah, and all emirates.\n  * GCC & Middle East: Export delivery within 6 to 8 business days to Saudi Arabia, Oman, Qatar, Kuwait, and Bahrain via FedEx and Aramex.\n  * Africa Regional: Air freight and courier shipping (6 to 8 business days) to Kenya, Nigeria, Ghana, Tanzania, Uganda, South Africa, and across the African continent.\n- Thermal Printhead Maintenance with CITIZEN-PEN:\n  * The Citizen Thermal Head Cleaning Pen (CITIZEN-PEN, 190.00 AED) is an official genuine maintenance accessory compatible with CX-02, CX-02W, CY-02, and CZ-01.\n  * Formulated with high-purity isopropyl alcohol and an abrasive-free felt tip, it safely dissolves adhesive buildup, burnt dye particles, and environmental dust from the thermal printhead heating elements without scratching the microscopic glass glaze.\n  * Regular cleaning prevents permanent white streaks, uneven density lines, and premature head failure, preserving factory print quality throughout the printer's lifecycle.",
+    "text": "## Kepler Tech LLC Authorized Distribution, UAE & Regional Delivery, and Maintenance\nKepler Tech LLC is the premier commercial partner for Citizen Systems dye-sublimation photo printers in the GCC and Africa:\n- Dubai Commercial Office: Office No.1, Abdulla Al Awar Building, D79 Khalid Bin Waleed Road, Bur Dubai, Dubai, United Arab Emirates.\n- Contact Details: Tel: +971 4 323 1008 | WhatsApp: +971 4 323 1008 | Email: sales@keplertechllc.com | Web: www.keplertechllc.com.\n- Delivery Times & Logistics:\n  * UAE Domestic: Rapid delivery within 1 to 2 business days across Dubai, Abu Dhabi, Sharjah, and all emirates.\n  * GCC & Middle East: Export delivery within 6 to 8 business days to Saudi Arabia, Oman, Qatar, Kuwait, and Bahrain via FedEx and Aramex.\n  * Africa Regional: Air freight and courier shipping (6 to 8 business days) to Kenya, Nigeria, Ghana, Tanzania, Uganda, South Africa, and across the African continent.\n- Thermal Printhead Maintenance with CITIZEN-PEN:\n  * The Citizen Thermal Head Cleaning Pen (CITIZEN-PEN, 190.0 AED) is an official genuine maintenance accessory compatible with CX-02, CX-02W, CY-02, and CZ-01.\n  * Formulated with high-purity isopropyl alcohol and an abrasive-free felt tip, it safely dissolves adhesive buildup, burnt dye particles, and environmental dust from the thermal printhead heating elements without scratching the microscopic glass glaze.\n  * Regular cleaning prevents permanent white streaks, uneven density lines, and premature head failure, preserving factory print quality throughout the printer's lifecycle.",
     "model": "CX-02",
     "namespace": "cx02",
     "site": "corporate",
@@ -325,7 +335,9 @@
     "raw_sources": [
       "data/raw/kepler_citizen_photo_printers_brochure.txt",
       "data/raw/cx02_datasheet.txt",
-      "data/raw/cx02_product_page.txt"
+      "data/raw/cx02_product_page.txt",
+      "/opt/salesai/data/verified_descriptions.json",
+      "/opt/salesai/data/sheets/master_complete_products.csv"
     ]
   },
   {
@@ -333,7 +345,7 @@
     "file": "07_epson_lineup.md",
     "section": "Epson SureColor SC-T3100 Technical CAD Plotter Specifications",
     "title": "Epson SureColor SC-T3100 Technical CAD Plotter Specifications",
-    "text": "## Epson SureColor SC-T3100 Technical CAD Plotter Specifications\nThe Epson SureColor SC-T3100 is an entry-level 24-inch wireless technical CAD/GIS plotter:\n- Application: Architecture blueprints, engineering line drawings, CAD, GIS, and posters.\n- Max Width & Media Sizes: 24.0 inches | Supports A1, A2, A3, A4 sheets and 24-inch rolls.\n- Print Speed: 34 seconds per A1 CAD line drawing on plain paper (approx. 106 A1 per hour).\n- Print Resolution: 2,400 x 1,200 DPI.\n- Ink Technology: Epson UltraChrome XD2 all-pigment inks (water and smudge resistant).\n- Connectivity: Wi-Fi, Wi-Fi Direct, Gigabit Ethernet, USB 3.0.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 3,880.00 AED + VAT).",
+    "text": "## Epson SureColor SC-T3100 Technical CAD Plotter Specifications\nThe Epson SureColor SC-T3100 is an entry-level 24-inch wireless technical CAD/GIS plotter:\n- Application: Architecture blueprints, engineering line drawings, CAD, GIS, and posters.\n- Max Width & Media Sizes: 24.0 inches | Supports A1, A2, A3, A4 sheets and 24-inch rolls.\n- Print Speed: 34 seconds per A1 CAD line drawing on plain paper (approx. 106 A1 per hour).\n- Print Resolution: 2,400 x 1,200 DPI.\n- Ink Technology: Epson UltraChrome XD2 all-pigment inks (water and smudge resistant).\n- Connectivity: Wi-Fi, Wi-Fi Direct, Gigabit Ethernet, USB 3.0.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 3880.0 AED + VAT).",
     "model": "CX-02",
     "namespace": "cx02",
     "site": "corporate",
@@ -348,7 +360,7 @@
     "file": "07_epson_lineup.md",
     "section": "Epson SureColor SC-T5100 Technical CAD Plotter Specifications",
     "title": "Epson SureColor SC-T5100 Technical CAD Plotter Specifications",
-    "text": "## Epson SureColor SC-T5100 Technical CAD Plotter Specifications\nThe Epson SureColor SC-T5100 is a 36-inch professional technical CAD and GIS plotter:\n- Application: A0 architectural blueprints, civil engineering plans, and technical construction renderings.\n- Max Width & Media Sizes: 36.0 inches | Supports A0, A1, A2, A3, A4 sheets and up to 36-inch rolls. Stand included.\n- Print Speed: 31 seconds per A1 CAD line drawing on plain paper.\n- Print Resolution: 2,400 x 1,200 DPI.\n- Ink Technology: Epson UltraChrome XD2 all-pigment inks (moisture and archival resistant).\n- Connectivity: Wireless Wi-Fi, Ethernet, USB 3.0.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 9,700.00 AED + VAT).",
+    "text": "## Epson SureColor SC-T5100 Technical CAD Plotter Specifications\nThe Epson SureColor SC-T5100 is a 36-inch professional technical CAD and GIS plotter:\n- Application: A0 architectural blueprints, civil engineering plans, and technical construction renderings.\n- Max Width & Media Sizes: 36.0 inches | Supports A0, A1, A2, A3, A4 sheets and up to 36-inch rolls. Stand included.\n- Print Speed: 31 seconds per A1 CAD line drawing on plain paper.\n- Print Resolution: 2,400 x 1,200 DPI.\n- Ink Technology: Epson UltraChrome XD2 all-pigment inks (moisture and archival resistant).\n- Connectivity: Wireless Wi-Fi, Ethernet, USB 3.0.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 9700.0 AED + VAT).",
     "model": "CX-02",
     "namespace": "cx02",
     "site": "corporate",
@@ -378,7 +390,7 @@
     "file": "07_epson_lineup.md",
     "section": "Epson SureColor SC-P700 13-Inch Photo Printer Specifications",
     "title": "Epson SureColor SC-P700 13-Inch Photo Printer Specifications",
-    "text": "## Epson SureColor SC-P700 13-Inch Photo Printer Specifications\nThe Epson SureColor SC-P700 is a professional 13-inch desktop photo and fine art printer:\n- Application: Professional portrait photographers, exhibition galleries, fine art reproduction, and graphic designers.\n- Max Width & Media Sizes: 13.0 inches | Supports A3+, A3, A4, 4x6, 5x7, 8x10 cut sheets and 13-inch roll paper.\n- Print Speed: Approx. 90 seconds for 8x10 inch / 150 seconds for 13x19 inch prints on Premium Glossy paper.\n- Print Resolution: 5,760 x 1,440 DPI.\n- Ink Technology: UltraChrome PRO10 10-colour pigment inks with Black Enhance Overcoat (BEO) for unmatched D-Max.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 3,400.00 AED + VAT).",
+    "text": "## Epson SureColor SC-P700 13-Inch Photo Printer Specifications\nThe Epson SureColor SC-P700 is a professional 13-inch desktop photo and fine art printer:\n- Application: Professional portrait photographers, exhibition galleries, fine art reproduction, and graphic designers.\n- Max Width & Media Sizes: 13.0 inches | Supports A3+, A3, A4, 4x6, 5x7, 8x10 cut sheets and 13-inch roll paper.\n- Print Speed: Approx. 90 seconds for 8x10 inch / 150 seconds for 13x19 inch prints on Premium Glossy paper.\n- Print Resolution: 5,760 x 1,440 DPI.\n- Ink Technology: UltraChrome PRO10 10-colour pigment inks with Black Enhance Overcoat (BEO) for unmatched D-Max.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 3400.0 AED + VAT).",
     "model": "CX-02",
     "namespace": "cx02",
     "site": "corporate",
@@ -393,7 +405,7 @@
     "file": "07_epson_lineup.md",
     "section": "Epson SureColor SC-P900 17-Inch Photo Printer Specifications",
     "title": "Epson SureColor SC-P900 17-Inch Photo Printer Specifications",
-    "text": "## Epson SureColor SC-P900 17-Inch Photo Printer Specifications\nThe Epson SureColor SC-P900 is a professional 17-inch desktop fine art and exhibition photo printer:\n- Application: Commercial photography studios, fine art printmakers, and premium proofing.\n- Max Width & Media Sizes: 17.0 inches | Supports A2, A3+, A3, A4, 8x10, 8x12 cut sheets and 17-inch roll paper.\n- Print Speed: Approx. 90 seconds for 8x10 inch / 280 seconds for 17x22 inch prints on Premium Glossy paper.\n- Print Resolution: 5,760 x 1,440 DPI.\n- Ink Technology: UltraChrome PRO10 10-colour pigment inks with dedicated Matte Black and Photo Black lines (no switching).\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 4,880.00 AED + VAT).",
+    "text": "## Epson SureColor SC-P900 17-Inch Photo Printer Specifications\nThe Epson SureColor SC-P900 is a professional 17-inch desktop fine art and exhibition photo printer:\n- Application: Commercial photography studios, fine art printmakers, and premium proofing.\n- Max Width & Media Sizes: 17.0 inches | Supports A2, A3+, A3, A4, 8x10, 8x12 cut sheets and 17-inch roll paper.\n- Print Speed: Approx. 90 seconds for 8x10 inch / 280 seconds for 17x22 inch prints on Premium Glossy paper.\n- Print Resolution: 5,760 x 1,440 DPI.\n- Ink Technology: UltraChrome PRO10 10-colour pigment inks with dedicated Matte Black and Photo Black lines (no switching).\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 4880.0 AED + VAT).",
     "model": "CX-02",
     "namespace": "cx02",
     "site": "corporate",
@@ -423,7 +435,7 @@
     "file": "07_epson_lineup.md",
     "section": "Epson SureColor SC-F100 Desktop Sublimation Printer Specifications",
     "title": "Epson SureColor SC-F100 Desktop Sublimation Printer Specifications",
-    "text": "## Epson SureColor SC-F100 Desktop Sublimation Printer Specifications\nThe Epson SureColor SC-F100 is a compact A4 dye-sublimation printer:\n- Application: Promotional merchandise, customized gifts, mugs, phone cases, mousepads, and small textile garments.\n- Max Width & Media Sizes: 8.5 inches (A4, A5, Letter cut sheets).\n- Print Speed: Approx. 65 seconds per A4 sublimation transfer page.\n- Print Resolution: 600 x 1,200 DPI.\n- Ink Technology: Epson UltraChrome DS genuine dye-sublimation ink bottles (OEKO-TEX ECO PASSPORT certified). Refillable ink tanks.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 1,950.00 AED + VAT).",
+    "text": "## Epson SureColor SC-F100 Desktop Sublimation Printer Specifications\nThe Epson SureColor SC-F100 is a compact A4 dye-sublimation printer:\n- Application: Promotional merchandise, customized gifts, mugs, phone cases, mousepads, and small textile garments.\n- Max Width & Media Sizes: 8.5 inches (A4, A5, Letter cut sheets).\n- Print Speed: Approx. 65 seconds per A4 sublimation transfer page.\n- Print Resolution: 600 x 1,200 DPI.\n- Ink Technology: Epson UltraChrome DS genuine dye-sublimation ink bottles (OEKO-TEX ECO PASSPORT certified). Refillable ink tanks.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 1950.0 AED + VAT).",
     "model": "CX-02",
     "namespace": "cx02",
     "site": "corporate",
@@ -438,7 +450,7 @@
     "file": "07_epson_lineup.md",
     "section": "Epson WorkForce Pro WF-C5890 DWF Business Multifunction Printer Specifications",
     "title": "Epson WorkForce Pro WF-C5890 DWF Business Multifunction Printer Specifications",
-    "text": "## Epson WorkForce Pro WF-C5890 DWF Business Multifunction Printer Specifications\nThe Epson WorkForce Pro WF-C5890 DWF is a high-speed A4 business colour multifunction printer (Print, Scan, Copy, Fax):\n- Application: High-demand corporate offices, SMB workgroups, government departments, and legal/financial firms.\n- Max Width & Media Sizes: A4, A5, A6, B5, Letter, Legal. Automatic duplex printing.\n- Print Speed: 25 ISO ppm black / 25 ISO ppm colour (simplex); 16 ipm duplex.\n- Print Resolution: 4,800 x 1,200 DPI.\n- Ink Technology: Epson DURABrite Ultra all-pigment inks (water, highlighter, and smudge resistant). High-yield Replaceable Ink Pack System (RIPS).\n- Technology: PrecisionCore Heat-Free technology delivering ultra-low power consumption and fast first page out time.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 1,656.00 AED + VAT).",
+    "text": "## Epson WorkForce Pro WF-C5890 DWF Business Multifunction Printer Specifications\nThe Epson WorkForce Pro WF-C5890 DWF is a high-speed A4 business colour multifunction printer (Print, Scan, Copy, Fax):\n- Application: High-demand corporate offices, SMB workgroups, government departments, and legal/financial firms.\n- Max Width & Media Sizes: A4, A5, A6, B5, Letter, Legal. Automatic duplex printing.\n- Print Speed: 25 ISO ppm black / 25 ISO ppm colour (simplex); 16 ipm duplex.\n- Print Resolution: 4,800 x 1,200 DPI.\n- Ink Technology: Epson DURABrite Ultra all-pigment inks (water, highlighter, and smudge resistant). High-yield Replaceable Ink Pack System (RIPS).\n- Technology: PrecisionCore Heat-Free technology delivering ultra-low power consumption and fast first page out time.\n- Commercial Enquiries: Distributed by Kepler Tech LLC in Dubai (Verified price: 1656.0 AED + VAT).",
     "model": "CX-02",
     "namespace": "cx02",
     "site": "corporate",

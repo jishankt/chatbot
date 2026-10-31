@@ -1,0 +1,332 @@
+[
+  {
+    "chunk_id": "comp_chunk_001",
+    "file": "about.md",
+    "section": "# Kepler Tech LLC - Company Overview & About Us",
+    "title": "# Kepler Tech LLC - Company Overview & About Us",
+    "text": "## # Kepler Tech LLC - Company Overview & About Us\n- RAW_SOURCE_FILE: data/raw/company/keplertechllc_about_us.txt\n- SITE: corporate (keplertechllc.com) & store (keplertech.ae)\n- SOURCE_DATE: 2026-10-26\n- NAMESPACE: company",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "corporate (keplertechllc.com) & store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertechllc_about_us.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_002",
+    "file": "about.md",
+    "section": "Company Profile",
+    "title": "Company Profile",
+    "text": "## Company Profile\nKepler Tech LLC is a premier technology distributor and provider of professional printing hardware, wide-format plotters, dye-sublimation photo systems, consumables, and digital imaging solutions based in Dubai, United Arab Emirates. Operating for over a decade (10+ years experience), Kepler Tech serves businesses, photo studios, event companies, print service providers, and resellers across the UAE, all six GCC countries, and the African continent.",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "corporate (keplertechllc.com) & store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertechllc_about_us.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_003",
+    "file": "about.md",
+    "section": "Core Specialization",
+    "title": "Core Specialization",
+    "text": "## Core Specialization\nKepler Tech is an authorized distributor and dealer for world-leading printing brands including Epson and Citizen. The company provides complete end-to-end printing solutions encompassing:\n1. Hardware supply: Office business printers, large format CAD/GIS plotters, graphic production printers, and compact dye-sublimation event photo printers.\n2. Official consumables: OEM inks, pigment and dye cartridges, printheads, maintenance boxes, and specialized media sets.\n3. Media & Fine Art: Inkjet photo papers, fine art rag, backlit films, and canvas from leading mills (Innova, Olmec, Korejet, Epson).\n4. Technical Services: Certified maintenance, repair, printer rentals, leasing, and Managed Print Services (MPS).",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "corporate (keplertechllc.com) & store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertechllc_about_us.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_004",
+    "file": "about.md",
+    "section": "Facility and Team",
+    "title": "Facility and Team",
+    "text": "## Facility and Team\nKepler Tech operates its main office and central distribution warehouse located on Khalid Bin Waleed Road in Dubai. The company maintains an in-house team of manufacturer-trained printer engineers and customer support specialists delivering pre-sales guidance, ICC profile color calibration, and remote/on-site after-sales technical support.",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "corporate (keplertechllc.com) & store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertechllc_about_us.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_005",
+    "file": "brands_and_categories.md",
+    "section": "# Kepler Tech LLC - Brands & Product Categories",
+    "title": "# Kepler Tech LLC - Brands & Product Categories",
+    "text": "## # Kepler Tech LLC - Brands & Product Categories\n- RAW_SOURCE_FILE: data/raw/company/keplertechllc_countries_we_serve.txt\n- SITE: corporate (keplertechllc.com) & store (keplertech.ae)\n- SOURCE_DATE: 2026-10-26\n- NAMESPACE: company",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "corporate (keplertechllc.com) & store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertechllc_countries_we_serve.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_006",
+    "file": "brands_and_categories.md",
+    "section": "Authorized Brands",
+    "title": "Authorized Brands",
+    "text": "## Authorized Brands\nKepler Tech LLC supplies genuine products from world-leading imaging and printing manufacturers with full manufacturer warranties:\n- **Epson**: Authorized dealer for WorkForce Pro business printers, SureColor large-format printers, CAD/GIS plotters, and OEM inks.\n- **Citizen**: Official distributor for Citizen dye-sublimation photo printers (CX Series, CY Series, CZ Series) and thermal media sets.\n- **Innova**: Premium fine art paper, photo paper, and museum-grade archival media.\n- **Olmec**: Professional photo and resin-coated inkjet media.\n- **Korejet**: High-performance inkjet papers, canvas, and wide-format banner media.",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "corporate (keplertechllc.com) & store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertechllc_countries_we_serve.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_007",
+    "file": "brands_and_categories.md",
+    "section": "Product Categories Available",
+    "title": "Product Categories Available",
+    "text": "## Product Categories Available\n1. **Office Printers (Epson)**:\n   - Lineup: Epson WorkForce Pro Series, AM-C Series, EM-C Series.\n   - Applications: Fast, energy-efficient Heat-Free inkjet document printing for corporate offices and institutions.\n   - Category Link: https://www.keplertechllc.com/product-category/printers/business-printer/\n2. **Large Format & Plotters (Epson)**:\n   - Lineup: Epson SureColor Graphic Series, CAD/GIS Plotters, Technical Wide-Format Printers.\n   - Applications: Architectural blueprints, engineering schematics, GIS mapping, fine art reproduction, and signage.\n   - Category Link: https://www.keplertechllc.com/product-category/printers/epson-large-format-inkjet-printer/\n3. **Dye-Sublimation Photo Printers (Citizen)**:\n   - Active Detail Model: Citizen CX-02 (full technical specifications, live stock, and instant automated quotes available).\n   - Additional Carried Models: Citizen CX-02W, Citizen CY-02, Citizen CZ-01. (Known Citizen models with commercial detail pending; sales specialist handles inquiries and formal quotes).\n   - Category Link: https://www.keplertechllc.com/product-category/printers/dye-sublimation-citizen-photo-printer/\n4. **Inkjet Media & Paper**:\n   - Lineup: Epson, Korejet, Innova, Olmec — Glossy, Luster, Matte, Fine Art, Canvas, Backlit Film.\n   - Category Link: https://www.keplertechllc.com/product-category/inkjet-printing-paper/\n5. **Epson Inks & Cartridges**:\n   - Lineup: UltraChrome HDX, T-Series OEM Inks, Pigment and Dye Cartridges.\n   - Category Link: https://www.keplertechllc.com/product-category/inks-consumables/epson-printer-ink-cartridges/\n6. **Consumables & Spare Parts**:\n   - Lineup: Maintenance boxes, OEM printheads, replacement cutter blades, cleaning pens, and accessories.\n   - Category Link: https://www.keplertechllc.com/product-category/inks-consumables/",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "corporate (keplertechllc.com) & store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertechllc_countries_we_serve.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_008",
+    "file": "contacts.md",
+    "section": "# Kepler Tech LLC - Contact Information & Business Channels",
+    "title": "# Kepler Tech LLC - Contact Information & Business Channels",
+    "text": "## # Kepler Tech LLC - Contact Information & Business Channels\n- RAW_SOURCE_FILE: data/raw/company/keplertech_ae_contact_us.txt\n- SITE: corporate (keplertechllc.com) & store (keplertech.ae)\n- SOURCE_DATE: 2026-10-26\n- NAMESPACE: company",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "corporate (keplertechllc.com) & store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertech_ae_contact_us.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_009",
+    "file": "contacts.md",
+    "section": "Official Contact Directory",
+    "title": "Official Contact Directory",
+    "text": "## Official Contact Directory\nCustomers across the UAE, GCC, and Africa can reach the Kepler Tech team through the following direct channels:\n\n- **Company Name**: Kepler Tech LLC\n- **Physical Address**: D79 Khalid Bin Waleed Road, Bur Dubai, Dubai, United Arab Emirates\n- **Main Landline Phone**: 00971 4 323 1008\n- **Second Direct Phone**: 00971 55 835 8586\n- **Sales & Quotes WhatsApp**: +971 50 890 1641\n- **Order Tracking & Shipment Updates Phone**: +971 521 21 4898\n- **Official Email**: info@keplertech.ae (also info@keplertechllc.com)\n- **Websites**:\n  - Corporate Portal: https://www.keplertechllc.com/\n  - Online Store & Services: https://www.keplertech.ae/\n- **Working Hours**:\n  - Monday to Friday: 8:30 AM – 5:30 PM (GST)\n  - Saturday: 8:30 AM – 1:00 PM (GST)\n  - Sunday: Closed\n- **Local Store Pickup**:\n  - Store pickup available at D79 Khalid Bin Waleed Road, Dubai (ready within 1 to 2 business days after order confirmation).",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "corporate (keplertechllc.com) & store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertech_ae_contact_us.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_010",
+    "file": "coverage_and_delivery.md",
+    "section": "# Kepler Tech LLC - Geographic Coverage, Shipping & Delivery Timelines",
+    "title": "# Kepler Tech LLC - Geographic Coverage, Shipping & Delivery Timelines",
+    "text": "## # Kepler Tech LLC - Geographic Coverage, Shipping & Delivery Timelines\n- RAW_SOURCE_FILE: data/raw/company/keplertechllc_countries_we_serve.txt\n- SITE: corporate (keplertechllc.com)\n- SOURCE_DATE: 2026-10-26\n- NAMESPACE: company",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "corporate (keplertechllc.com)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertechllc_countries_we_serve.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_011",
+    "file": "coverage_and_delivery.md",
+    "section": "Shipping & Regional Coverage",
+    "title": "Shipping & Regional Coverage",
+    "text": "## Shipping & Regional Coverage\nKepler Tech LLC operates global fulfillment from its central distribution center in Dubai, shipping hardware, consumables, and media across the GCC and the African continent.",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "corporate (keplertechllc.com)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertechllc_countries_we_serve.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_012",
+    "file": "coverage_and_delivery.md",
+    "section": "1. GCC Countries & Delivery Times",
+    "title": "1. GCC Countries & Delivery Times",
+    "text": "## 1. GCC Countries & Delivery Times\nDedicated regional logistics cover all six GCC member states:\n- **United Arab Emirates (UAE)**:\n  - Delivery Time: 1–3 Business Days (FAQ states 1–2 days; our team will confirm).\n  - Shipping Fee: Free shipping on orders over 400 AED (older 2023 terms note a flat AED 10 rate for small orders; our team will confirm).\n  - Store Pickup: Free local pickup at our Dubai store within 1–2 business days.\n- **Saudi Arabia (KSA)**:\n  - Delivery Time: 5–8 Business Days.\n  - Coverage: Riyadh, Jeddah, Dammam, Makkah, and all regions.\n  - Pricing & VAT: VAT inclusive pricing.\n- **Kuwait**:\n  - Delivery Time: 4–6 Business Days.\n  - Coverage: Kuwait City, Ahmadi, Hawalli, and all governorates.\n  - Pricing & VAT: VAT inclusive pricing.\n- **Qatar**:\n  - Delivery Time: 4–6 Business Days.\n  - Coverage: Doha, Al Wakrah, Al Khor, and all municipalities.\n  - Pricing & VAT: VAT inclusive pricing.\n- **Bahrain**:\n  - Delivery Time: 4–6 Business Days.\n  - Coverage: Manama, Muharraq, Riffa, and all governorates.\n  - Pricing & VAT: VAT inclusive pricing.\n- **Oman**:\n  - Delivery Time: 4–7 Business Days.\n  - Coverage: Muscat, Sohar, Salalah, and all governorates.\n  - Pricing & VAT: VAT inclusive pricing.",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "corporate (keplertechllc.com)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertechllc_countries_we_serve.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_013",
+    "file": "coverage_and_delivery.md",
+    "section": "2. Pan-Africa Shipping",
+    "title": "2. Pan-Africa Shipping",
+    "text": "## 2. Pan-Africa Shipping\nKepler Tech ships commercial printing equipment, photo printers, large-format plotters, and media rolls across Africa through established international air and ocean cargo partners (Aramex, FedEx, and freight forwarders).\n- Major Markets Served: Nigeria, South Africa, Kenya, Ghana, Ethiopia, Tanzania, Rwanda, Uganda, Senegal, Côte d'Ivoire, Zambia, Mozambique, Namibia, Botswana, and more.\n- Customs & Documentation: Kepler Tech assists with commercial invoices, certificate of origin, packing lists, and export declarations.\n- Reseller & Bulk Shipments: Consolidated freight and customized volume quotations available via the corporate sales desk.",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "corporate (keplertechllc.com)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertechllc_countries_we_serve.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_014",
+    "file": "coverage_and_delivery.md",
+    "section": "3. Order Processing",
+    "title": "3. Order Processing",
+    "text": "## 3. Order Processing\n- Standard Order Processing: All orders are processed within 24 hours (1 to 2 business days).",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "corporate (keplertechllc.com)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertechllc_countries_we_serve.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_015",
+    "file": "policies.md",
+    "section": "# Kepler Tech LLC - Commercial Policies & Warranty",
+    "title": "# Kepler Tech LLC - Commercial Policies & Warranty",
+    "text": "## # Kepler Tech LLC - Commercial Policies & Warranty\n- RAW_SOURCE_FILE: data/raw/company/terms_and_conditions.txt\n- SITE: corporate (keplertechllc.com) & store (keplertech.ae)\n- SOURCE_DATE: 2026-10-26\n- NAMESPACE: company",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "corporate (keplertechllc.com) & store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/terms_and_conditions.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_016",
+    "file": "policies.md",
+    "section": "Commercial Terms & Policies",
+    "title": "Commercial Terms & Policies",
+    "text": "## Commercial Terms & Policies\n### 1. Free Shipping Threshold & Delivery Fees\n- Free Delivery: Orders over 400 AED qualify for free shipping within the UAE (per 2026 Countries We Serve policy; older 2023 terms state flat rate AED 10 for smaller deliveries; our team will confirm).\n- Delivery Fees Outside UAE: Calculated at checkout based on destination country, freight weight, and carrier.\n\n### 2. Order Processing & Transit Time\n- Order Processing: All orders are processed within 24 hours (1 to 2 business days).\n- UAE Domestic Transit: 1 to 3 business days (FAQ states 1 to 2 days; our team will confirm).\n- GCC Regional Transit: 4 to 8 business days depending on destination country.\n- International / Africa Transit: 6 to 8 business days via courier or customized freight schedule.\n\n### 3. Payment Methods\n- Accepted Payment Methods: Credit Card (Visa, MasterCard in AED), Debit Card, and PayPal. Payment is required at time of order placement.\n\n### 4. Cancellation Policy\n- Cancellation Window: Orders may be cancelled within 24 hours of placing the order prior to dispatch.\n\n### 5. Return & Refund Policy\n- Inspection & Packaging: Goods accepted for return only if defective or non-conforming, in original unopened delivery packaging.\n- Defect Notification: Customer must notify Kepler Tech within 2 days of receipt.\n- Refund Window: Refunds processed via original mode of payment within up to 45 days following inspection.\n\n### 6. Warranty Terms\n- Genuine Products: All hardware supplied by Kepler Tech carries full manufacturer warranty.\n- Warranty Coverage: We provide genuine manufacturer-backed warranty support; specific duration and terms for individual models (including the Citizen CX-02 warranty) will be confirmed by our technical team.\n\n### 7. VAT & Tax Treatment\n- UAE VAT Treatment: UAE VAT status is not stated as fact without explicit configuration.\n- Non-UAE GCC Countries: According to the official Countries We Serve specifications, prices for Saudi Arabia, Kuwait, Qatar, Bahrain, and Oman include VAT.\n\n### 8. Bulk Orders & Volume Discounts\n- Volume Pricing: Volume discounts are available for commercial bulk orders, studio bundles, and reseller consignments.\n- Quotation Process: Inquiries for bulk orders (or quantities exceeding 10 units) are routed directly to corporate sales specialists to compute tailored commercial rates.",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "corporate (keplertechllc.com) & store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/terms_and_conditions.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_017",
+    "file": "services.md",
+    "section": "# Kepler Tech LLC - Technical Services & Solutions",
+    "title": "# Kepler Tech LLC - Technical Services & Solutions",
+    "text": "## # Kepler Tech LLC - Technical Services & Solutions\n- RAW_SOURCE_FILE: data/raw/company/keplertech_ae_services.txt\n- SITE: store (keplertech.ae)\n- SOURCE_DATE: 2026-10-26\n- NAMESPACE: company",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertech_ae_services.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_018",
+    "file": "services.md",
+    "section": "Comprehensive Services Overview",
+    "title": "Comprehensive Services Overview",
+    "text": "## Comprehensive Services Overview\nKepler Tech LLC offers complete lifecycle support for business, office, and production printers across Dubai and the UAE. Service inquiries create a dedicated CRM lead and connect customers directly with certified service engineers.",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertech_ae_services.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_019",
+    "file": "services.md",
+    "section": "1. Printer Repair Services (Dubai & UAE)",
+    "title": "1. Printer Repair Services (Dubai & UAE)",
+    "text": "## 1. Printer Repair Services (Dubai & UAE)\n- Scope: Multi-brand diagnostics, printhead recovery, nozzle clog clearing, carriage belt replacement, roller maintenance, motherboard repair, and firmware calibration.\n- Supported Brands: Authorized servicing for Epson, Citizen, and major office and photo printing systems.\n- Quality Guarantee: 100% genuine OEM replacement parts, emergency on-site service in Dubai, and carry-in repair at our Bur Dubai service center.\n- Service Link: https://www.keplertech.ae/services/best-printer-repair-service-in-dubai/",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertech_ae_services.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_020",
+    "file": "services.md",
+    "section": "2. Printer Rental & Leasing",
+    "title": "2. Printer Rental & Leasing",
+    "text": "## 2. Printer Rental & Leasing\n- Flexible Terms: Short-term printer rentals (for exhibitions, conferences, sports events, photo booths, and seasonal projects) and long-term multi-year corporate leases.\n- Equipment Offered: High-speed Epson office multifunction printers, wide-format plotters, and Citizen dye-sublimation event photo printers.\n- Inclusions: Delivery, installation, user onboarding, ongoing ink/toner supply, and complimentary maintenance visits.\n- Service Link: https://www.keplertech.ae/services/best-printer-rental-and-lease-service-in-dubai/",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertech_ae_services.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_021",
+    "file": "services.md",
+    "section": "3. Managed Print Services (MPS / FSMA)",
+    "title": "3. Managed Print Services (MPS / FSMA)",
+    "text": "## 3. Managed Print Services (MPS / FSMA)\n- Overview: Full Service & Maintenance Agreements (FSMA) designed to reduce enterprise printing costs by up to 30%.\n- Features: Automated ink and supply replenishment, proactive remote monitoring, scheduled preventive maintenance, and guaranteed SLA response times.\n- Service Link: https://www.keplertech.ae/services/best-managed-print-services-in-dubai-uae/",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertech_ae_services.txt"
+    ]
+  },
+  {
+    "chunk_id": "comp_chunk_022",
+    "file": "services.md",
+    "section": "4. Software & Event Solutions",
+    "title": "4. Software & Event Solutions",
+    "text": "## 4. Software & Event Solutions\n- Solutions: Enterprise Resource Planning (ERP) integrations, Adobe creative software licensing, and custom automated photo booth systems.",
+    "model": "kepler_company",
+    "namespace": "company",
+    "site": "store (keplertech.ae)",
+    "source_date": "2026-10-26",
+    "source_url": "https://www.keplertechllc.com/product/citizen-cx-02-photo-printer/",
+    "raw_sources": [
+      "data/raw/company/keplertech_ae_services.txt"
+    ]
+  }
+]

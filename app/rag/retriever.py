@@ -157,9 +157,22 @@ def retrieve(
 
     # Filter chunks by category/model if specified
     q_lower = query.lower()
-    is_cad_query = category == "cad_plotter" or any(w in q_lower for w in ["cad", "blueprint", "plotter", "architectural", "t3100", "t5100", "t7700"])
-    is_office_query = category == "business_mfp" or any(w in q_lower for w in ["office", "workforce", "c5890", "em-c800", "am-c400", "duplex"])
-    is_scanner_query = category == "scanner" or any(w in q_lower for w in ["scanner", "ds-530", "ds-770", "scanning"])
+
+    # Rejection of unlisted competitor brands and non-commercial consumer lines (Rule 4)
+    UNLISTED_BRANDS = [
+        "canon", "dnp", "fujifilm", "fuji", "kodak", "mitsubishi", "sinfonia", "hiti",
+        "pentax", "lexmark", "aeroprint", "brother", "kyocera", "ricoh", "konica", "xerox",
+        "hp", "hewlett", "selphy", "ecotank", "l805", "coffee", "biriyani", "pizza", "burger",
+        "കാനൺ", "دی ان بی", "فوجي",
+        "graphtec", "summa", "roland", "mimaki", "mutoh", "silhouette", "cricut",
+        "sony", "arri", "sennheiser", "rode", "shure", "zoom", "tascam", "yamaha", "genelec", "focusrite"
+    ]
+    if any(b in q_lower for b in UNLISTED_BRANDS):
+        return []
+
+    is_cad_query = category == "cad_plotter" or any(w in q_lower for w in ["cad", "blueprint", "architectural"]) or (("plotter" in q_lower or "plotters" in q_lower) and any(ep in q_lower for ep in ["epson", "kepler", "surecolor", "sc-t", "t3100", "t5100", "t7700"]))
+    is_office_query = category == "business_mfp" or any(w in q_lower for w in ["workforce", "business printer"])
+    is_scanner_query = category == "scanner" or any(w in q_lower for w in ["scanner", "scanning", "sheetfed duplex"])
 
     if is_cad_query and not any(cx in q_lower for cx in ["cx-02", "cx02"]):
         candidate_chunks = [c for c in chunks if "CAD" in c.get("title", "") or "T3100" in c.get("title", "") or "T5100" in c.get("title", "") or "T7700" in c.get("title", "")]
@@ -180,7 +193,7 @@ def retrieve(
             "cx-02", "cx02", "cx 02", "cx-02w", "cx02w", "cx 02w", "cy-02", "cy02", "cy 02", "cz-01", "cz01", "cz 01",
             "citizen", "kepler", "ms46", "ms57", "ms68", "cleaning pen", "cx2", "cx-2",
             "epson", "surecolor", "workforce", "t3100", "t5100", "t7700", "p700", "p900", "p9500", "p8500",
-            "f100", "f500", "c5890", "em-c800", "am-c400", "ds-530", "ds-770", "scanner", "plotter", "blueprint", "cad",
+            "f100", "f500", "c5890", "em-c800", "am-c400", "ds-530", "ds-770", "sc-t",
             "overcoat", "cups", "strip", "strips", "dual-cut", "dual cut",
             "سيتيزن", "ابسون", "إبسون", "كيبلر", "الأوفركوت", "أوفركوت", "ريبان", "الريبان",
             "سي اكس", "سي واي", "سي زد", "സിറ്റിസൺ", "കെപ്ലർ", "എപ്സൺ",
@@ -218,9 +231,15 @@ def retrieve(
         use_dense=eff_dense,
     )
     if not res and namespace == "cx02":
-        comp_res = retrieve(query, top_k=top_k, score_threshold=0.04, min_word_coverage=0.15, use_dense=False, namespace="company")
-        if comp_res:
-            return comp_res
+        company_triggers = [
+            "company", "corporate", "kepler", "delivery", "shipping", "office", "contact", "phone", "whatsapp",
+            "warranty", "return", "refund", "hours", "address", "location", "showroom", "dubai", "abu dhabi", "sharjah",
+            "شحن", "توصيل", "ضمان", "معرض", "عنوان", "دوام"
+        ]
+        if any(tr in q_lower for tr in company_triggers):
+            comp_res = retrieve(query, top_k=top_k, score_threshold=0.04, min_word_coverage=0.15, use_dense=False, namespace="company")
+            if comp_res:
+                return comp_res
     return res
 
 

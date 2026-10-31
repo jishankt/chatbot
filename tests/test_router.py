@@ -16,13 +16,16 @@ def test_router_priority_1_guardrails():
     res_comp = classify_intent("How does it compare to DNP DS620?")
     assert res_comp["priority"] == 1
 
-    # Other Citizen model
-    res_other = classify_intent("Do you sell the Citizen CX-02W wide printer?")
-    assert res_other["priority"] == 1
-
-    # Unsupported size
+    # Unsupported size on CX-02
     res_a4 = classify_intent("Can I print A4 sheets on the CX-02?")
     assert res_a4["priority"] == 1
+
+
+def test_router_other_citizen_models_category_browse():
+    # WP0.6: Other Citizen models are handled as catalog category browse
+    res_other = classify_intent("Do you sell the Citizen CX-02W wide printer?")
+    assert res_other["intent"] == "category_browse"
+    assert res_other["priority"] == 8
 
 
 def test_router_priority_2_small_talk():

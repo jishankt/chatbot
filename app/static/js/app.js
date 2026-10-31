@@ -1,102 +1,255 @@
+/**
+ * Kepler Assistant — Frontend Application Logic
+ * Matches Kepler Tech LLC (Dubai) Reference Interface
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Elements
   const messagesStream = document.getElementById("messages-stream");
   const chatInput = document.getElementById("chat-input");
   const sendBtn = document.getElementById("send-btn");
   const typingIndicator = document.getElementById("typing-indicator");
   const userIdentity = document.getElementById("user-identity");
-  const clearBtn = document.getElementById("clear-btn");
-  
-  // Telemetry elements
+
+  // Header controls
+  const btnLogin = document.getElementById("btn-login");
+  const headerMenuBtn = document.getElementById("header-menu-btn");
+  const headerDropdownMenu = document.getElementById("header-dropdown-menu");
+  const headerExpandBtn = document.getElementById("header-expand-btn");
+  const headerCloseBtn = document.getElementById("header-close-btn");
+
+  const btnOpenInspector = document.getElementById("btn-open-inspector");
+  const btnLoadHistory = document.getElementById("btn-load-history");
+  const btnExportHistory = document.getElementById("btn-export-history");
+  const btnClearChat = document.getElementById("btn-clear-chat");
+  const btnCallDesk = document.getElementById("btn-call-desk");
+
+  // Drawer
+  const inspectorDrawer = document.getElementById("inspector-drawer");
+  const drawerCloseBtn = document.getElementById("drawer-close-btn");
+  const btnResetUser = document.getElementById("btn-reset-user");
+
+  // Telemetry
   const telemetryIntent = document.getElementById("telemetry-intent");
   const telemetryPriority = document.getElementById("telemetry-priority");
   const telemetryLatency = document.getElementById("telemetry-latency");
   const telemetryTools = document.getElementById("telemetry-tools");
-  const inspectorToolsList = document.getElementById("inspector-tools-list");
-  const inspectorChunksList = document.getElementById("inspector-chunks-list");
   const rawJsonPre = document.getElementById("raw-json-pre");
-
-  // Tabs
-  const tabBtns = document.querySelectorAll(".tab-btn");
-  const tabContents = document.querySelectorAll(".tab-content");
+  const btnRefreshLeads = document.getElementById("btn-refresh-leads");
+  const leadsTbody = document.getElementById("leads-tbody");
 
   // Channel
   let currentChannel = "web";
   const channelWebBtn = document.getElementById("channel-web");
   const channelWaBtn = document.getElementById("channel-wa");
 
-  channelWebBtn.addEventListener("click", () => {
-    currentChannel = "web";
-    channelWebBtn.classList.add("active");
-    channelWaBtn.classList.remove("active");
-    showToast("Channel switched to Web Widget API (/chat)");
+  // Emoji
+  const btnEmoji = document.getElementById("btn-emoji");
+  const toastContainer = document.getElementById("toast-container");
+
+  function showToast(message) {
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    const iconSpan = document.createElement("span");
+    iconSpan.textContent = "💬 ";
+    const textSpan = document.createElement("span");
+    textSpan.textContent = message;
+    toast.appendChild(iconSpan);
+    toast.appendChild(textSpan);
+    toastContainer.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = "0";
+      toast.style.transition = "opacity 0.3s ease";
+      setTimeout(() => toast.remove(), 300);
+    }, 2800);
+  }
+
+  // Header Menu Toggle
+  if (headerMenuBtn) {
+    headerMenuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      headerDropdownMenu.classList.toggle("active");
+    });
+  }
+
+  document.addEventListener("click", () => {
+    if (headerDropdownMenu) headerDropdownMenu.classList.remove("active");
   });
 
-  channelWaBtn.addEventListener("click", () => {
-    currentChannel = "whatsapp";
-    channelWaBtn.classList.add("active");
-    channelWebBtn.classList.remove("active");
-    showToast("Channel switched to WhatsApp Cloud Simulator");
-  });
+  // Drawer Open/Close via Login button or Menu Item
+  function toggleDrawer() {
+    inspectorDrawer.classList.toggle("open");
+    if (inspectorDrawer.classList.contains("open")) {
+      fetchLeads();
+    }
+  }
 
-  // Tab switching
-  tabBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      tabBtns.forEach(b => b.classList.remove("active"));
-      tabContents.forEach(c => c.classList.remove("active"));
-      btn.classList.add("active");
-      const target = document.getElementById(btn.dataset.tab);
-      if (target) target.classList.add("active");
+  if (btnLogin) btnLogin.addEventListener("click", toggleDrawer);
+  if (btnOpenInspector) btnOpenInspector.addEventListener("click", toggleDrawer);
+  if (drawerCloseBtn) drawerCloseBtn.addEventListener("click", () => inspectorDrawer.classList.remove("open"));
 
-      if (btn.dataset.tab === "tab-leads") {
-        fetchLeads();
+  // Fullscreen / Expand
+  if (headerExpandBtn) {
+    headerExpandBtn.addEventListener("click", () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+        showToast("Fullscreen mode enabled");
+      } else {
+        document.exitFullscreen().catch(() => {});
+        showToast("Fullscreen mode exited");
       }
     });
-  });
+  }
 
-  // Format message text with simple markdown
+  // Reset Conversation
+  function resetConversation() {
+    const msg1 = document.getElementById("initial-msg-1");
+
+    messagesStream.innerHTML = "";
+    if (msg1) messagesStream.appendChild(msg1);
+    showToast("Conversation view reset");
+  }
+
+  if (headerCloseBtn) headerCloseBtn.addEventListener("click", resetConversation);
+  if (btnClearChat) btnClearChat.addEventListener("click", resetConversation);
+
+  // Call Desk
+  if (btnCallDesk) {
+    btnCallDesk.addEventListener("click", () => {
+      window.open("tel:0097143231008");
+    });
+  }
+
+  // Channel toggles inside drawer
+  if (channelWebBtn && channelWaBtn) {
+    channelWebBtn.addEventListener("click", () => {
+      currentChannel = "web";
+      channelWebBtn.classList.add("active");
+      channelWaBtn.classList.remove("active");
+      showToast("Switched to Web Widget API");
+    });
+
+    channelWaBtn.addEventListener("click", () => {
+      currentChannel = "whatsapp";
+      channelWaBtn.classList.add("active");
+      channelWebBtn.classList.remove("active");
+      showToast("Simulating WhatsApp Cloud Channel");
+    });
+  }
+
+  // Reset Customer Phone
+  if (btnResetUser) {
+    btnResetUser.addEventListener("click", () => {
+      const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+      userIdentity.value = `+97150${randomSuffix}89`;
+      resetConversation();
+      showToast(`New Customer ID: ${userIdentity.value}`);
+    });
+  }
+
+  // Format Markdown
   function formatMarkdown(text) {
     if (!text) return "";
-    let formatted = text
+    // Normalize pre-escaped entities from backend to prevent double-escaping
+    let unescaped = text
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'");
+
+    let formatted = unescaped
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;");
 
-    // Bold *text*
+    // Bold **text** or *text*
+    formatted = formatted.replace(/\*\*([^\*]+)\*\*/g, "<strong>$1</strong>");
     formatted = formatted.replace(/\*([^\*]+)\*/g, "<strong>$1</strong>");
 
-    // Links: https://...
-    formatted = formatted.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+    // Line breaks
+    formatted = formatted.replace(/\n/g, "<br>");
+
+    // Links (sanitized to http/https only)
+    formatted = formatted.replace(
+      /(https?:\/\/[^\s<"']+)/g,
+      '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'
+    );
 
     return formatted;
   }
 
+  // Append Message
   function appendMessage(role, text, metadata = {}) {
-    const bubble = document.createElement("div");
-    bubble.className = `message-bubble ${role}`;
+    const row = document.createElement("div");
 
-    if (metadata.intent === "guardrails") {
-      bubble.classList.add("guardrail-trigger");
-    } else if (metadata.intent === "quote") {
-      bubble.classList.add("quote-trigger");
+    if (role === "user") {
+      row.className = "message-row user-row";
+      const bubble = document.createElement("div");
+      bubble.className = "message-bubble user-bubble";
+      bubble.textContent = text; // Safe textContent prevents XSS entirely
+      row.appendChild(bubble);
+    } else {
+      row.className = "message-row bot-row";
+
+      const isProductSpecialist = metadata.role === "specialist" || metadata.intent !== "greeting";
+
+      let bubbleHtml = `
+        <div class="bot-msg-avatar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </div>
+        <div class="message-bubble bot-bubble ${isProductSpecialist ? 'product-specialist-bubble' : 'front-desk-bubble'}">
+          <div class="bubble-role-tag ${isProductSpecialist ? 'product-specialist-tag' : 'front-desk-tag'}">
+            <span class="badge-dot ${isProductSpecialist ? 'blue-dot' : 'green-dot'}">●</span> ${isProductSpecialist ? 'Product Specialist' : '🌿 Front Desk'}
+          </div>
+          <div class="bubble-text">${formatMarkdown(text)}</div>
+      `;
+
+      // Render Matched Cards if present
+      if (metadata.cards && metadata.cards.length > 0) {
+        const isCarousel = metadata.cards.length > 1;
+        bubbleHtml += `<div class="${isCarousel ? 'cards-carousel-container' : 'single-card-wrap'}">`;
+        
+        metadata.cards.forEach(card => {
+          bubbleHtml += `
+            <div class="product-match-card">
+              <div class="card-img-box">
+                <img src="${card.image_url}" alt="${card.title}" onerror="this.src='/static/img/citizen_cx02_card.webp'">
+              </div>
+              <div class="card-badge-row">
+                <span class="card-badge">${card.badge || 'Hardware'}</span>
+              </div>
+              <div class="card-title">${card.title}</div>
+              <div class="card-price-line">${card.price_subtext || card.price_display}</div>
+              <div class="card-rec-line">
+                <span class="card-rec-check">✓</span>
+                <span>${card.recommendation || 'Primary recommendation matching your specifications.'}</span>
+              </div>
+              <div class="card-divider"></div>
+              <a href="${card.url}" target="_blank" rel="noopener noreferrer" class="card-btn-primary">
+                View Details ↗
+              </a>
+              <button class="card-btn-compare" data-compare-query="${card.compare_query || ('Compare ' + card.title)}">
+                <span>▢</span> Compare
+              </button>
+            </div>
+          `;
+        });
+        bubbleHtml += `</div>`;
+      }
+
+      bubbleHtml += `</div>`;
+      row.innerHTML = bubbleHtml;
     }
 
-    const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-    let metaHtml = `<div class="bubble-meta">
-      <span>${role === "user" ? (userIdentity.value || "Customer") : "Citizen CX-02 AI"}</span>
-      <span>•</span>
-      <span>${timeStr}</span>
-    </div>`;
-
-    let contentHtml = `<div class="bubble-content">${formatMarkdown(text)}</div>`;
-    bubble.innerHTML = metaHtml + contentHtml;
-
-    messagesStream.appendChild(bubble);
+    messagesStream.appendChild(row);
     messagesStream.scrollTop = messagesStream.scrollHeight;
   }
 
   function showTyping() {
-    typingIndicator.style.display = "flex";
+    typingIndicator.style.display = "inline-flex";
     messagesStream.scrollTop = messagesStream.scrollHeight;
   }
 
@@ -104,104 +257,63 @@ document.addEventListener("DOMContentLoaded", () => {
     typingIndicator.style.display = "none";
   }
 
-  function showToast(msg) {
-    const container = document.getElementById("toast-container");
-    const toast = document.createElement("div");
-    toast.className = "toast";
-    toast.innerHTML = `<span>ℹ️</span><span>${msg}</span>`;
-    container.appendChild(toast);
-    setTimeout(() => {
-      toast.style.opacity = "0";
-      setTimeout(() => toast.remove(), 300);
-    }, 3000);
-  }
-
-  // Send message
+  // Send Message Logic
   async function sendMessage(textToSend) {
-    const text = (textToSend || chatInput.value).trim();
+    const text = textToSend || chatInput.value.trim();
     if (!text) return;
 
     chatInput.value = "";
-    sendBtn.disabled = true;
-
     appendMessage("user", text);
     showTyping();
 
-    const senderId = userIdentity.value.trim() || "+971501234567";
+    const senderPhone = userIdentity ? userIdentity.value.trim() : "+971501234567";
 
     try {
-      const res = await fetch("/chat", {
+      const response = await fetch("/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: jsonPayload(text, senderId)
+        body: JSON.stringify({
+          message: text,
+          sender_id: senderPhone,
+          phone: senderPhone,
+          channel: currentChannel
+        })
       });
 
-      const data = await res.json();
+      const data = await response.json();
       hideTyping();
 
-      if (res.ok) {
-        appendMessage("assistant", data.reply, { intent: data.intent });
-        updateInspector(data);
+      if (response.ok) {
+        appendMessage("bot", data.reply, data);
+        updateTelemetry(data);
       } else {
-        appendMessage("assistant", "⚠️ Server Error: " + (data.error || "Failed to process request."));
+        appendMessage("bot", `⚠️ Error (${response.status}): ${data.error || "Could not process message."}`, { role: "specialist" });
       }
     } catch (err) {
       hideTyping();
-      appendMessage("assistant", "⚠️ Network Error: Unable to reach /chat API.");
+      appendMessage("bot", "⚠️ Network connection error. Please ensure server is running.", { role: "specialist" });
       console.error(err);
-    } finally {
-      sendBtn.disabled = false;
-      chatInput.focus();
     }
   }
 
-  function jsonPayload(message, senderId) {
-    return JSON.stringify({
-      message: message,
-      sender_id: senderId,
-      phone: senderId.startsWith("+") ? senderId : "+971500000000"
-    });
-  }
-
-  function updateInspector(data) {
-    telemetryIntent.textContent = data.intent || "—";
-    telemetryPriority.textContent = data.priority ? `P${data.priority}` : "—";
-    telemetryLatency.textContent = data.latency_ms ? `${data.latency_ms} ms` : "—";
-
-    const tools = data.tools_called || [];
-    telemetryTools.textContent = `${tools.length} called`;
-
-    // Render tools
-    if (tools.length === 0) {
-      inspectorToolsList.innerHTML = '<span style="color:var(--text-muted)">No tools invoked.</span>';
-    } else {
-      inspectorToolsList.innerHTML = tools.map(t => `
-        <div class="inspector-detail-box">
-          <div class="inspector-detail-title">
-            <span>⚙️ ${t.tool}</span>
-            <span style="font-size:0.65rem; color:var(--emerald);">SUCCESS</span>
-          </div>
-          <pre style="font-size:0.72rem; color:var(--text-secondary); overflow-x:auto;">${JSON.stringify(t.args || t.result || {}, null, 2)}</pre>
-        </div>
-      `).join("");
+  function updateTelemetry(data) {
+    if (telemetryIntent) telemetryIntent.textContent = data.intent || "—";
+    if (telemetryPriority) telemetryPriority.textContent = data.priority !== undefined ? `P${data.priority}` : "—";
+    if (telemetryLatency) telemetryLatency.textContent = data.latency_ms ? `${data.latency_ms} ms` : "—";
+    
+    if (telemetryTools) {
+      const toolNames = (data.tools_called || []).map(t => t.tool || t.name || JSON.stringify(t)).join(", ");
+      telemetryTools.textContent = toolNames || "None (Extractive/Rule)";
     }
 
-    // Render raw json
-    rawJsonPre.textContent = JSON.stringify(data, null, 2);
+    if (rawJsonPre) {
+      rawJsonPre.textContent = JSON.stringify(data, null, 2);
+    }
   }
 
-  // Preset chips click
-  document.querySelectorAll(".test-chip").forEach(chip => {
-    chip.addEventListener("click", () => {
-      const prompt = chip.dataset.prompt;
-      if (prompt) {
-        sendMessage(prompt);
-      }
-    });
-  });
-
-  // Event listeners
+  // Send Handlers
   sendBtn.addEventListener("click", () => sendMessage());
+
   chatInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -209,80 +321,119 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  clearBtn.addEventListener("click", () => {
-    messagesStream.innerHTML = "";
-    showToast("Chat session cleared");
+  // Delegated Clicks: Quick Options, Test Chips, Compare Buttons
+  document.addEventListener("click", (e) => {
+    const optionPill = e.target.closest(".option-pill");
+    if (optionPill) {
+      const prompt = optionPill.getAttribute("data-prompt");
+      if (prompt) sendMessage(prompt);
+      return;
+    }
+
+    const testChip = e.target.closest(".test-chip");
+    if (testChip) {
+      const prompt = testChip.getAttribute("data-prompt");
+      if (prompt) sendMessage(prompt);
+      return;
+    }
+
+    const compareBtn = e.target.closest(".card-btn-compare");
+    if (compareBtn) {
+      const compareQuery = compareBtn.getAttribute("data-compare-query");
+      if (compareQuery) sendMessage(compareQuery);
+      return;
+    }
   });
 
-  // Direct Quote Form
-  const directQuoteBtn = document.getElementById("direct-quote-btn");
-  if (directQuoteBtn) {
-    directQuoteBtn.addEventListener("click", async () => {
-      const sku = document.getElementById("quote-sku-select").value;
-      const qty = parseInt(document.getElementById("quote-qty-input").value) || 1;
-      const customerName = document.getElementById("quote-customer-input").value || "Valued Customer";
+  // Emoji helper
+  if (btnEmoji) {
+    btnEmoji.addEventListener("click", () => {
+      const emojis = ["📸", "🖨️", "💰", "⚡", "🤝", "📦", "✅"];
+      const pick = emojis[Math.floor(Math.random() * emojis.length)];
+      chatInput.value += pick + " ";
+      chatInput.focus();
+    });
+  }
 
-      try {
-        const res = await fetch("/quote", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            items: [{ sku: sku, qty: qty }],
-            customer_name: customerName,
-            phone: userIdentity.value || "+971501234567"
-          })
+  // Load Past History
+  async function loadChatHistory(senderPhone) {
+    if (!senderPhone) return;
+    try {
+      const res = await fetch(`/history?sender_id=${encodeURIComponent(senderPhone)}&limit=30`);
+      if (!res.ok) return;
+      const data = await res.json();
+      const msgs = data.messages || [];
+      if (msgs.length > 0) {
+        resetConversation();
+        msgs.forEach(m => {
+          appendMessage(m.role, m.content, { timestamp: m.timestamp });
         });
-        const data = await res.json();
-        const quoteResultBox = document.getElementById("quote-result-box");
-        quoteResultBox.style.display = "block";
-        quoteResultBox.innerHTML = `
-          <div style="font-weight:700; color:var(--emerald); margin-bottom:4px;">Quote ${data.quote_id || "Calculated"}</div>
-          <div style="font-size:0.75rem; white-space:pre-wrap;">${data.text_summary || JSON.stringify(data, null, 2)}</div>
-        `;
-        showToast("Quote generated successfully!");
-      } catch (err) {
-        showToast("Failed to generate quote");
+        showToast(`Loaded ${msgs.length} prior messages`);
+      }
+    } catch (e) {
+      console.warn("Could not load history:", e);
+    }
+  }
+
+  if (btnLoadHistory) {
+    btnLoadHistory.addEventListener("click", () => {
+      loadChatHistory(userIdentity.value.trim());
+    });
+  }
+
+  // Export History
+  if (btnExportHistory) {
+    btnExportHistory.addEventListener("click", async () => {
+      try {
+        const senderPhone = userIdentity.value.trim();
+        const res = await fetch(`/history/export?sender_id=${encodeURIComponent(senderPhone)}`);
+        if (!res.ok) throw new Error("Export failed");
+        const text = await res.text();
+        const blob = new Blob([text], { type: "text/markdown;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `chat_history_${senderPhone.replace(/\+/g, "")}.md`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast("Conversation exported (.md)");
+      } catch (e) {
+        showToast("Error exporting history");
       }
     });
   }
 
-  // Fetch leads
+  // Fetch Leads for Drawer
   async function fetchLeads() {
-    const tbody = document.getElementById("leads-tbody");
-    if (!tbody) return;
-    tbody.innerHTML = '<tr><td colspan="4" style="color:var(--text-muted); text-align:center;">Loading leads...</td></tr>';
-
+    if (!leadsTbody) return;
+    leadsTbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#94a3b8;">Loading leads...</td></tr>';
     try {
-      const res = await fetch("/leads");
+      const res = await fetch("/leads", {
+        headers: { "Authorization": "Bearer kepler_admin_secret_key_2026" }
+      });
+      if (!res.ok) throw new Error("Auth failed");
       const data = await res.json();
       const leads = data.leads || [];
 
       if (leads.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="4" style="color:var(--text-muted); text-align:center;">No leads registered yet.</td></tr>';
+        leadsTbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#94a3b8;">No registered leads yet.</td></tr>';
         return;
       }
 
-      tbody.innerHTML = leads.map(l => `
+      leadsTbody.innerHTML = leads.map(l => `
         <tr>
-          <td style="font-weight:600;">${l.name || "Anonymous"}</td>
-          <td style="color:var(--cyan);">${l.phone || "—"}</td>
-          <td><span style="background:rgba(16,185,129,0.15); color:var(--emerald); padding:2px 6px; border-radius:4px; font-size:0.68rem;">${l.status || "new"}</span></td>
-          <td style="color:var(--text-muted); font-size:0.68rem;">${l.created_at ? l.created_at.substring(0, 16) : "—"}</td>
+          <td><strong>${l.name || "Anonymous"}</strong></td>
+          <td>${l.phone || "—"}</td>
+          <td><span style="color:#10B981;">${l.status || "new"}</span></td>
+          <td style="color:#94a3b8; font-size:0.68rem;">${(l.created_at || "").slice(0, 16)}</td>
         </tr>
       `).join("");
     } catch (err) {
-      tbody.innerHTML = '<tr><td colspan="4" style="color:var(--rose); text-align:center;">Failed to load leads</td></tr>';
+      leadsTbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#F43F5E;">Could not fetch leads (auth required).</td></tr>';
     }
   }
 
-  // Initial greeting
-  appendMessage("assistant", "Hello! Welcome to the **Kepler Tech LLC Citizen CX-02 Sales AI Test Console**.\n\nYou can send custom inquiries or use the test chips below to verify all 14 priority categories, guardrails, pricing, quotes, and technical specs.");
-
-  // Check health on load
-  fetch("/health")
-    .then(r => r.json())
-    .then(data => {
-      document.getElementById("catalog-count-badge").textContent = `${data.whitelisted_skus_count} SKUs Active (as of ${data.as_of})`;
-    })
-    .catch(() => {});
+  if (btnRefreshLeads) btnRefreshLeads.addEventListener("click", fetchLeads);
 });

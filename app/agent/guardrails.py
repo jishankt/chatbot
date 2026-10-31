@@ -151,6 +151,20 @@ def check_pre_guardrails(user_text: str) -> Tuple[bool, str, Dict[str, Any]]:
                 )
             }
 
+    # 6b. Unsupported Epson consumer photo printers or SureLab models
+    if re.search(r"\bepson\s+photo\s+printers?\b", clean_text) or "surelab" in clean_text:
+        return False, "competitor", {
+            "competitor": "Epson Photo",
+            "reason": "Inquiry mentions unsupported Epson photo printer or SureLab.",
+            "response": (
+                "That product line is not available in our catalog. Kepler Tech is an authorized UAE distributor for **Citizen** and **Epson** commercial printing systems:\n"
+                "• **Photo Booth & Events**: Citizen CX-02, CY-02, CZ-01\n"
+                "• **CAD, Technical & Fine Art**: Epson SureColor T-Series & P-Series\n"
+                "• **Office & Enterprise MFP**: Epson WorkForce Pro & Enterprise\n\n"
+                "Would you like details on an authorized solution, or assistance from a sales specialist?"
+            )
+        }
+
     # 7. Competitor brand check (brands Kepler does NOT carry)
     for comp in COMPETITOR_BRANDS:
         if re.search(r"\b" + re.escape(comp) + r"\b", clean_text):

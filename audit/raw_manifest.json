@@ -1,0 +1,1322 @@
+[
+  {
+    "path": ".agent/workflows/verify.md",
+    "size": 313,
+    "lines": 15,
+    "ext": ".md"
+  },
+  {
+    "path": ".env.example",
+    "size": 1033,
+    "lines": 36,
+    "ext": ".example"
+  },
+  {
+    "path": ".github/workflows/ci.yml",
+    "size": 1385,
+    "lines": 51,
+    "ext": ".yml"
+  },
+  {
+    "path": ".gitignore",
+    "size": 127,
+    "lines": 13,
+    "ext": ""
+  },
+  {
+    "path": "AGENTS.md",
+    "size": 3385,
+    "lines": 29,
+    "ext": ".md"
+  },
+  {
+    "path": "AUDIT_REPORT.md",
+    "size": 115607,
+    "lines": 1577,
+    "ext": ".md"
+  },
+  {
+    "path": "Dockerfile",
+    "size": 543,
+    "lines": 25,
+    "ext": ""
+  },
+  {
+    "path": "Makefile",
+    "size": 422,
+    "lines": 25,
+    "ext": ""
+  },
+  {
+    "path": "README.md",
+    "size": 3521,
+    "lines": 103,
+    "ext": ".md"
+  },
+  {
+    "path": "app/__init__.py",
+    "size": 0,
+    "lines": 0,
+    "ext": ".py"
+  },
+  {
+    "path": "app/agent/__init__.py",
+    "size": 0,
+    "lines": 0,
+    "ext": ".py"
+  },
+  {
+    "path": "app/agent/admission.py",
+    "size": 3556,
+    "lines": 100,
+    "ext": ".py"
+  },
+  {
+    "path": "app/agent/guardrails.py",
+    "size": 12334,
+    "lines": 241,
+    "ext": ".py"
+  },
+  {
+    "path": "app/agent/llm.py",
+    "size": 9185,
+    "lines": 174,
+    "ext": ".py"
+  },
+  {
+    "path": "app/agent/orchestrator.py",
+    "size": 328,
+    "lines": 8,
+    "ext": ".py"
+  },
+  {
+    "path": "app/agent/pipeline.py",
+    "size": 158107,
+    "lines": 2244,
+    "ext": ".py"
+  },
+  {
+    "path": "app/agent/prompts.py",
+    "size": 2011,
+    "lines": 30,
+    "ext": ".py"
+  },
+  {
+    "path": "app/agent/router.py",
+    "size": 22681,
+    "lines": 520,
+    "ext": ".py"
+  },
+  {
+    "path": "app/agent/validator.py",
+    "size": 13170,
+    "lines": 240,
+    "ext": ".py"
+  },
+  {
+    "path": "app/api/__init__.py",
+    "size": 0,
+    "lines": 0,
+    "ext": ".py"
+  },
+  {
+    "path": "app/api/routes.py",
+    "size": 19570,
+    "lines": 518,
+    "ext": ".py"
+  },
+  {
+    "path": "app/audit_logging/__init__.py",
+    "size": 0,
+    "lines": 0,
+    "ext": ".py"
+  },
+  {
+    "path": "app/audit_logging/audit.py",
+    "size": 2777,
+    "lines": 80,
+    "ext": ".py"
+  },
+  {
+    "path": "app/cognitive/composer.py",
+    "size": 10022,
+    "lines": 238,
+    "ext": ".py"
+  },
+  {
+    "path": "app/cognitive/normalizer.py",
+    "size": 12934,
+    "lines": 294,
+    "ext": ".py"
+  },
+  {
+    "path": "app/cognitive/reader.py",
+    "size": 24890,
+    "lines": 575,
+    "ext": ".py"
+  },
+  {
+    "path": "app/cognitive/state_machine.py",
+    "size": 19022,
+    "lines": 457,
+    "ext": ".py"
+  },
+  {
+    "path": "app/cognitive/understander.py",
+    "size": 21417,
+    "lines": 525,
+    "ext": ".py"
+  },
+  {
+    "path": "app/config.py",
+    "size": 6455,
+    "lines": 134,
+    "ext": ".py"
+  },
+  {
+    "path": "app/main.py",
+    "size": 1007,
+    "lines": 35,
+    "ext": ".py"
+  },
+  {
+    "path": "app/memory/__init__.py",
+    "size": 0,
+    "lines": 0,
+    "ext": ".py"
+  },
+  {
+    "path": "app/memory/sessions.py",
+    "size": 4178,
+    "lines": 104,
+    "ext": ".py"
+  },
+  {
+    "path": "app/monitoring/metrics.py",
+    "size": 5278,
+    "lines": 142,
+    "ext": ".py"
+  },
+  {
+    "path": "app/notifications/salesperson.py",
+    "size": 10275,
+    "lines": 261,
+    "ext": ".py"
+  },
+  {
+    "path": "app/rag/__init__.py",
+    "size": 0,
+    "lines": 0,
+    "ext": ".py"
+  },
+  {
+    "path": "app/rag/chunker.py",
+    "size": 4689,
+    "lines": 127,
+    "ext": ".py"
+  },
+  {
+    "path": "app/rag/embed.py",
+    "size": 3759,
+    "lines": 115,
+    "ext": ".py"
+  },
+  {
+    "path": "app/rag/hybrid.py",
+    "size": 7299,
+    "lines": 204,
+    "ext": ".py"
+  },
+  {
+    "path": "app/rag/ingest.py",
+    "size": 543,
+    "lines": 19,
+    "ext": ".py"
+  },
+  {
+    "path": "app/rag/relevance.py",
+    "size": 17779,
+    "lines": 276,
+    "ext": ".py"
+  },
+  {
+    "path": "app/rag/retrieve.py",
+    "size": 4716,
+    "lines": 134,
+    "ext": ".py"
+  },
+  {
+    "path": "app/rag/retriever.py",
+    "size": 13948,
+    "lines": 276,
+    "ext": ".py"
+  },
+  {
+    "path": "app/static/css/index.css",
+    "size": 19936,
+    "lines": 1081,
+    "ext": ".css"
+  },
+  {
+    "path": "app/static/img/citizen_bag_card.jpg",
+    "size": 629115,
+    "lines": 3327,
+    "ext": ".jpg"
+  },
+  {
+    "path": "app/static/img/citizen_bag_card.webp",
+    "size": 387550,
+    "lines": 3064,
+    "ext": ".webp"
+  },
+  {
+    "path": "app/static/img/citizen_cx02.jpg",
+    "size": 599910,
+    "lines": 3978,
+    "ext": ".jpg"
+  },
+  {
+    "path": "app/static/img/citizen_cx02_card.jpg",
+    "size": 599165,
+    "lines": 3441,
+    "ext": ".jpg"
+  },
+  {
+    "path": "app/static/img/citizen_cx02_card.webp",
+    "size": 26854,
+    "lines": 202,
+    "ext": ".webp"
+  },
+  {
+    "path": "app/static/img/citizen_media_4x6.webp",
+    "size": 390480,
+    "lines": 3095,
+    "ext": ".webp"
+  },
+  {
+    "path": "app/static/img/citizen_media_5x7.jpg",
+    "size": 126803,
+    "lines": 698,
+    "ext": ".jpg"
+  },
+  {
+    "path": "app/static/img/citizen_media_6x8.webp",
+    "size": 342314,
+    "lines": 2728,
+    "ext": ".webp"
+  },
+  {
+    "path": "app/static/img/citizen_media_card.jpg",
+    "size": 525205,
+    "lines": 2493,
+    "ext": ".jpg"
+  },
+  {
+    "path": "app/static/img/citizen_pen_card.jpg",
+    "size": 542348,
+    "lines": 2674,
+    "ext": ".jpg"
+  },
+  {
+    "path": "app/static/img/citizen_pen_card.webp",
+    "size": 162364,
+    "lines": 1315,
+    "ext": ".webp"
+  },
+  {
+    "path": "app/static/js/app.js",
+    "size": 15684,
+    "lines": 439,
+    "ext": ".js"
+  },
+  {
+    "path": "app/storage/__init__.py",
+    "size": 98,
+    "lines": 3,
+    "ext": ".py"
+  },
+  {
+    "path": "app/storage/consents.py",
+    "size": 2881,
+    "lines": 92,
+    "ext": ".py"
+  },
+  {
+    "path": "app/storage/db.py",
+    "size": 8419,
+    "lines": 224,
+    "ext": ".py"
+  },
+  {
+    "path": "app/storage/handoffs.py",
+    "size": 3344,
+    "lines": 117,
+    "ext": ".py"
+  },
+  {
+    "path": "app/storage/leads.py",
+    "size": 3841,
+    "lines": 129,
+    "ext": ".py"
+  },
+  {
+    "path": "app/storage/messages.py",
+    "size": 3319,
+    "lines": 91,
+    "ext": ".py"
+  },
+  {
+    "path": "app/storage/quotes.py",
+    "size": 2773,
+    "lines": 97,
+    "ext": ".py"
+  },
+  {
+    "path": "app/templates/index.html",
+    "size": 13862,
+    "lines": 270,
+    "ext": ".html"
+  },
+  {
+    "path": "app/tools/__init__.py",
+    "size": 0,
+    "lines": 0,
+    "ext": ".py"
+  },
+  {
+    "path": "app/tools/dispatcher.py",
+    "size": 2621,
+    "lines": 76,
+    "ext": ".py"
+  },
+  {
+    "path": "app/tools/handoff.py",
+    "size": 5767,
+    "lines": 150,
+    "ext": ".py"
+  },
+  {
+    "path": "app/tools/links.py",
+    "size": 1005,
+    "lines": 33,
+    "ext": ".py"
+  },
+  {
+    "path": "app/tools/policies.py",
+    "size": 5834,
+    "lines": 147,
+    "ext": ".py"
+  },
+  {
+    "path": "app/tools/pricing.py",
+    "size": 9052,
+    "lines": 254,
+    "ext": ".py"
+  },
+  {
+    "path": "app/tools/quote.py",
+    "size": 13941,
+    "lines": 321,
+    "ext": ".py"
+  },
+  {
+    "path": "app/tools/registry.py",
+    "size": 645,
+    "lines": 22,
+    "ext": ".py"
+  },
+  {
+    "path": "app/tools/schemas.py",
+    "size": 5877,
+    "lines": 182,
+    "ext": ".py"
+  },
+  {
+    "path": "app/utils/crypto.py",
+    "size": 2463,
+    "lines": 77,
+    "ext": ".py"
+  },
+  {
+    "path": "app/utils/phone.py",
+    "size": 459,
+    "lines": 16,
+    "ext": ".py"
+  },
+  {
+    "path": "app/utils/quantity.py",
+    "size": 7086,
+    "lines": 176,
+    "ext": ".py"
+  },
+  {
+    "path": "app/utils/session.py",
+    "size": 950,
+    "lines": 28,
+    "ext": ".py"
+  },
+  {
+    "path": "app/whatsapp/client.py",
+    "size": 2833,
+    "lines": 79,
+    "ext": ".py"
+  },
+  {
+    "path": "config/cron.d/sales_handoff_retry",
+    "size": 398,
+    "lines": 6,
+    "ext": ""
+  },
+  {
+    "path": "config/nginx_rate_limits.conf",
+    "size": 4714,
+    "lines": 121,
+    "ext": ".conf"
+  },
+  {
+    "path": "config/scope.yaml",
+    "size": 6083,
+    "lines": 213,
+    "ext": ".yaml"
+  },
+  {
+    "path": "config/systemd/sales-handoff-retry.service",
+    "size": 282,
+    "lines": 11,
+    "ext": ".service"
+  },
+  {
+    "path": "config/systemd/sales-handoff-retry.timer",
+    "size": 188,
+    "lines": 10,
+    "ext": ".timer"
+  },
+  {
+    "path": "data/audit.jsonl",
+    "size": 6178,
+    "lines": 10,
+    "ext": ".jsonl"
+  },
+  {
+    "path": "data/backups/sales_ai_20261028_084130.db",
+    "size": 10465280,
+    "lines": 72241,
+    "ext": ".db"
+  },
+  {
+    "path": "data/backups/sales_ai_20261028_084130.db-shm",
+    "size": 32768,
+    "lines": 1,
+    "ext": ".db-shm"
+  },
+  {
+    "path": "data/backups/sales_ai_20261028_084130.db-wal",
+    "size": 0,
+    "lines": 0,
+    "ext": ".db-wal"
+  },
+  {
+    "path": "data/backups/sales_ai_20261028_095901.db",
+    "size": 10854400,
+    "lines": 73443,
+    "ext": ".db"
+  },
+  {
+    "path": "data/backups/sales_ai_20261028_103940.db",
+    "size": 11771904,
+    "lines": 75798,
+    "ext": ".db"
+  },
+  {
+    "path": "data/chunks.json",
+    "size": 43541,
+    "lines": 478,
+    "ext": ".json"
+  },
+  {
+    "path": "data/company_chunks.json",
+    "size": 24306,
+    "lines": 332,
+    "ext": ".json"
+  },
+  {
+    "path": "data/cx02_sales.db",
+    "size": 0,
+    "lines": 0,
+    "ext": ".db"
+  },
+  {
+    "path": "data/eval/conversation_eval_report.json",
+    "size": 8172,
+    "lines": 215,
+    "ext": ".json"
+  },
+  {
+    "path": "data/eval/eval_set.json",
+    "size": 130255,
+    "lines": 6735,
+    "ext": ".json"
+  },
+  {
+    "path": "data/eval/questions.jsonl",
+    "size": 55955,
+    "lines": 220,
+    "ext": ".jsonl"
+  },
+  {
+    "path": "data/eval/validator_eval_report.json",
+    "size": 594,
+    "lines": 25,
+    "ext": ".json"
+  },
+  {
+    "path": "data/kb/01_overview.md",
+    "size": 2760,
+    "lines": 29,
+    "ext": ".md"
+  },
+  {
+    "path": "data/kb/02_print_engine.md",
+    "size": 1678,
+    "lines": 21,
+    "ext": ".md"
+  },
+  {
+    "path": "data/kb/03_media_formats.md",
+    "size": 1954,
+    "lines": 25,
+    "ext": ".md"
+  },
+  {
+    "path": "data/kb/04_dimensions_power.md",
+    "size": 1607,
+    "lines": 20,
+    "ext": ".md"
+  },
+  {
+    "path": "data/kb/05_accessories.md",
+    "size": 2550,
+    "lines": 16,
+    "ext": ".md"
+  },
+  {
+    "path": "data/kb/06_citizen_lineup.md",
+    "size": 12346,
+    "lines": 110,
+    "ext": ".md"
+  },
+  {
+    "path": "data/kb/07_epson_lineup.md",
+    "size": 7075,
+    "lines": 86,
+    "ext": ".md"
+  },
+  {
+    "path": "data/kb/company/about.md",
+    "size": 1798,
+    "lines": 19,
+    "ext": ".md"
+  },
+  {
+    "path": "data/kb/company/brands_and_categories.md",
+    "size": 2739,
+    "lines": 37,
+    "ext": ".md"
+  },
+  {
+    "path": "data/kb/company/contacts.md",
+    "size": 1183,
+    "lines": 26,
+    "ext": ".md"
+  },
+  {
+    "path": "data/kb/company/coverage_and_delivery.md",
+    "size": 2482,
+    "lines": 45,
+    "ext": ".md"
+  },
+  {
+    "path": "data/kb/company/policies.md",
+    "size": 2586,
+    "lines": 41,
+    "ext": ".md"
+  },
+  {
+    "path": "data/kb/company/services.md",
+    "size": 2153,
+    "lines": 29,
+    "ext": ".md"
+  },
+  {
+    "path": "data/kb_supplemental/07_troubleshooting.md",
+    "size": 3791,
+    "lines": 50,
+    "ext": ".md"
+  },
+  {
+    "path": "data/kb_supplemental/08_catalog_ecosystem.md",
+    "size": 3857,
+    "lines": 51,
+    "ext": ".md"
+  },
+  {
+    "path": "data/kb_supplemental/09_sales_playbook.md",
+    "size": 4236,
+    "lines": 52,
+    "ext": ".md"
+  },
+  {
+    "path": "data/offbox_backups/sales_ai_20261028_103940.db",
+    "size": 11771904,
+    "lines": 75798,
+    "ext": ".db"
+  },
+  {
+    "path": "data/policies.json",
+    "size": 10199,
+    "lines": 193,
+    "ext": ".json"
+  },
+  {
+    "path": "data/products.json",
+    "size": 849227,
+    "lines": 17868,
+    "ext": ".json"
+  },
+  {
+    "path": "data/products.json.bak",
+    "size": 3495,
+    "lines": 93,
+    "ext": ".bak"
+  },
+  {
+    "path": "data/raw/bag_product_page.txt",
+    "size": 15103,
+    "lines": 229,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/citizen_cx02_page.txt",
+    "size": 2677,
+    "lines": 113,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/bag_product_page.txt",
+    "size": 15103,
+    "lines": 229,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/citizen_cx02_page.txt",
+    "size": 2677,
+    "lines": 113,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/cx02_datasheet.txt",
+    "size": 2319,
+    "lines": 65,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/cx02_product_page.txt",
+    "size": 24920,
+    "lines": 412,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/faq.txt",
+    "size": 3317,
+    "lines": 30,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/keplertech_ae_about_us.txt",
+    "size": 2513,
+    "lines": 52,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/keplertech_ae_contact_us.txt",
+    "size": 854,
+    "lines": 43,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/keplertech_ae_home.txt",
+    "size": 15800,
+    "lines": 772,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/keplertech_ae_service_managed_print.txt",
+    "size": 7694,
+    "lines": 131,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/keplertech_ae_service_rental.txt",
+    "size": 16736,
+    "lines": 447,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/keplertech_ae_service_repair.txt",
+    "size": 5307,
+    "lines": 182,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/keplertech_ae_services.txt",
+    "size": 1828,
+    "lines": 24,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/keplertechllc_about_us.txt",
+    "size": 6255,
+    "lines": 81,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/keplertechllc_africa.txt",
+    "size": 17374,
+    "lines": 369,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/keplertechllc_contact_us.txt",
+    "size": 1269,
+    "lines": 65,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/keplertechllc_countries_we_serve.txt",
+    "size": 5448,
+    "lines": 97,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/media_4x6_page.txt",
+    "size": 19551,
+    "lines": 382,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/media_5x7_page.txt",
+    "size": 17489,
+    "lines": 278,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/media_6x8_page.txt",
+    "size": 18211,
+    "lines": 320,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/pen_product_page.txt",
+    "size": 15225,
+    "lines": 220,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/company/terms_and_conditions.txt",
+    "size": 11926,
+    "lines": 156,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/cx02_datasheet.txt",
+    "size": 2319,
+    "lines": 65,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/cx02_product_page.txt",
+    "size": 24920,
+    "lines": 412,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/faq.txt",
+    "size": 3317,
+    "lines": 30,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/kepler_citizen_photo_printers_brochure.txt",
+    "size": 2501,
+    "lines": 68,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/media_4x6_page.txt",
+    "size": 19551,
+    "lines": 382,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/media_5x7_page.txt",
+    "size": 17489,
+    "lines": 278,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/media_6x8_page.txt",
+    "size": 18211,
+    "lines": 320,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/pen_product_page.txt",
+    "size": 15225,
+    "lines": 220,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/raw/terms_and_conditions.txt",
+    "size": 11926,
+    "lines": 156,
+    "ext": ".txt"
+  },
+  {
+    "path": "data/sales_ai.db",
+    "size": 20062208,
+    "lines": 88831,
+    "ext": ".db"
+  },
+  {
+    "path": "docker-compose.yml",
+    "size": 825,
+    "lines": 36,
+    "ext": ".yml"
+  },
+  {
+    "path": "docs/ARCHITECTURE.md",
+    "size": 6735,
+    "lines": 111,
+    "ext": ".md"
+  },
+  {
+    "path": "docs/DATA_TODO.md",
+    "size": 4476,
+    "lines": 27,
+    "ext": ".md"
+  },
+  {
+    "path": "docs/DEPLOYMENT_HANDOFF_RETRY.md",
+    "size": 2438,
+    "lines": 66,
+    "ext": ".md"
+  },
+  {
+    "path": "docs/FOLLOWUPS.md",
+    "size": 1633,
+    "lines": 15,
+    "ext": ".md"
+  },
+  {
+    "path": "docs/MIGRATION_PLAN_DROP_REAL_COLUMNS.md",
+    "size": 3560,
+    "lines": 74,
+    "ext": ".md"
+  },
+  {
+    "path": "docs/PRODUCT_ONBOARDING.md",
+    "size": 4768,
+    "lines": 112,
+    "ext": ".md"
+  },
+  {
+    "path": "docs/SMTP_SECURITY.md",
+    "size": 3302,
+    "lines": 68,
+    "ext": ".md"
+  },
+  {
+    "path": "eval/__init__.py",
+    "size": 0,
+    "lines": 0,
+    "ext": ".py"
+  },
+  {
+    "path": "eval/generate_questions.py",
+    "size": 21296,
+    "lines": 344,
+    "ext": ".py"
+  },
+  {
+    "path": "eval/run_eval.py",
+    "size": 17081,
+    "lines": 416,
+    "ext": ".py"
+  },
+  {
+    "path": "migrations/001_core_indexes.sql",
+    "size": 475,
+    "lines": 7,
+    "ext": ".sql"
+  },
+  {
+    "path": "migrations/002_add_conversation_state_version.sql",
+    "size": 158,
+    "lines": 2,
+    "ext": ".sql"
+  },
+  {
+    "path": "migrations/003_quotes_integer_fils.sql",
+    "size": 342,
+    "lines": 6,
+    "ext": ".sql"
+  },
+  {
+    "path": "pytest.ini",
+    "size": 42,
+    "lines": 3,
+    "ext": ".ini"
+  },
+  {
+    "path": "requirements.lock",
+    "size": 57215,
+    "lines": 720,
+    "ext": ".lock"
+  },
+  {
+    "path": "requirements.txt",
+    "size": 144,
+    "lines": 9,
+    "ext": ".txt"
+  },
+  {
+    "path": "scripts/backfill_quote_fils.py",
+    "size": 2133,
+    "lines": 74,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/backup_db.py",
+    "size": 2409,
+    "lines": 70,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/benchmark_capacity.py",
+    "size": 6401,
+    "lines": 170,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/check_links.py",
+    "size": 3117,
+    "lines": 96,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/check_quote_fils_mismatch.py",
+    "size": 3168,
+    "lines": 94,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/eval_validator.py",
+    "size": 6267,
+    "lines": 178,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/fetch_company_sources.py",
+    "size": 5234,
+    "lines": 158,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/generate_eval.py",
+    "size": 51469,
+    "lines": 1030,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/ingest_master_products.py",
+    "size": 7226,
+    "lines": 178,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/load_test_concurrent_sessions.py",
+    "size": 8487,
+    "lines": 201,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/migrate.py",
+    "size": 2218,
+    "lines": 74,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/offbox_backup_copy.py",
+    "size": 1855,
+    "lines": 64,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/profile_turn_latency.py",
+    "size": 5520,
+    "lines": 136,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/restore_drill.py",
+    "size": 3822,
+    "lines": 113,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/retention_cleanup.py",
+    "size": 4364,
+    "lines": 138,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/retention_dry_run.py",
+    "size": 2525,
+    "lines": 79,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/retry_handoffs.py",
+    "size": 783,
+    "lines": 29,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/scrub_audit_logs.py",
+    "size": 4151,
+    "lines": 124,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/unlock_ip.py",
+    "size": 1023,
+    "lines": 42,
+    "ext": ".py"
+  },
+  {
+    "path": "scripts/verify_backup_restore.py",
+    "size": 2567,
+    "lines": 78,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/__init__.py",
+    "size": 0,
+    "lines": 0,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/conftest.py",
+    "size": 177,
+    "lines": 8,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/conversation_eval.py",
+    "size": 15375,
+    "lines": 301,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_api.py",
+    "size": 7947,
+    "lines": 219,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_batch3_hardening.py",
+    "size": 18334,
+    "lines": 378,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_batch4_hardening.py",
+    "size": 16046,
+    "lines": 361,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_batch5_hardening.py",
+    "size": 13012,
+    "lines": 307,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_batch6_hardening.py",
+    "size": 10529,
+    "lines": 242,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_batch7_hardening.py",
+    "size": 11042,
+    "lines": 218,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_cards.py",
+    "size": 1107,
+    "lines": 26,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_category_retrieval_and_out_of_catalogue.py",
+    "size": 2647,
+    "lines": 52,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_company_grounding.py",
+    "size": 4026,
+    "lines": 85,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_composer.py",
+    "size": 4341,
+    "lines": 134,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_eval_benchmark.py",
+    "size": 6305,
+    "lines": 165,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_guardrails.py",
+    "size": 3108,
+    "lines": 82,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_nginx_integration.py",
+    "size": 4548,
+    "lines": 136,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_normalizer_and_phantoms.py",
+    "size": 4326,
+    "lines": 109,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_pipeline_natural_conversation.py",
+    "size": 2266,
+    "lines": 61,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_rag.py",
+    "size": 2037,
+    "lines": 51,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_rag_and_conflict_resolution.py",
+    "size": 3451,
+    "lines": 90,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_reader.py",
+    "size": 4655,
+    "lines": 126,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_retrieval.py",
+    "size": 8052,
+    "lines": 184,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_router.py",
+    "size": 4261,
+    "lines": 124,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_scope_config.py",
+    "size": 6624,
+    "lines": 160,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_session_state_anaphora.py",
+    "size": 5711,
+    "lines": 156,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_state_machine.py",
+    "size": 4915,
+    "lines": 138,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_steps_5_to_8.py",
+    "size": 2882,
+    "lines": 62,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_storage.py",
+    "size": 6704,
+    "lines": 172,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_tools.py",
+    "size": 9391,
+    "lines": 252,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_transcripts.py",
+    "size": 2641,
+    "lines": 77,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_two_tier_pricing.py",
+    "size": 4200,
+    "lines": 116,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_understander.py",
+    "size": 5583,
+    "lines": 152,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_validator.py",
+    "size": 2450,
+    "lines": 65,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/test_web_hardening.py",
+    "size": 12089,
+    "lines": 323,
+    "ext": ".py"
+  },
+  {
+    "path": "tests/transcripts/sample_chat.json",
+    "size": 1199,
+    "lines": 52,
+    "ext": ".json"
+  }
+]

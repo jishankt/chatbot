@@ -67,7 +67,9 @@ MEDIA_YIELD_KEYWORDS = [
 
 BUNDLE_CATALOG_KEYWORDS = [
     "catalog", "catalogue", "all products", "list products", "accessories",
-    "what accessories", "range", "what else do you sell", "bundle", "consumables"
+    "what accessories", "range", "what else do you sell", "bundle", "consumables",
+    "dye sub media", "dyesub media", "dye sub paper", "dye sub ribbon", "dyesub paper",
+    "ورق داي سب", "رولات داي سب", "وسائط داي سب", "ورق سبليميشن"
 ]
 
 PRICE_KEYWORDS = [
@@ -113,13 +115,26 @@ CATEGORY_BROWSE_PATTERNS = [
     r"\bcx[-_]?02w\b", r"\bcy[-_]?02\b", r"\bcz[-_]?01\b", r"\bop900\b", r"\bcw[-_]?01\b",
     r"\baircastpro\b", r"\bsc[-_]?p900\b", r"\bsc[-_]?p700\b", r"\ba3\s+printers?\b",
     r"\bwhat\s+(printers|brands|products)\s+(do\s+you\s+)?(sell|have|carry|stock)\b",
-    r"\bproduct\s+categories\b"
+    r"\bproduct\s+categories\b",
+    r"\b(do\s+you\s+(have|sell|carry)\s+)?dye[- ]?sub(limation)?(\s+photo)?(\s+printers?)?\b",
+    r"\bshow(\s+me)?\s+(your\s+)?dye[- ]?sub(limation)?(\s+photo)?(\s+printers?)?\b",
+    r"\bdye[- ]?sub(limation)?(\s+photo)?\s+printers?\b",
+    r"\bdyesub(\s+photo)?\s+printers?\b",
+    r"\bthermal\s+photo\s+printers?\b",
+    r"\b(mugs?|t-?shirts?|shirts?|apparel|fabrics?|heat\s*press|tumblers?)\b",
+    r"\b(طابعات?|طابعه?)\s*(داي\s*سب|سبليميشن|سبلميشن|سوبليميشن|تسامي|حرارية)\b",
+    r"\b(احتاج|اريد|ابي)\s*(طابعات?|طابعه?)?\s*(داي\s*سب|سبليميشن|تسامي)\b",
+    r"\bطابعات?\s+حرارية\s+للصور\b",
+    r"\b(داي\s*سب|سبليميشن|سبلميشن|سوبليميشن|تسامي)\b"
 ]
 
 COMPANY_INFO_PATTERNS = [
     r"\bcompany\s+name\b", r"\bwho\s+is\s+kepler\b", r"\bwhat\s+is\s+kepler\b",
     r"\babout\s+kepler\b", r"\babout\s+(your\s+)?company\b", r"\bwho\s+are\s+you\b",
-    r"\bwhere\s+are\s+you\s+located\b", r"\boffice\s+location\b", r"\bshowroom\s+address\b",
+    r"\bwhere\s+are\s+you\s+located\b", r"\bwhere\s+(is|are)\s+(your\s+)?(showroom|office|location|store|shop|warehouse)\b",
+    r"\b(showroom|office|store)\s+(location|address|located)\b",
+    r"\bwhere\s+(can\s+i\s+)?(find|visit)\s+(your\s+)?(showroom|office|store)\b",
+    r"\boffice\s+location\b", r"\bshowroom\s+address\b",
     r"\bhead\s+office\b", r"\bdubai\s+silicon\s+oasis\b", r"\bdso\b",
     r"\bcontact\s+(info|information|details|number)\b", r"\bphone\s+number\b",
     r"\bemail(\s+address)?\b", r"\bopening\s+hours\b", r"\bworking\s+hours\b", r"\btimings\b",
@@ -342,7 +357,12 @@ def classify_intent(message: str) -> Dict[str, Any]:
                 "reason": "Customer seeking printer recommendation for specific workflow requirement"
             }
         has_price_kw = any(re.search(r"\b" + re.escape(p) + r"\b", clean_msg) for p in PRICE_KEYWORDS)
-        if not has_price_kw:
+        is_comparison = any(re.search(pat, clean_msg) for pat in OBJECTION_PATTERNS) or any(w in clean_msg for w in [" vs ", "better than", "why not", "مقارنة", "ولا "])
+        is_education = any(w in clean_msg for w in [
+            "what is dye", "what is sublimation", "what is dyesub", "how does dye", "how dye", "explain dye",
+            "ما هي تقنية", "كيف تعمل تقنية", "ما هو داي", "ما هي طابعة التسامي"
+        ])
+        if not has_price_kw and not is_comparison and not is_education:
             for pat in CATEGORY_BROWSE_PATTERNS:
                 if re.search(pat, clean_msg):
                     return {

@@ -1,0 +1,52 @@
+[
+  {
+    "input": "office printer",
+    "expected_intent": "category_browse",
+    "must_answer_from_sources": true
+  },
+  {
+    "input": "scanner",
+    "expected_intent": "category_browse",
+    "must_answer_from_sources": true
+  },
+  {
+    "input": "company name",
+    "expected_intent": "company_info",
+    "must_answer_from_sources": true
+  },
+  {
+    "input": "why printers are used",
+    "expected_intent": "company_info",
+    "must_answer_from_sources": true
+  },
+  {
+    "input": "what is dye sub",
+    "expected_intent": "rag",
+    "must_answer_from_sources": true
+  },
+  {
+    "input": "i want buy cx 02",
+    "expected_intent": "price",
+    "must_answer_from_sources": true
+  },
+  {
+    "input": "create a draft quote for 2 cx-02",
+    "expected_intent": "quote",
+    "must_answer_from_sources": true
+  },
+  {
+    "input": "Do you sell Epson printers?",
+    "expected_intent": "category_browse",
+    "must_answer_from_sources": true
+  },
+  {
+    "input": "Do you do printer repair?",
+    "expected_intent": "service_enquiry",
+    "must_answer_from_sources": true
+  },
+  {
+    "input": "Do you ship to Kuwait?",
+    "expected_intent": "coverage",
+    "must_answer_from_sources": true
+  }
+]

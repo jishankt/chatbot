@@ -328,10 +328,45 @@ JSON FORMAT REQUIRED:
 
 
 def extract_llm_nlu(user_text: str, timeout: float = 5.0) -> Optional[Dict[str, Any]]:
-    """Calls Ollama with 5.0s timeout. Returns parsed JSON dict or None."""
+    """Calls OpenRouter or Ollama with 5.0s timeout. Returns parsed JSON dict or None."""
     if Config.FORCE_EXTRACTIVE_MODE or not circuit_breaker.can_attempt():
         return None
 
+    use_openrouter = (Config.LLM_PROVIDER == "openrouter") or (bool(Config.OPENROUTER_API_KEY) and Config.LLM_PROVIDER != "ollama")
+    if use_openrouter and Config.OPENROUTER_API_KEY:
+        try:
+            url = f"{Config.OPENROUTER_BASE_URL}/chat/completions"
+            headers = {
+                "Authorization": f"Bearer {Config.OPENROUTER_API_KEY}",
+                "HTTP-Referer": "https://keplertechllc.com",
+                "X-Title": "Kepler Tech Sales AI",
+                "Content-Type": "application/json"
+            }
+            payload = {
+                "model": Config.OPENROUTER_MODEL,
+                "messages": [
+                    {"role": "system", "content": LLM_NLU_PROMPT},
+                    {"role": "user", "content": f"Message: {user_text}\nJSON:"}
+                ],
+                "response_format": {"type": "json_object"},
+                "temperature": 0.0,
+                "max_tokens": 180
+            }
+            res = requests.post(url, headers=headers, json=payload, timeout=timeout)
+            if res.status_code == 200:
+                circuit_breaker.record_success()
+                choices = res.json().get("choices", [])
+                if choices:
+                    content = choices[0].get("message", {}).get("content", "").strip()
+                    return json.loads(content)
+            elif res.status_code >= 500:
+                circuit_breaker.record_failure()
+        except requests.exceptions.ConnectionError:
+            circuit_breaker.record_failure()
+        except Exception as e:
+            logger.info(f"OpenRouter NLU call failed: {e}")
+
+    # Fallback to Ollama
     url = f"{Config.OLLAMA_BASE_URL}/api/chat"
     payload = {
         "model": Config.OLLAMA_CHAT_MODEL,

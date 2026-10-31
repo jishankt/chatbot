@@ -4,7 +4,8 @@ WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PORT=5000
+    PORT=5000 \
+    APP_ENV=production
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \

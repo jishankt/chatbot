@@ -20,3 +20,10 @@ The Citizen CX-02 is designed for commercial and professional photo environments
 - Finishing options: Glossy or matte surface selectable through printer driver without changing media.
 - Energy saving: Sleep mode reduces energy consumption by 98%.
 - Ribbon rewind function: Prevents wasted ribbon and paper when printing single 4 x 6 inch photos using 6 x 8 inch media.
+
+## Dye-Sublimation Technology and Overcoat Protection
+The Citizen CX-02 utilizes professional dye-sublimation thermal transfer technology with a clear protective overcoat:
+- Instantly Dry and Water-Resistant: Prints emerge completely dry, laminated, and water-resistant immediately upon printing. The clear overcoat seals the photo against liquid spills, fingerprints, dust, and UV fading.
+- Clean Operation: Unlike inkjet printers that rely on liquid ink cartridges that can clog, smear, or leak during transit, dye-sublimation uses solid dry ribbon panels, ensuring clean, reliable operation for mobile setups.
+- Continuous Tone Lab Quality: Thermal heat fuses vaporized dyes directly into the synthetic paper surface, producing smooth continuous-tone gradations without visible dots or graininess at 300 dpi and 600 dpi resolution.
+- Optimized for Event Photo Booths and High Traffic: Designed specifically for event party booths, retail kiosks, and mobile photographers requiring rapid, reliable, uninterrupted photo printing in 8.4 seconds (or 8 seconds).
